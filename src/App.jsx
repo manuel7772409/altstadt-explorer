@@ -15,6 +15,19 @@ import {
 const BOUNDS = { minLat: 47.3650, maxLat: 47.3775, minLng: 8.5378, maxLng: 8.5478 };
 const VIEWPORT = { width: 1000, height: 820 };
 
+/* Erweiterter Render-Bereich: 4000×4000-Polster um das Altstadt-Zentrum.
+   Deckt jede mögliche Kombination aus Zoom, Rotation (0-360°) und Tilt ab,
+   damit beim Rotieren keine leeren Container-Ecken sichtbar werden.
+   Nur Hintergrund + Fog werden auf EXTENT vergrössert — Strassen/Häuser/POIs
+   bleiben in ihren echten geographischen Positionen innerhalb von VIEWPORT. */
+const EXTENT_HALF = 2000;
+const EXTENT = {
+  x: VIEWPORT.width / 2 - EXTENT_HALF,    // -1500
+  y: VIEWPORT.height / 2 - EXTENT_HALF,   // -1590
+  w: 2 * EXTENT_HALF,                      // 4000
+  h: 2 * EXTENT_HALF,                      // 4000
+};
+
 const STREETS_RAW = [
   { id: 'limmatquai', name: 'Limmatquai', side: 'east',
     points: [[47.3674,8.5418],[47.3690,8.5424],[47.3705,8.5430],[47.3722,8.5432],[47.3738,8.5428],[47.3748,8.5420]] },
@@ -731,6 +744,7 @@ const starPath = (size) => {
 };
 
 const STAR_PATH_LG = starPath(13);
+const STAR_PATH_SM = starPath(8);   // kompakter Stern für engen Zoom
 
 const fmtTime = (s) => {
   const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
@@ -865,13 +879,6 @@ const PALETTES = {
     streetGhostStroke: '#a89272',
     streetGhostOpacity: 0.35,
     bridgeAccent: '#C8923C',
-    cloudA: '#fbf3e2',
-    cloudB: '#ffffff',
-    cloudC: '#f7eed8',
-    cloudOpA: 0.95,
-    cloudOpB: 0.97,
-    cloudOpC: 0.95,
-    cloudOpacity: 1,
     riverTop: '#5C9499',
     riverBottom: '#2F5F65',
     riverHighlight: '#9ABFC0',
@@ -932,10 +939,11 @@ const PALETTES = {
     poiClubRing: '#C9D2F5',
     poiPinShadow: 'rgba(60,40,20,0.35)',
     poiLockedDesat: 0.55,        // grayscale ratio when not visited
-    // Cloud upgrade
-    cloudGradTop: '#FFFFFF',
-    cloudGradBottom: '#E8DAC0',
-    cloudShadow: 'rgba(60,40,20,0.22)',
+    // Fog-of-War — moderne, gedämpfte Wolkendecke (60% opak)
+    fogColor: '#C5CDD6',          // Grundfarbe der Decke
+    fogHighlight: '#DCE2EA',      // oberer Highlight-Ton (Volumen-Kante)
+    fogShadow: '#8E96A4',         // unterer Schatten-Ton
+    fogTextureTint: '0 0 0 0 0.96  0 0 0 0 0.97  0 0 0 0 1  0 0 0 0.55 -0.18', // Noise-Tönung (Tag)
     // OSM features
     osmBuildingFill: '#E8D2A8',
     osmBuildingStroke: 'rgba(80,55,30,0.55)',
@@ -949,6 +957,26 @@ const PALETTES = {
     osmParkingFill: '#DFD4BD',
     osmParkingStroke: 'rgba(80,55,30,0.25)',
     osmBarrierStroke: 'rgba(80,55,30,0.5)',
+    // Brücken-Stil
+    bridgeFill: '#D6BE92',
+    bridgeRail: 'rgba(60,40,20,0.55)',
+    bridgeEdge: 'rgba(60,40,20,0.4)',
+    // Gebäude-Schatten (Ostseite, simuliert Licht aus NW)
+    buildingEastShadow: 'rgba(60,40,20,0.32)',
+    // Park-Textur (subtile Punkte)
+    parkTexture: 'rgba(80,110,55,0.45)',
+    // Mini-Map
+    miniBg: '#F1E7CF',
+    miniStreet: 'rgba(60,40,20,0.32)',
+    miniStreetMain: 'rgba(60,40,20,0.55)',
+    miniBuilding: 'rgba(80,55,30,0.18)',
+    miniWater: '#A6CDD2',
+    miniPark: '#BFCA9A',
+    miniBridge: '#D6BE92',
+    miniFog: 'rgba(120,110,90,0.45)',
+    miniBorder: 'rgba(60,40,20,0.35)',
+    // Welt-Label-Halo (für Texte auf der Karte)
+    labelHalo: 'rgba(245,233,208,0.92)',
   },
   night: {
     name: 'night',
@@ -967,13 +995,6 @@ const PALETTES = {
     streetGhostStroke: '#3a4566',
     streetGhostOpacity: 0.45,
     bridgeAccent: '#FFE9B0',
-    cloudA: '#1a223e',
-    cloudB: '#252e4f',
-    cloudC: '#1d2640',
-    cloudOpA: 0.85,
-    cloudOpB: 0.88,
-    cloudOpC: 0.85,
-    cloudOpacity: 1,
     riverTop: '#5B7DA8',
     riverBottom: '#2A4368',
     riverHighlight: '#B8C9DE',
@@ -1034,10 +1055,11 @@ const PALETTES = {
     poiClubRing: '#1F2848',
     poiPinShadow: 'rgba(0,0,0,0.6)',
     poiLockedDesat: 0.7,
-    // Cloud upgrade
-    cloudGradTop: '#2C3656',
-    cloudGradBottom: '#161E36',
-    cloudShadow: 'rgba(0,0,0,0.55)',
+    // Fog-of-War — moderne, gedämpfte Wolkendecke (60% opak)
+    fogColor: '#1F2A38',
+    fogHighlight: '#324252',
+    fogShadow: '#0E1622',
+    fogTextureTint: '0 0 0 0 0.18  0 0 0 0 0.22  0 0 0 0 0.30  0 0 0 0.55 -0.18',
     // OSM features
     osmBuildingFill: '#1f2848',
     osmBuildingStroke: 'rgba(232,226,208,0.32)',
@@ -1051,6 +1073,26 @@ const PALETTES = {
     osmParkingFill: '#212a4a',
     osmParkingStroke: 'rgba(232,226,208,0.18)',
     osmBarrierStroke: 'rgba(232,226,208,0.32)',
+    // Brücken-Stil (Nacht)
+    bridgeFill: '#3a4670',
+    bridgeRail: 'rgba(232,226,208,0.45)',
+    bridgeEdge: 'rgba(232,226,208,0.32)',
+    // Gebäude-Schatten (Ostseite, simuliert Mondlicht aus NW)
+    buildingEastShadow: 'rgba(0,0,0,0.5)',
+    // Park-Textur (subtile Punkte)
+    parkTexture: 'rgba(140,180,140,0.35)',
+    // Mini-Map (Nacht)
+    miniBg: '#16203a',
+    miniStreet: 'rgba(232,226,208,0.28)',
+    miniStreetMain: 'rgba(232,226,208,0.5)',
+    miniBuilding: 'rgba(232,226,208,0.18)',
+    miniWater: '#3a5d75',
+    miniPark: '#1d3034',
+    miniBridge: '#3a4670',
+    miniFog: 'rgba(20,28,46,0.6)',
+    miniBorder: 'rgba(232,226,208,0.28)',
+    // Welt-Label-Halo (Nacht)
+    labelHalo: 'rgba(10,14,28,0.92)',
   },
 };
 
@@ -1072,6 +1114,13 @@ const STARFIELD = (() => {
   }
   return out;
 })();
+
+/* ============================================================================
+   FOG-OF-WAR — Konstanten. Positions-basiertes Reveal, persistent.
+============================================================================ */
+const FOG_REVEAL_RADIUS_PX = 15;       // Sichtradius um den Spieler in SVG-px
+const FOG_REVEAL_DEDUP_PX = 30;        // Mindestabstand zwischen gespeicherten Reveal-Punkten
+const FOG_OPACITY = 0.6;               // Deckkraft der Wolkendecke
 
 const resolveTheme = (mode) => {
   if (mode === 'day') return 'day';
@@ -1129,6 +1178,15 @@ export default function App() {
   const [osmFeatures, setOsmFeatures] = useState(null);   // { buildings, water, parks, rail, churches }
   const [osmStatus, setOsmStatus] = useState('idle');     // idle | loading | ready | error
 
+  /* Fog-of-War: persistierte Reveal-Punkte in SVG-Koordinaten */
+  const [revealed, setRevealed] = useState([]);
+
+  /* Navigation: Heading (Kompass-Grad, kontinuierlich) + Overview-Modal */
+  const [heading, setHeading] = useState(0);
+  const [showOverview, setShowOverview] = useState(false);
+  const headingHistoryRef = useRef([]);     // letzte Positionen [{lat, lng}, ...]
+  const displayedHeadingRef = useRef(0);    // kumulativ, kürzester Pfad zwischen Updates
+
   const settingsRef = useRef(DEFAULT_SETTINGS);
   useEffect(() => { settingsRef.current = settings; }, [settings]);
 
@@ -1177,6 +1235,7 @@ export default function App() {
         setAchievements(new Set(data.achievements || []));
         setDistance(data.distance || 0);
         setElapsed(data.elapsed || 0);
+        if (Array.isArray(data.revealed)) setRevealed(data.revealed);
         setChapterDoneSeen(!!data.chapterDoneSeen);
         if (data.settings) {
           const s = { ...DEFAULT_SETTINGS, ...data.settings };
@@ -1225,11 +1284,12 @@ export default function App() {
         chapterDoneSeen,
         settings,
         journal,
+        revealed,
         savedAt: Date.now(),
       });
     }, 800);
     return () => clearTimeout(t);
-  }, [unlocked, stars, anekdoten, pois, achievements, distance, elapsed, welcomeOpen, chapterDoneSeen, settings, journal, hydrated]);
+  }, [unlocked, stars, anekdoten, pois, achievements, distance, elapsed, welcomeOpen, chapterDoneSeen, settings, journal, revealed, hydrated]);
 
   /* Toast queue */
   const enqueueToast = useCallback((t) => {
@@ -1268,6 +1328,40 @@ export default function App() {
   /* Process new position */
   const processPosition = useCallback((latlng) => {
     setPosition(latlng);
+
+    // Fog-of-War: aktuelle Position als Reveal-Punkt speichern, sofern weiter
+    // als FOG_REVEAL_DEDUP_PX vom letzten entfernt.
+    const proj = project(latlng[0], latlng[1]);
+    setRevealed((prev) => {
+      if (prev.length > 0) {
+        const last = prev[prev.length - 1];
+        const dx = proj.x - last.x, dy = proj.y - last.y;
+        if (dx * dx + dy * dy < FOG_REVEAL_DEDUP_PX * FOG_REVEAL_DEDUP_PX) return prev;
+      }
+      return [...prev, { x: proj.x, y: proj.y }];
+    });
+
+    // Heading: aus letzten 4 Positionen mitteln, nur wenn Gesamtbewegung ≥ 3m.
+    // Bei zu kurzer Bewegung bleibt der bisherige Heading-Wert erhalten (kein Spring zurück).
+    const hist = headingHistoryRef.current;
+    hist.push(latlng);
+    if (hist.length > 4) hist.shift();
+    if (hist.length >= 2) {
+      const oldest = hist[0];
+      const newest = hist[hist.length - 1];
+      const totalM = distanceM(oldest, newest);
+      if (totalM >= 3) {
+        const a = project(oldest[0], oldest[1]);
+        const b = project(newest[0], newest[1]);
+        const dx = b.x - a.x, dy = b.y - a.y;
+        // Kompass-Grad: 0=N, 90=O, 180=S, 270=W
+        const targetHeading = ((Math.atan2(dx, -dy) * 180 / Math.PI) + 360) % 360;
+        // Kürzester Winkelpfad zum Ziel
+        let delta = ((targetHeading - (displayedHeadingRef.current % 360 + 360) % 360 + 540) % 360) - 180;
+        displayedHeadingRef.current = displayedHeadingRef.current + delta;
+        setHeading(displayedHeadingRef.current);
+      }
+    }
 
     const newSegs = [];
     setUnlocked((prev) => {
@@ -1521,9 +1615,11 @@ export default function App() {
     stopDemo(); setTracking(false);
     setUnlocked(new Set()); setStars(new Set()); setAnekdoten(new Set()); setPois(new Set()); setAchievements(new Set());
     setTrail([]); setPosition(null); setElapsed(0); setDistance(0); setLevelUp(null); setChapterDone(false);
-    setChapterDoneSeen(false); setJournal([]);
+    setChapterDoneSeen(false); setJournal([]); setRevealed([]);
+    setHeading(0); setShowOverview(false);
+    headingHistoryRef.current = []; displayedHeadingRef.current = 0;
     lastPosRef.current = null; lastLevelIdxRef.current = 0; startTsRef.current = null;
-    saveState({ unlocked: [], stars: [], anekdoten: [], pois: [], achievements: [], distance: 0, elapsed: 0, welcomeSeen: true, chapterDoneSeen: false, settings, journal: [], savedAt: Date.now() });
+    saveState({ unlocked: [], stars: [], anekdoten: [], pois: [], achievements: [], distance: 0, elapsed: 0, welcomeSeen: true, chapterDoneSeen: false, settings, journal: [], revealed: [], savedAt: Date.now() });
   };
 
   const handleStart = () => {
@@ -1546,8 +1642,8 @@ export default function App() {
       {view === 'explore' && (
         <ExploreScreen
           palette={palette}
-          state={{ tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName }}
-          actions={{ handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, processPosition, lastPosRef, setView,
+          state={{ tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, heading, showOverview, anyModalOpen: welcomeOpen || !!activeLandmark || !!activeAnekdote || !!activePoi || !!levelUp || chapterDone || showLegend || showAchievements || showJournal || showSettings || showLokale || showOverview }}
+          actions={{ handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, setShowOverview, processPosition, lastPosRef, setView,
             cycleTheme: () => setSettings((s) => {
               const next = s.themeMode === 'auto' ? (themeName === 'night' ? 'day' : 'night')
                 : s.themeMode === 'day' ? 'night'
@@ -1570,6 +1666,7 @@ export default function App() {
       {activePoi && <PoiModal poi={activePoi} unlocked={pois.has(activePoi.id)} dist={position ? distanceM(position, activePoi.coords) : null} onClose={() => setActivePoi(null)} />}
       {levelUp && <LevelUpModal level={levelUp} onClose={() => setLevelUp(null)} />}
       {chapterDone && <ChapterCompleteModal stars={stars.size} anekdoten={anekdoten.size} pois={pois.size} elapsed={elapsed} distance={distance} onClose={() => setChapterDone(false)} onBack={() => { setChapterDone(false); setView('districts'); }} />}
+      {showOverview && <OverviewModal palette={palette} revealed={revealed} position={position} onClose={() => setShowOverview(false)} />}
 
       <style>{`
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -1788,8 +1885,8 @@ function DistrictsScreen({ palette, stats, onSelect }) {
 ============================================================================ */
 
 function ExploreScreen({ palette, state, actions }) {
-  const { tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName } = state;
-  const { handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, processPosition, lastPosRef, setView, cycleTheme } = actions;
+  const { tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, heading, showOverview, anyModalOpen } = state;
+  const { handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, setShowOverview, processPosition, lastPosRef, setView, cycleTheme } = actions;
 
   const svgRef = useRef(null);
   const LevelIcon = level.icon;
@@ -1823,6 +1920,100 @@ function ExploreScreen({ palette, state, actions }) {
     return candidates[0] || null;
   }, [position, pois]);
 
+  /* ============================================================================
+     NAVIGATION: viewBox-Zoom auf Spieler, Heading-Rotation, 3D-Tilt.
+     SVG-Element ist via CSS 250% des Containers (NAV_OVERSCAN), damit nach
+     Rotation alle Container-Ecken zuverlässig gefüllt bleiben. ViewBox-Grösse
+     ist entsprechend skaliert; sichtbare Region bleibt ~50m Radius.
+     transitionProgress 0→1 wird per rAF beim ersten Positions-Fix interpoliert,
+     damit Voll-Kartenansicht glatt in Nav-View überblendet (~800ms).
+  ============================================================================ */
+  const NAV_OVERSCAN = 2.5;                                        // SVG-Element 250% des Containers
+  const NAV_VIEWBOX_SIZE_VISIBLE = 200;                            // sichtbare viewBox-Region (~50m Radius)
+  const NAV_VIEWBOX_SIZE_RAW = NAV_VIEWBOX_SIZE_VISIBLE * NAV_OVERSCAN;  // 500
+  const NAV_PLAYER_OFFSET_CONTAINER = 0.65;                        // Spieler bei 65% des Containers (Sicht voraus)
+  const NAV_PLAYER_OFFSET_SVG = 0.5 + (NAV_PLAYER_OFFSET_CONTAINER - 0.5) / NAV_OVERSCAN;  // 0.56 — Spieler-Position innerhalb des SVG-Elements
+  const NAV_TILT_DEG = 28;
+  const navMode = !!position;
+  const [transitionProgress, setTransitionProgress] = useState(0);
+  const [firstTransitionDone, setFirstTransitionDone] = useState(false);
+  const transitionStartedRef = useRef(false);
+
+  useEffect(() => {
+    if (!navMode || transitionStartedRef.current) return;
+    transitionStartedRef.current = true;
+    const start = performance.now();
+    let raf;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / 800);
+      const ease = 1 - Math.pow(1 - t, 3);
+      setTransitionProgress(ease);
+      if (t < 1) raf = requestAnimationFrame(tick);
+      else setFirstTransitionDone(true);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [navMode]);
+
+  const playerProj = useMemo(
+    () => position ? project(position[0], position[1]) : { x: VIEWPORT.width / 2, y: VIEWPORT.height / 2 },
+    [position]
+  );
+
+  // Throttling für Mini-Map: aktuelle position/revealed nur alle ~500ms weitergeben.
+  const [miniPosition, setMiniPosition] = useState(position);
+  const [miniRevealed, setMiniRevealed] = useState(revealed);
+  const miniLastUpdateRef = useRef(0);
+  useEffect(() => {
+    const now = performance.now();
+    const delta = now - miniLastUpdateRef.current;
+    if (delta >= 500) {
+      miniLastUpdateRef.current = now;
+      setMiniPosition(position);
+      setMiniRevealed(revealed);
+      return;
+    }
+    const tm = setTimeout(() => {
+      miniLastUpdateRef.current = performance.now();
+      setMiniPosition(position);
+      setMiniRevealed(revealed);
+    }, 500 - delta);
+    return () => clearTimeout(tm);
+  }, [position, revealed]);
+
+  // Beide viewBoxes sind um NAV_OVERSCAN vergrössert, damit der visuelle Zoom
+  // (in der Container-Mitte sichtbar) unabhängig vom Overscan konstant bleibt.
+  // FullVB ist quadratisch (max(VIEWPORT.w, VIEWPORT.h) * OVERSCAN), damit die
+  // Altstadt mit Slice-Aspect ohne starkes Cropping ins Container-Quadrat passt.
+  const fullVBSize = Math.max(VIEWPORT.width, VIEWPORT.height) * NAV_OVERSCAN;
+  const fullVB = {
+    x: VIEWPORT.width / 2 - fullVBSize / 2,
+    y: VIEWPORT.height / 2 - fullVBSize / 2,
+    w: fullVBSize,
+    h: fullVBSize,
+  };
+  const navVB = {
+    x: playerProj.x - NAV_VIEWBOX_SIZE_RAW / 2,
+    y: playerProj.y - NAV_VIEWBOX_SIZE_RAW * NAV_PLAYER_OFFSET_SVG,
+    w: NAV_VIEWBOX_SIZE_RAW,
+    h: NAV_VIEWBOX_SIZE_RAW,
+  };
+  const tp = transitionProgress;
+  const viewBoxAttr = `${fullVB.x + (navVB.x - fullVB.x) * tp} ${fullVB.y + (navVB.y - fullVB.y) * tp} ${fullVB.w + (navVB.w - fullVB.w) * tp} ${fullVB.h + (navVB.h - fullVB.h) * tp}`;
+
+  const effectiveTilt = NAV_TILT_DEG * tp;
+  const effectiveRotation = -heading * tp;
+  const svgTransform = `perspective(900px) rotateX(${effectiveTilt}deg) rotateZ(${effectiveRotation}deg)`;
+  // Label-Gegenrotation in SVG-Space (kompensiert nur den rotateZ-Anteil)
+  const labelCounterRot = heading * tp;
+  // Während rAF: keine CSS-Transition (rAF treibt die Animation). Danach: 400ms ease-out für Heading-Updates.
+  const transformTransition = firstTransitionDone ? 'transform 400ms ease-out' : 'none';
+  // transform-origin ist in SVG-Element-Koordinaten; Spieler liegt bei (50%, NAV_PLAYER_OFFSET_SVG).
+  const transformOriginCss = `50% ${NAV_PLAYER_OFFSET_SVG * 100}%`;
+  // CSS-Overscan-Werte für das SVG-Element
+  const svgOverscanOffsetPct = -50 * (NAV_OVERSCAN - 1);            // -75%
+  const svgOverscanSizePct = 100 * NAV_OVERSCAN;                   // 250%
+
   const handleSvgClick = useCallback((e) => {
     const svg = svgRef.current;
     if (!svg) return;
@@ -1838,8 +2029,8 @@ function ExploreScreen({ palette, state, actions }) {
     }
     for (const poi of POIS) {
       const pp = project(poi.coords[0], poi.coords[1]);
-      // Hit area: pin disc is centered ~22px above the location
-      if (Math.hypot(pp.x - local.x, (pp.y - 18) - local.y) < 14) { setActivePoi(poi); return; }
+      // Hit area: pin disc ist ~15px über der Location (skaliert für engen Zoom)
+      if (Math.hypot(pp.x - local.x, (pp.y - 15) - local.y) < 10) { setActivePoi(poi); return; }
     }
     for (const an of ANEKDOTEN) {
       const ap = project(an.coords[0], an.coords[1]);
@@ -1910,23 +2101,32 @@ function ExploreScreen({ palette, state, actions }) {
         </div>
       </header>
 
-      <div className="relative flex-1 min-h-[420px]" style={{ background: palette.mapBg, transition: 'background 800ms ease' }}>
+      <div className="relative flex-1 min-h-[420px] overflow-hidden" style={{ background: palette.mapBg, transition: 'background 800ms ease', perspective: '900px' }}>
         <svg
           ref={svgRef}
-          viewBox={`0 0 ${VIEWPORT.width} ${VIEWPORT.height}`}
-          className="w-full h-full block"
-          preserveAspectRatio="xMidYMid meet"
+          viewBox={viewBoxAttr}
+          preserveAspectRatio="xMidYMid slice"
           onClick={handleSvgClick}
-          style={{ cursor: simMode && tracking && !demoRunning ? 'crosshair' : 'default', touchAction: 'manipulation' }}
+          style={{
+            position: 'absolute',
+            top: `${svgOverscanOffsetPct}%`,
+            left: `${svgOverscanOffsetPct}%`,
+            width: `${svgOverscanSizePct}%`,
+            height: `${svgOverscanSizePct}%`,
+            display: 'block',
+            cursor: simMode && tracking && !demoRunning ? 'crosshair' : 'default',
+            touchAction: 'manipulation',
+            transform: svgTransform,
+            transformOrigin: transformOriginCss,
+            transition: transformTransition,
+            willChange: 'transform',
+          }}
         >
           <defs>
             <filter id="paperNoise" x="0" y="0" width="100%" height="100%">
               <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3" />
               <feColorMatrix values={palette.paperNoiseColor} />
               <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-            <filter id="cloudBlur" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3.2" />
             </filter>
             <linearGradient id="riverGrad" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={palette.riverTop} />
@@ -1940,9 +2140,14 @@ function ExploreScreen({ palette, state, actions }) {
               <stop offset="0%" stopColor={palette.userPulseColor} stopOpacity="0.5" />
               <stop offset="100%" stopColor={palette.userPulseColor} stopOpacity="0" />
             </radialGradient>
-            <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
-              <stop offset="60%" stopColor="rgba(0,0,0,0)" />
-              <stop offset="100%" stopColor={palette.vignette} />
+            {/* Vignette + Outer-Fade in einem: transparent in der Altstadt-Region,
+                Verdunkelung am Rand des natürlichen Viewports, voll mapBg ab Radius
+                1500 vom Karten-Zentrum (alles weiter draussen → flacher mapBg-Fill). */}
+            <radialGradient id="vignette" cx={VIEWPORT.width / 2} cy={VIEWPORT.height / 2} r="1500" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stopColor="rgba(0,0,0,0)" />
+              <stop offset="40%"  stopColor="rgba(0,0,0,0)" />
+              <stop offset="55%"  stopColor={palette.vignette} />
+              <stop offset="100%" stopColor={palette.mapBg} stopOpacity="1" />
             </radialGradient>
             <radialGradient id="starGlow">
               <stop offset="0%" stopColor="#FFE9B0" stopOpacity="0.9" />
@@ -1953,35 +2158,43 @@ function ExploreScreen({ palette, state, actions }) {
               <stop offset="0%" stopColor="#FFE9B0" />
               <stop offset="100%" stopColor="#C8923C" />
             </linearGradient>
-            <linearGradient id="cloudVolume" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={palette.cloudGradTop} stopOpacity="1" />
-              <stop offset="100%" stopColor={palette.cloudGradBottom} stopOpacity="0.95" />
-            </linearGradient>
-            <filter id="cloudPuff" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="1.4" />
-            </filter>
-            <filter id="cloudDropShadow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" />
-              <feOffset dy="1.5" />
-              <feComponentTransfer><feFuncA type="linear" slope="0.4" /></feComponentTransfer>
-              <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
             <filter id="poiPinShadow" x="-50%" y="-30%" width="200%" height="180%">
               <feGaussianBlur in="SourceAlpha" stdDeviation="1.6" />
               <feOffset dy="2.5" />
               <feComponentTransfer><feFuncA type="linear" slope="0.55" /></feComponentTransfer>
               <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
-            <filter id="streetEmboss" x="-10%" y="-10%" width="120%" height="120%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="0.8" />
-              <feOffset dy="1.2" />
-              <feComponentTransfer><feFuncA type="linear" slope="0.45" /></feComponentTransfer>
-              <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+            {/* Fog-of-War: weiche Reveal-Kante */}
+            <radialGradient id="fogReveal" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stopColor="black" stopOpacity="1" />
+              <stop offset="55%"  stopColor="black" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="black" stopOpacity="0" />
+            </radialGradient>
+            {/* Fog-of-War: vertikaler Volumen-Gradient (Highlight oben, Shadow unten) */}
+            <linearGradient id="fogGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor={palette.fogHighlight} />
+              <stop offset="55%"  stopColor={palette.fogColor} />
+              <stop offset="100%" stopColor={palette.fogShadow} />
+            </linearGradient>
+            {/* Fog-of-War: organische Volumen-Textur via Fractal-Noise */}
+            <filter id="fogTexture" x="0" y="0" width="100%" height="100%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="3" seed="11" />
+              <feColorMatrix type="matrix" values={palette.fogTextureTint} />
             </filter>
+            {/* Fog-of-War: Maske — weiss = Wolken sichtbar, schwarz/transparent = freigewischt */}
+            <mask id="fogMask" maskUnits="userSpaceOnUse" x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h}>
+              <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h} fill="white" />
+              {revealed.map((p, i) => (
+                <circle key={i}
+                  cx={p.x} cy={p.y}
+                  r={FOG_REVEAL_RADIUS_PX}
+                  fill="url(#fogReveal)" />
+              ))}
+            </mask>
           </defs>
 
-          <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.paperFill} style={{ transition: 'fill 800ms ease' }} />
-          <rect width={VIEWPORT.width} height={VIEWPORT.height} filter="url(#paperNoise)" opacity={palette.paperNoiseOpacity} />
+          <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h} fill={palette.paperFill} style={{ transition: 'fill 800ms ease' }} />
+          <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h} filter="url(#paperNoise)" opacity={palette.paperNoiseOpacity} />
 
           {/* Starfield (night only) */}
           {palette.starfieldVisible && (
@@ -2050,6 +2263,50 @@ function ExploreScreen({ palette, state, actions }) {
           <polyline points={riverPts.map((p) => `${p.x - 6},${p.y - 2}`).join(' ')} fill="none" stroke={palette.riverHighlight} strokeWidth="0.7" strokeLinecap="round" opacity="0.3" strokeDasharray="3 22">
             <animate attributeName="stroke-dashoffset" from="0" to="-50" dur="9s" repeatCount="indefinite" />
           </polyline>
+
+          {/* Brücken — rechteckige Balken senkrecht zum Strassenverlauf, mit Geländer-Strichen */}
+          <g style={{ pointerEvents: 'none' }}>
+            {STREETS.filter((s) => s.side === 'bridge').map((bridge) => {
+              const points = bridge.points;
+              if (points.length < 2) return null;
+              // Pro Brücke: nutze nur erste→letzte Punkte für Achse (sind kurz, gerade)
+              const a = project(points[0][0], points[0][1]);
+              const b = project(points[points.length - 1][0], points[points.length - 1][1]);
+              const dx = b.x - a.x, dy = b.y - a.y;
+              const len = Math.hypot(dx, dy) || 1;
+              const tx = dx / len, ty = dy / len;       // Tangente (Brückenrichtung)
+              const nx = -ty, ny = tx;                  // Normale (quer zur Brücke)
+              const halfW = 6;                          // halbe Brückenbreite
+              // Brückendeck-Polygon
+              const corners = [
+                [a.x + nx * halfW, a.y + ny * halfW],
+                [b.x + nx * halfW, b.y + ny * halfW],
+                [b.x - nx * halfW, b.y - ny * halfW],
+                [a.x - nx * halfW, a.y - ny * halfW],
+              ];
+              const polyPts = corners.map((p) => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+              return (
+                <g key={`bridge-${bridge.id}`}>
+                  {/* Unterschatten */}
+                  <polygon points={polyPts} fill={palette.bridgeEdge} opacity="0.55"
+                    transform="translate(0.5, 1.2)" />
+                  {/* Brückendeck */}
+                  <polygon points={polyPts} fill={palette.bridgeFill}
+                    stroke={palette.bridgeEdge} strokeWidth="0.6" strokeLinejoin="round" />
+                  {/* Geländer auf beiden Seiten */}
+                  <line
+                    x1={a.x + nx * halfW} y1={a.y + ny * halfW}
+                    x2={b.x + nx * halfW} y2={b.y + ny * halfW}
+                    stroke={palette.bridgeRail} strokeWidth="0.7" strokeLinecap="round" />
+                  <line
+                    x1={a.x - nx * halfW} y1={a.y - ny * halfW}
+                    x2={b.x - nx * halfW} y2={b.y - ny * halfW}
+                    stroke={palette.bridgeRail} strokeWidth="0.7" strokeLinecap="round" />
+                </g>
+              );
+            })}
+          </g>
+
           {/* OSM water polygons (pools, fountains' basins, etc.) — under everything else */}
           {osmFeatures && osmFeatures.water.length > 0 && (
             <g style={{ pointerEvents: 'none' }}>
@@ -2112,7 +2369,8 @@ function ExploreScreen({ palette, state, actions }) {
               {(() => {
                 const center = project((HBF_BUILDING[0][0] + HBF_BUILDING[2][0]) / 2, (HBF_BUILDING[0][1] + HBF_BUILDING[2][1]) / 2);
                 return (
-                  <text x={center.x} y={center.y + 3} textAnchor="middle" fontSize="9" fontFamily="Fraunces, Georgia, serif" fontWeight="700" fill={palette.hbfStroke} opacity="0.85" style={{ pointerEvents: 'none' }}>
+                  <text x={center.x} y={center.y + 3} textAnchor="middle" fontSize="9" fontFamily="Fraunces, Georgia, serif" fontWeight="700" fill={palette.hbfStroke} opacity="0.85" style={{ pointerEvents: 'none' }}
+                    transform={`rotate(${labelCounterRot} ${center.x} ${center.y + 3})`}>
                     Hbf
                   </text>
                 );
@@ -2120,25 +2378,59 @@ function ExploreScreen({ palette, state, actions }) {
             </g>
           )}
 
-          {/* OSM buildings — Google Maps-like rendering with crisp outlines */}
+          {/* OSM buildings — Google Maps-like rendering with crisp outlines.
+              Helligkeitsvariation pro Haus via deterministischem ID-Hash + Ostkanten-Schatten
+              simuliert Licht aus Nordwesten (gibt 2.5D-Tiefe). */}
           {osmFeatures && osmFeatures.buildings.length > 0 ? (
             <g style={{ pointerEvents: 'none' }}>
-              {/* Pass 1: drop shadows */}
+              {/* Pass 1: drop shadows (Boden) */}
               {osmFeatures.buildings.map((b) => {
                 const pts = b.points.map(([la, ln]) => { const p = project(la, ln); return `${p.x + 0.8},${p.y + 1.2}`; }).join(' ');
                 return <polygon key={`bs-${b.id}`} points={pts} fill={palette.osmBuildingShadow} opacity="0.55" />;
               })}
-              {/* Pass 2: fills */}
+              {/* Pass 2: fills mit deterministischer Helligkeits-Variation */}
               {osmFeatures.buildings.map((b) => {
                 const isChurch = b.kind === 'church' || b.kind === 'cathedral' || b.kind === 'chapel';
                 const pts = b.points.map(([la, ln]) => { const p = project(la, ln); return `${p.x},${p.y}`; }).join(' ');
+                // Deterministisches Helligkeits-Delta zwischen -0.06 und +0.06 (ID-Hash)
+                let h = 0;
+                const idStr = String(b.id);
+                for (let i = 0; i < idStr.length; i++) h = (h * 31 + idStr.charCodeAt(i)) >>> 0;
+                const brightnessShift = ((h % 100) / 100 - 0.5) * 0.12;   // -0.06 … +0.06
+                const baseColor = isChurch ? palette.osmBuildingChurch : palette.osmBuildingFill;
                 return (
                   <polygon key={b.id} points={pts}
-                    fill={isChurch ? palette.osmBuildingChurch : palette.osmBuildingFill}
+                    fill={baseColor}
                     stroke={palette.osmBuildingStroke}
                     strokeWidth="0.75"
                     strokeLinejoin="round"
-                    style={{ transition: 'fill 600ms ease, stroke 600ms ease' }} />
+                    style={{
+                      transition: 'fill 600ms ease, stroke 600ms ease',
+                      filter: `brightness(${1 + brightnessShift})`,
+                    }} />
+                );
+              })}
+              {/* Pass 2b: Ostkanten-Schatten — dünne dunkle Striche an Süd-/Ostseiten der Polygone */}
+              {osmFeatures.buildings.map((b) => {
+                const projPts = b.points.map(([la, ln]) => project(la, ln));
+                // Sammle Kanten, deren Normale Richtung Südost zeigt (Licht aus NW)
+                const segments = [];
+                for (let i = 0; i < projPts.length - 1; i++) {
+                  const p1 = projPts[i], p2 = projPts[i + 1];
+                  const dx = p2.x - p1.x, dy = p2.y - p1.y;
+                  // Aussen-Normale (rechts der Kante in Polygon-Reihenfolge)
+                  const nx = dy, ny = -dx;
+                  // SO ist (+x, +y) → wenn (nx + ny) > 0, ist es Süd-/Ostseite
+                  if (nx + ny > 0) {
+                    segments.push(`M ${p1.x.toFixed(1)},${p1.y.toFixed(1)} L ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`);
+                  }
+                }
+                if (segments.length === 0) return null;
+                return (
+                  <path key={`be-${b.id}`} d={segments.join(' ')}
+                    fill="none" stroke={palette.buildingEastShadow} strokeWidth="1.2"
+                    strokeLinecap="round" strokeLinejoin="round"
+                    transform="translate(0.6, 0.6)" opacity="0.85" />
                 );
               })}
               {/* Pass 3: building parts — subtle internal subdivision lines (courtyards, sections) */}
@@ -2245,7 +2537,8 @@ function ExploreScreen({ palette, state, actions }) {
             <circle r="22" fill="none" stroke={palette.compassStroke} strokeWidth="0.6" />
             <path d="M 0,-30 L 4,0 L 0,30 L -4,0 Z" fill={palette.compassStroke} opacity="0.6" />
             <path d="M -30,0 L 0,4 L 30,0 L 0,-4 Z" fill={palette.compassStroke} opacity="0.35" />
-            <text y="-36" textAnchor="middle" fontSize="11" fontFamily="Fraunces, Georgia, serif" fill={palette.compassStroke} fontWeight="700">N</text>
+            <text y="-36" textAnchor="middle" fontSize="11" fontFamily="Fraunces, Georgia, serif" fill={palette.compassStroke} fontWeight="700"
+              transform={`rotate(${labelCounterRot} 0 -36)`}>N</text>
           </g>
 
           {/* OSM streets — backdrop (always visible context, lifted from background with outline+fill) */}
@@ -2286,61 +2579,6 @@ function ExploreScreen({ palette, state, actions }) {
             </g>
           )}
 
-          {/* Core streets unlocked — lifted with outline + fill + bright shine */}
-          <g filter="url(#streetEmboss)">
-            {/* Outline pass */}
-            {SEGMENTS.map((seg) => {
-              if (!unlocked.has(seg.id)) return null;
-              const a = project(seg.a[0], seg.a[1]);
-              const b = project(seg.b[0], seg.b[1]);
-              const isBridge = seg.side === 'bridge';
-              return (
-                <line key={`u-o-${seg.id}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-                  stroke={palette.streetOutline} strokeWidth={isBridge ? 7.5 : 6.4}
-                  strokeLinecap="round" opacity="0.95" style={{ transition: 'stroke 600ms ease' }} />
-              );
-            })}
-            {/* Fill pass */}
-            {SEGMENTS.map((seg) => {
-              if (!unlocked.has(seg.id)) return null;
-              const a = project(seg.a[0], seg.a[1]);
-              const b = project(seg.b[0], seg.b[1]);
-              const isBridge = seg.side === 'bridge';
-              return (
-                <line key={`u-f-${seg.id}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-                  stroke={palette.streetFill} strokeWidth={isBridge ? 5.2 : 4.2}
-                  strokeLinecap="round" opacity="1" style={{ transition: 'stroke 600ms ease' }} />
-              );
-            })}
-            {/* Bridge accent */}
-            {SEGMENTS.map((seg) => {
-              if (!unlocked.has(seg.id) || seg.side !== 'bridge') return null;
-              const a = project(seg.a[0], seg.a[1]);
-              const b = project(seg.b[0], seg.b[1]);
-              return (
-                <line key={`u-b-${seg.id}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-                  stroke={palette.bridgeAccent} strokeWidth="1.4" strokeLinecap="round"
-                  strokeDasharray="3 3" opacity="0.9" />
-              );
-            })}
-            {/* Shine highlight (top edge of street, very subtle) */}
-            {SEGMENTS.map((seg) => {
-              if (!unlocked.has(seg.id)) return null;
-              const a = project(seg.a[0], seg.a[1]);
-              const b = project(seg.b[0], seg.b[1]);
-              const dx = b.x - a.x, dy = b.y - a.y;
-              const len = Math.hypot(dx, dy) || 1;
-              const nx = -dy / len, ny = dx / len;
-              const off = 1.0;
-              return (
-                <line key={`u-s-${seg.id}`}
-                  x1={a.x + nx * off} y1={a.y + ny * off}
-                  x2={b.x + nx * off} y2={b.y + ny * off}
-                  stroke={palette.streetShine} strokeWidth="1" strokeLinecap="round" opacity="0.85" />
-              );
-            })}
-          </g>
-
           {/* Core streets locked — faint hint (under clouds) */}
           {SEGMENTS.map((seg) => {
             if (unlocked.has(seg.id)) return null;
@@ -2353,52 +2591,15 @@ function ExploreScreen({ palette, state, actions }) {
             );
           })}
 
-          {/* Clouds — fluffier multi-puff with ground shadow + volume gradient */}
-          <g style={{ pointerEvents: 'none' }}>
-            {SEGMENTS.map((seg) => {
-              const isUnlocked = unlocked.has(seg.id);
-              const a = project(seg.a[0], seg.a[1]);
-              const b = project(seg.b[0], seg.b[1]);
-              const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-              const dx = b.x - a.x, dy = b.y - a.y;
-              const len = Math.hypot(dx, dy) || 1;
-              const ux = dx / len, uy = dy / len;
-              const baseR = Math.max(8, len * 0.28);
-              return (
-                <g key={`c-${seg.id}`}
-                  style={{
-                    transition: 'opacity 700ms ease-out, transform 900ms ease-out',
-                    opacity: isUnlocked ? 0 : 1,
-                    transform: isUnlocked ? `translate(0,-14px) scale(1.18) rotate(2deg)` : 'none',
-                    transformOrigin: `${mx}px ${my}px`,
-                    transformBox: 'fill-box',
-                  }}
-                >
-                  {/* Ground shadow */}
-                  <ellipse cx={mx} cy={my + baseR * 0.55} rx={baseR * 0.85} ry={baseR * 0.18}
-                    fill={palette.cloudShadow} opacity="0.7" filter="url(#cloudPuff)" />
-                  {/* Cloud body — multi-puff with volume gradient */}
-                  <g filter="url(#cloudPuff)">
-                    {/* Bottom layer — wider, slightly darker (gradient bottom) */}
-                    <ellipse cx={mx - ux * baseR * 0.55} cy={my + 1.5} rx={baseR * 0.55} ry={baseR * 0.42}
-                      fill="url(#cloudVolume)" opacity={palette.cloudOpA} />
-                    <ellipse cx={mx + ux * baseR * 0.55} cy={my + 1.2} rx={baseR * 0.55} ry={baseR * 0.40}
-                      fill="url(#cloudVolume)" opacity={palette.cloudOpC} />
-                    {/* Center layer — tallest, dominant */}
-                    <ellipse cx={mx} cy={my} rx={baseR * 0.72} ry={baseR * 0.50}
-                      fill="url(#cloudVolume)" opacity={palette.cloudOpB} />
-                    {/* Top puffs — give billowy crown */}
-                    <ellipse cx={mx - ux * baseR * 0.25} cy={my - baseR * 0.32} rx={baseR * 0.42} ry={baseR * 0.36}
-                      fill={palette.cloudGradTop} opacity={palette.cloudOpA} />
-                    <ellipse cx={mx + ux * baseR * 0.25} cy={my - baseR * 0.36} rx={baseR * 0.46} ry={baseR * 0.38}
-                      fill={palette.cloudGradTop} opacity={palette.cloudOpA} />
-                    {/* Tiny highlight puff */}
-                    <ellipse cx={mx - ux * baseR * 0.15} cy={my - baseR * 0.55} rx={baseR * 0.22} ry={baseR * 0.18}
-                      fill={palette.cloudGradTop} opacity={palette.cloudOpB * 0.95} />
-                  </g>
-                </g>
-              );
-            })}
+          {/* Fog-of-War: flächendeckende Wolken-Schicht, maskiert durch
+              gespeicherte Reveal-Punkte. Volumen via vertikalem Gradient (Highlight
+              oben, Shadow unten) + Turbulence-Textur für gemalten Look. */}
+          <g mask="url(#fogMask)" style={{ pointerEvents: 'none', opacity: FOG_OPACITY }}>
+            <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h}
+              fill="url(#fogGrad)"
+              style={{ transition: 'fill 600ms ease' }} />
+            <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h}
+              filter="url(#fogTexture)" opacity="0.55" />
           </g>
 
 
@@ -2441,29 +2642,40 @@ function ExploreScreen({ palette, state, actions }) {
             })}
           </g>
 
-          {/* Anekdoten — small bookmark dots */}
+          {/* Anekdoten — kompakte Bookmark-Dots mit Counter-Rotation, Drop-Shadow + weisser Outline */}
           {ANEKDOTEN.map((an) => {
             const p = project(an.coords[0], an.coords[1]);
             const isUnlocked = anekdoten.has(an.id);
             return (
               <g key={an.id} transform={`translate(${p.x},${p.y})`} style={{ cursor: 'pointer' }}>
-                <circle r="14" fill="transparent" />
-                <circle
-                  r={isUnlocked ? 6 : 4}
-                  fill={isUnlocked ? palette.anekdoteUnlockedFill : palette.anekdoteLockedFill}
-                  stroke={isUnlocked ? palette.anekdoteUnlockedStroke : palette.anekdoteLockedStroke}
-                  strokeWidth={isUnlocked ? 1.6 : 1}
-                  opacity={isUnlocked ? 1 : 0.55}
-                  style={{ transition: 'all 500ms ease-out', filter: isUnlocked ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' : 'none' }}
-                />
-                {isUnlocked && (
-                  <text y="2" textAnchor="middle" fontSize="7" fontWeight="900" fill={palette.anekdoteIconColor} pointerEvents="none">!</text>
-                )}
+                <circle r="12" fill="transparent" />
+                <g transform={`rotate(${labelCounterRot})`}
+                  style={{ transition: 'all 500ms ease-out', filter: 'drop-shadow(0 1px 1.5px rgba(0,0,0,0.28))' }}>
+                  {/* Weisser Outline-Ring für Lesbarkeit über bunten Bereichen */}
+                  <circle
+                    r={isUnlocked ? 4.5 : 3}
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="1.1"
+                    opacity={isUnlocked ? 0.92 : 0.7}
+                  />
+                  <circle
+                    r={isUnlocked ? 4 : 2.6}
+                    fill={isUnlocked ? palette.anekdoteUnlockedFill : palette.anekdoteLockedFill}
+                    stroke={isUnlocked ? palette.anekdoteUnlockedStroke : palette.anekdoteLockedStroke}
+                    strokeWidth={isUnlocked ? 1.1 : 0.8}
+                    opacity={isUnlocked ? 1 : 0.6}
+                  />
+                  {isUnlocked && (
+                    <text y="1.6" textAnchor="middle" fontSize="5" fontWeight="900"
+                      fill={palette.anekdoteIconColor} pointerEvents="none">!</text>
+                  )}
+                </g>
               </g>
             );
           })}
 
-          {/* Landmarks */}
+          {/* Landmarks — kompakter, dezenter, mit Counter-Rotation + weisser Outline */}
           {LANDMARKS.map((lm) => {
             const p = project(lm.coords[0], lm.coords[1]);
             const isUnlocked = stars.has(lm.id);
@@ -2472,27 +2684,26 @@ function ExploreScreen({ palette, state, actions }) {
             return (
               <g key={lm.id} transform={`translate(${p.x},${p.y})`} style={{ cursor: 'pointer' }}>
                 {(isUnlocked || isNear) && (
-                  <circle r={isUnlocked ? 28 : 22} fill="url(#starGlow)">
-                    {isUnlocked && <animate attributeName="r" values="22;32;22" dur="3s" repeatCount="indefinite" />}
+                  <circle r={isUnlocked ? 17 : 14} fill="url(#starGlow)" opacity="0.65">
+                    {isUnlocked && <animate attributeName="r" values="14;20;14" dur="3s" repeatCount="indefinite" />}
                   </circle>
                 )}
-                {isUnlocked && (
-                  <circle r="18" fill="none" stroke="#C8923C" strokeWidth="0.8" opacity="0.4">
-                    <animate attributeName="r" values="14;22;14" dur="3s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" />
-                  </circle>
-                )}
-                <path
-                  d={STAR_PATH_LG}
-                  fill={isUnlocked ? 'url(#starFill)' : palette.starLockedFill}
-                  stroke={isUnlocked ? '#7A4A1F' : palette.starLockedStroke}
-                  strokeWidth={isUnlocked ? 1.4 : 1.2}
-                  strokeLinejoin="round"
-                  opacity={isUnlocked ? 1 : 0.55}
-                  style={{ filter: isUnlocked ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' : 'none', transition: 'opacity 600ms ease-out' }}
-                />
-                <circle r="22" fill="transparent" />
-                <text y="28" textAnchor="middle" fontSize="11" fontFamily="Fraunces, Georgia, serif" fontWeight="700" fill={palette.text} opacity={isUnlocked ? 0.95 : 0.6} style={{ pointerEvents: 'none', paintOrder: 'stroke', stroke: palette.landmarkLabelStroke, strokeWidth: 3, strokeLinejoin: 'round' }}>
+                <g transform={`rotate(${labelCounterRot})`}
+                  style={{ filter: 'drop-shadow(0 1px 1.5px rgba(0,0,0,0.32))', transition: 'opacity 600ms ease-out' }}>
+                  {/* Weisser Outline-Ring um den Stern für Lesbarkeit */}
+                  <path d={STAR_PATH_SM} fill="none" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" opacity="0.85" />
+                  <path d={STAR_PATH_SM}
+                    fill={isUnlocked ? 'url(#starFill)' : palette.starLockedFill}
+                    stroke={isUnlocked ? '#7A4A1F' : palette.starLockedStroke}
+                    strokeWidth="0.9"
+                    strokeLinejoin="round"
+                    opacity={isUnlocked ? 1 : 0.55} />
+                </g>
+                <circle r="16" fill="transparent" />
+                <text y="18" textAnchor="middle" fontSize="9" fontFamily="Fraunces, Georgia, serif" fontWeight="700" fill={palette.text}
+                  opacity={isUnlocked ? 0.95 : 0.55}
+                  style={{ pointerEvents: 'none', paintOrder: 'stroke', stroke: palette.labelHalo, strokeWidth: 2.5, strokeLinejoin: 'round', letterSpacing: '0.01em' }}
+                  transform={`rotate(${labelCounterRot} 0 18)`}>
                   {lm.name}
                 </text>
               </g>
@@ -2510,79 +2721,104 @@ function ExploreScreen({ palette, state, actions }) {
               ? { bg: palette.poiRestaurantBg, ring: palette.poiRestaurantRing }
               : { bg: palette.poiClubBg, ring: palette.poiClubRing };
             // Pin floats above the location with a tail pointing to it
-            const pinY = -22; // disc center is 22px above the location
+            const pinY = -15; // disc center is 15px above the location (skaliert für engen Zoom)
             // Stagger bob phases so pins don't bob in sync
             const bobDelay = (idx * 0.37) % 2.4;
             return (
               <g key={poi.id} transform={`translate(${p.x},${p.y})`} style={{ cursor: 'pointer' }}>
                 {/* Ground shadow */}
-                <ellipse cx="0" cy="2" rx="6" ry="1.8" fill={palette.poiPinShadow} opacity="0.7">
+                <ellipse cx="0" cy="1.5" rx="4" ry="1.2" fill={palette.poiPinShadow} opacity="0.7">
                   {!isUnlocked && (
-                    <animate attributeName="rx" values="6;7;6" dur="2.4s" begin={`${bobDelay}s`} repeatCount="indefinite" />
+                    <animate attributeName="rx" values="4;4.7;4" dur="2.4s" begin={`${bobDelay}s`} repeatCount="indefinite" />
                   )}
                 </ellipse>
 
                 {/* Open-now soft glow halo */}
                 {isOpen && (
-                  <circle cx="0" cy={pinY} r="16" fill={colors.bg} opacity="0.22">
-                    <animate attributeName="r" values="14;20;14" dur="2.2s" repeatCount="indefinite" />
+                  <circle cx="0" cy={pinY} r="11" fill={colors.bg} opacity="0.22">
+                    <animate attributeName="r" values="9;13;9" dur="2.2s" repeatCount="indefinite" />
                     <animate attributeName="opacity" values="0.35;0.10;0.35" dur="2.2s" repeatCount="indefinite" />
                   </circle>
                 )}
 
-                <g style={{ filter: isUnlocked ? 'none' : 'grayscale(0.65)', opacity: isUnlocked ? 1 : 0.78, transition: 'filter 600ms ease, opacity 600ms ease' }}>
+                {/* Pin-Body mit Counter-Rotation, damit aufrecht über der Welt */}
+                <g transform={`rotate(${labelCounterRot})`}
+                  style={{ filter: isUnlocked ? 'drop-shadow(0 1px 1.5px rgba(0,0,0,0.28))' : 'drop-shadow(0 1px 1.5px rgba(0,0,0,0.2)) grayscale(0.55)', opacity: isUnlocked ? 1 : 0.82, transition: 'filter 600ms ease, opacity 600ms ease' }}>
                   {/* Tail (teardrop) — triangle pointing down */}
-                  <path d={`M -5,${pinY + 7} L 0,-2 L 5,${pinY + 7} Z`} fill={colors.bg} filter="url(#poiPinShadow)" />
-                  {/* Outer ring (white/cream) */}
-                  <circle cx="0" cy={pinY} r="11" fill={palette.streetFill} />
+                  <path d={`M -3.3,${pinY + 4.5} L 0,-1.5 L 3.3,${pinY + 4.5} Z`} fill={colors.bg} />
+                  {/* Weisser Outline-Ring für Lesbarkeit */}
+                  <circle cx="0" cy={pinY} r="7.5" fill="#fff" />
                   {/* Inner colored disc */}
-                  <circle cx="0" cy={pinY} r="9" fill={colors.bg} />
+                  <circle cx="0" cy={pinY} r="6" fill={colors.bg} />
                   {/* Inner highlight (subtle gradient) */}
-                  <circle cx="-2" cy={pinY - 2} r="3" fill="rgba(255,255,255,0.35)" />
+                  <circle cx="-1.3" cy={pinY - 1.3} r="2" fill="rgba(255,255,255,0.35)" />
 
                   {/* Icon */}
                   <PoiIconSvg kind={poi.kind} cx={0} cy={pinY} color={colors.ring} disco={isUnlocked && poi.kind === 'club'} />
 
                   {/* Bob animation when not visited */}
                   {!isUnlocked && (
-                    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-2.5; 0,0" dur="2.4s" begin={`${bobDelay}s`} repeatCount="indefinite" />
+                    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-1.5; 0,0" dur="2.4s" begin={`${bobDelay}s`} repeatCount="indefinite" additive="sum" />
                   )}
                 </g>
 
                 {/* Pulse ring when unlocked */}
                 {isUnlocked && (
-                  <circle cx="0" cy={pinY} r="11" fill="none" stroke={colors.bg} strokeWidth="1.5" opacity="0.5">
-                    <animate attributeName="r" values="11;18;11" dur="2.6s" repeatCount="indefinite" />
+                  <circle cx="0" cy={pinY} r="7" fill="none" stroke={colors.bg} strokeWidth="1" opacity="0.5">
+                    <animate attributeName="r" values="7;12;7" dur="2.6s" repeatCount="indefinite" />
                     <animate attributeName="opacity" values="0.6;0;0.6" dur="2.6s" repeatCount="indefinite" />
                   </circle>
                 )}
 
                 {/* Hit area */}
-                <circle cx="0" cy={pinY} r="14" fill="transparent" />
+                <circle cx="0" cy={pinY} r="10" fill="transparent" />
               </g>
             );
           })}
 
-          {/* User position */}
-          {userPos && (
-            <g pointerEvents="none">
-              {accuracy && !simMode && (
-                <circle cx={userPos.x} cy={userPos.y} r={Math.min(60, ((accuracy / LNG_M) / (BOUNDS.maxLng - BOUNDS.minLng)) * VIEWPORT.width)} fill="rgba(200,146,60,0.1)" stroke="rgba(200,146,60,0.3)" strokeWidth="1" />
-              )}
-              <circle cx={userPos.x} cy={userPos.y} r="22" fill="url(#userPulse)">
-                <animate attributeName="r" values="14;28;14" dur="2.4s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.4s" repeatCount="indefinite" />
-              </circle>
-              <circle cx={userPos.x} cy={userPos.y} r="9" fill={palette.userMarkerFill} stroke={palette.userMarkerStroke} strokeWidth="2.5" />
-              <circle cx={userPos.x} cy={userPos.y} r="4" fill={palette.userMarkerInner} />
-            </g>
+          {/* GPS-Genauigkeits-Ring bleibt im SVG (Welt-Distanz-bezogen) */}
+          {userPos && accuracy && !simMode && (
+            <circle cx={userPos.x} cy={userPos.y}
+              r={Math.min(40, ((accuracy / LNG_M) / (BOUNDS.maxLng - BOUNDS.minLng)) * VIEWPORT.width)}
+              fill="rgba(200,146,60,0.08)" stroke="rgba(200,146,60,0.25)" strokeWidth="0.8"
+              pointerEvents="none" />
           )}
 
-          <rect width={VIEWPORT.width} height={VIEWPORT.height} fill="url(#vignette)" pointerEvents="none" />
+          <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h} fill="url(#vignette)" pointerEvents="none" />
         </svg>
 
-        {/* Status card top-left */}
-        <div className="absolute top-3 left-3 px-3.5 py-2.5 rounded-xl backdrop-blur-md" style={{ background: palette.cardBg, border: `1px solid ${palette.cardBorder}`, boxShadow: palette.cardShadow, maxWidth: '54%', transition: 'background 600ms ease, border-color 600ms ease' }}>
+        {/* Player-Marker als HTML-Overlay — bleibt gestochen scharf, weil ausserhalb
+            des rotierten SVG-Compositor-Layers. Sitzt fix bei (50%, 65%) — die Karte
+            kommt zum Marker (Google-Maps-Stil). Weinrot, doppelte Grösse. */}
+        {position && (
+          <div className="absolute pointer-events-none"
+            style={{ left: '50%', top: '65%', transform: 'translate(-50%, -50%)', zIndex: 5 }}>
+            <svg width="72" height="72" viewBox="-36 -36 72 72" style={{ overflow: 'visible', display: 'block' }}>
+              {/* Pulse-Ring (Weinrot, semi-transparent, 1.5s alternate) */}
+              <circle r="16" fill="#8B1A3A" opacity="0.35">
+                <animate attributeName="r" values="14;28;14" dur="1.5s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.5;0.05;0.5" dur="1.5s" repeatCount="indefinite" />
+              </circle>
+              {/* Heading-Pfeil (zeigt immer nach oben, weil Karte heading-up rotiert) */}
+              <path d="M 0,-22 L 8.4,-11.2 L -8.4,-11.2 Z"
+                fill="#8B1A3A"
+                stroke="#fff"
+                strokeWidth="2.4"
+                strokeLinejoin="round"
+                style={{ filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.35))' }} />
+              {/* Kernpunkt — gefüllter Weinrot-Kreis mit weissem 4px-Rand */}
+              <circle r="10" fill="#8B1A3A" stroke="#fff" strokeWidth="4"
+                style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.4))' }} />
+            </svg>
+          </div>
+        )}
+
+        {/* Mini-Map oben links — Klick öffnet Vollkarten-Overlay. Versteckt sich, wenn ein Modal offen ist.
+            Position/Revealed werden auf 500ms throttled gerendert (Mini-Map = React.memo). */}
+        <MiniMap palette={palette} revealed={miniRevealed} position={miniPosition} onOpen={() => setShowOverview(true)} hidden={anyModalOpen} />
+
+        {/* Status card oben — rechts neben der Mini-Map */}
+        <div className="absolute top-3 px-3.5 py-2.5 rounded-xl backdrop-blur-md" style={{ left: 184, background: palette.cardBg, border: `1px solid ${palette.cardBorder}`, boxShadow: palette.cardShadow, maxWidth: 'calc(100% - 200px)', transition: 'background 600ms ease, border-color 600ms ease' }}>
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: level.color, boxShadow: `0 0 0 2px ${level.accent}` }}>
               <LevelIcon size={17} color="#fff" strokeWidth={2.2} />
@@ -2719,62 +2955,60 @@ function ExploreScreen({ palette, state, actions }) {
 /* PoiIconSvg — clean inline SVG icons for the POI pins */
 function PoiIconSvg({ kind, cx, cy, color, disco }) {
   const c = color || '#F5E9D0';
-  const sw = 1.3;
   if (kind === 'bar') {
-    // Cocktail glass: triangle + stem + base
+    // Cocktailglas — gefüllte Shapes, robust gegen Rasterisierung
     return (
-      <g transform={`translate(${cx},${cy})`} pointerEvents="none">
-        {/* Bowl (V shape) */}
-        <path d="M -4.5,-3.5 L 4.5,-3.5 L 0,2 Z" fill="none" stroke={c} strokeWidth={sw} strokeLinejoin="round" />
-        {/* Stem */}
-        <line x1="0" y1="2" x2="0" y2="4.4" stroke={c} strokeWidth={sw} strokeLinecap="round" />
-        {/* Foot */}
-        <line x1="-2.4" y1="4.4" x2="2.4" y2="4.4" stroke={c} strokeWidth={sw} strokeLinecap="round" />
-        {/* Olive on a pick */}
-        <line x1="2.6" y1="-3.2" x2="0.5" y2="-1" stroke={c} strokeWidth="0.8" />
-        <circle cx="0.3" cy="-0.8" r="0.7" fill={c} />
+      <g transform={`translate(${cx},${cy})`} pointerEvents="none" shapeRendering="geometricPrecision">
+        {/* Bowl als gefülltes Dreieck */}
+        <path d="M -3.2,-2.6 L 3.2,-2.6 L 0,1.3 Z" fill={c} />
+        {/* Stem als schmales Rechteck */}
+        <rect x="-0.45" y="1.3" width="0.9" height="1.7" fill={c} />
+        {/* Foot als abgerundetes Rechteck */}
+        <rect x="-2" y="2.8" width="4" height="0.7" rx="0.3" fill={c} />
+        {/* Olive */}
+        <circle cx="0.6" cy="-0.6" r="0.7" fill={c} />
       </g>
     );
   }
   if (kind === 'restaurant') {
-    // Crossed fork & knife
+    // Gabel + Messer — gefüllte Silhouetten
     return (
-      <g transform={`translate(${cx},${cy})`} pointerEvents="none">
-        {/* Fork */}
-        <line x1="-2.6" y1="-4.4" x2="-2.6" y2="-1.6" stroke={c} strokeWidth="0.6" />
-        <line x1="-1.6" y1="-4.4" x2="-1.6" y2="-1.6" stroke={c} strokeWidth="0.6" />
-        <line x1="-3.6" y1="-4.4" x2="-3.6" y2="-1.6" stroke={c} strokeWidth="0.6" />
-        <line x1="-2.6" y1="-1.6" x2="2.4" y2="4.4" stroke={c} strokeWidth={sw} strokeLinecap="round" />
-        {/* Knife */}
-        <path d="M 3.5,-4.6 L 3.5,-0.6 L 2.6,-0.6 L 2.6,-4.0 Z" fill="none" stroke={c} strokeWidth={sw * 0.8} strokeLinejoin="round" />
-        <line x1="3" y1="-0.6" x2="-2.6" y2="4.4" stroke={c} strokeWidth={sw} strokeLinecap="round" />
+      <g transform={`translate(${cx},${cy})`} pointerEvents="none" shapeRendering="geometricPrecision">
+        {/* Gabel: drei Zinken + Hals + Stiel als zusammengefügter Path */}
+        <path d="M -2.8,-3.2
+                 L -2.8,-1.4 L -2.3,-1.4 L -2.3,-3.2 L -2.0,-3.2
+                 L -2.0,-1.4 L -1.5,-1.4 L -1.5,-3.2 L -1.2,-3.2
+                 L -1.2,-1.4 L -0.7,-1.4 L -0.7,-3.2 L -0.4,-3.2
+                 L -0.4,-1.0 L -1.4,-0.3 L -1.4,3.0 L -2.0,3.0 L -2.0,-0.3
+                 L -2.8,-1.0 Z" fill={c} />
+        {/* Messer: Klinge + Stiel als zusammengefügter Path */}
+        <path d="M 1.3,-3.2 L 2.6,-3.2 L 2.6,-0.2 L 2.15,0.6 L 2.15,3.0 L 1.55,3.0 L 1.55,0.6 L 1.3,0.2 Z"
+          fill={c} />
       </g>
     );
   }
   if (kind === 'club') {
-    // Disco ball — circle with grid facets
+    // Disco-Kugel — gefüllter Kreis mit hellen Highlight-Strichen, Hängfaden
     return (
-      <g transform={`translate(${cx},${cy})`} pointerEvents="none">
-        <circle r="4.3" fill="none" stroke={c} strokeWidth={sw} />
-        {/* Latitude lines */}
-        <ellipse cx="0" cy="0" rx="4.3" ry="1.4" fill="none" stroke={c} strokeWidth="0.6" opacity="0.85" />
-        <ellipse cx="0" cy="-2" rx="3.8" ry="0.9" fill="none" stroke={c} strokeWidth="0.5" opacity="0.7" />
-        <ellipse cx="0" cy="2" rx="3.8" ry="0.9" fill="none" stroke={c} strokeWidth="0.5" opacity="0.7" />
-        {/* Longitude */}
-        <line x1="0" y1="-4.3" x2="0" y2="4.3" stroke={c} strokeWidth="0.5" opacity="0.85" />
-        {/* Hanging string */}
-        <line x1="0" y1="-4.3" x2="0" y2="-5.6" stroke={c} strokeWidth="0.6" />
-        {/* Sparkle when active */}
+      <g transform={`translate(${cx},${cy})`} pointerEvents="none" shapeRendering="geometricPrecision">
+        {/* Voller Kreis */}
+        <circle r="2.8" fill={c} />
+        {/* Highlight-Streifen (cut-outs als helle Linien für Glitzer-Eindruck) */}
+        <ellipse cx="0" cy="-1.0" rx="2.4" ry="0.35" fill="rgba(255,255,255,0.4)" />
+        <ellipse cx="0" cy="0.6"  rx="2.7" ry="0.35" fill="rgba(255,255,255,0.35)" />
+        <ellipse cx="0" cy="1.8"  rx="1.8" ry="0.30" fill="rgba(255,255,255,0.3)" />
+        {/* Glanzpunkt oben links */}
+        <circle cx="-0.9" cy="-1.4" r="0.55" fill="rgba(255,255,255,0.6)" />
+        {/* Hängfaden */}
+        <line x1="0" y1="-2.8" x2="0" y2="-4.0" stroke={c} strokeWidth="0.6" strokeLinecap="round" />
+        {/* Funkeln, wenn aktiv */}
         {disco && (
           <g>
-            <circle cx="-1.6" cy="-1.6" r="0.6" fill={c}>
+            <circle cx="-1.2" cy="-0.3" r="0.45" fill="#fff">
               <animate attributeName="opacity" values="1;0;1" dur="1.4s" repeatCount="indefinite" />
             </circle>
-            <circle cx="1.8" cy="0.5" r="0.5" fill={c}>
+            <circle cx="1.3" cy="0.9" r="0.35" fill="#fff">
               <animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="-0.5" cy="2" r="0.5" fill={c}>
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite" />
             </circle>
           </g>
         )}
@@ -3580,6 +3814,234 @@ function Stat({ icon: I, value, label }) {
       </div>
       <div className="mt-0.5 text-base tabular-nums" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, color: '#7A4A1F' }}>
         {value}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================================
+   MINI-MAP — echter Stadtplan-Ausschnitt oben links. Zeigt Wasser, Parks,
+   Gebäude-Cluster, Hauptstrassen-Netz, Brücken; freigelegte Bereiche heller
+   gegenüber leicht eingenebelten unbekannten. Throttled-Position via React.memo.
+============================================================================ */
+const MiniMap = React.memo(function MiniMap({ palette, revealed, position, onOpen, hidden }) {
+  const playerProj = position ? project(position[0], position[1]) : null;
+  // Vorberechnete Pfade (deterministisch, ändern sich nicht)
+  const limmatPath = RIVER_PATH.map((p) => project(p[0], p[1]));
+  const lakePts = LAKE_PATH.map((p) => project(p[0], p[1]));
+  return (
+    <button
+      onClick={onOpen}
+      className="absolute top-3 left-3 z-30 rounded-[10px] overflow-hidden transition-opacity duration-300 active:scale-[0.97]"
+      style={{
+        width: 160, height: 160,
+        background: palette.miniBg,
+        border: `1px solid ${palette.miniBorder}`,
+        boxShadow: palette.cardShadow,
+        opacity: hidden ? 0 : 1,
+        pointerEvents: hidden ? 'none' : 'auto',
+      }}
+      aria-label="Übersichtskarte öffnen"
+    >
+      <svg viewBox={`0 0 ${VIEWPORT.width} ${VIEWPORT.height}`} className="w-full h-full block" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <mask id="miniFogMask" maskUnits="userSpaceOnUse" x="0" y="0" width={VIEWPORT.width} height={VIEWPORT.height}>
+            <rect x="0" y="0" width={VIEWPORT.width} height={VIEWPORT.height} fill="white" />
+            {revealed.map((p, i) => (
+              <circle key={i} cx={p.x} cy={p.y} r="60" fill="black" />
+            ))}
+          </mask>
+        </defs>
+        <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.miniBg} />
+
+        {/* Zürichsee-Anschnitt — Polygon mit dunklerem Umriss für klare Kontur */}
+        <polygon
+          points={lakePts.map((p) => `${p.x},${p.y}`).join(' ')}
+          fill={palette.miniWater}
+          stroke={palette.lakeBottom}
+          strokeWidth="4"
+          strokeLinejoin="round"
+          opacity="0.95" />
+
+        {/* Limmat — dunkler Outline-Stroke unten, hellere Wasserfüllung darüber */}
+        <polyline
+          points={limmatPath.map((p) => `${p.x},${p.y}`).join(' ')}
+          fill="none" stroke={palette.lakeBottom}
+          strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" opacity="0.95" />
+        <polyline
+          points={limmatPath.map((p) => `${p.x},${p.y}`).join(' ')}
+          fill="none" stroke={palette.miniWater}
+          strokeWidth="22" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Subtile zentrale Strömungslinie */}
+        <polyline
+          points={limmatPath.map((p) => `${p.x},${p.y}`).join(' ')}
+          fill="none" stroke={palette.riverHighlight}
+          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />
+
+        {/* Parks (Lindenhof etc.) als grüne Patches */}
+        {PLAZAS.filter((pl) => pl.type === 'park').map((pl) => {
+          const pts = pl.poly.map((p) => { const pp = project(p[0], p[1]); return `${pp.x},${pp.y}`; }).join(' ');
+          return <polygon key={pl.id} points={pts} fill={palette.miniPark} opacity="0.85" />;
+        })}
+
+        {/* Gebäude-Cluster (Block-Polygone, simplifiziert) */}
+        {BLOCKS.map((blk) => {
+          const pts = blk.poly.map((p) => { const pp = project(p[0], p[1]); return `${pp.x},${pp.y}`; }).join(' ');
+          return <polygon key={blk.id} points={pts} fill={palette.miniBuilding} />;
+        })}
+
+        {/* Hauptstrassen — dünn, hellgrau. Nur die "trunk"-Achsen für Lesbarkeit */}
+        {STREETS.filter((s) => ['bahnhofstr', 'limmatquai', 'bahnhofquai', 'niederdorfstr', 'rennweg'].includes(s.id)).map((s) => {
+          const pts = s.points.map(([la, ln]) => { const pp = project(la, ln); return `${pp.x},${pp.y}`; }).join(' ');
+          return <polyline key={s.id} points={pts} fill="none" stroke={palette.miniStreetMain} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />;
+        })}
+        {/* Restliche Strassen — sehr dezent */}
+        {STREETS.filter((s) => !['bahnhofstr', 'limmatquai', 'bahnhofquai', 'niederdorfstr', 'rennweg'].includes(s.id) && s.side !== 'bridge').map((s) => {
+          const pts = s.points.map(([la, ln]) => { const pp = project(la, ln); return `${pp.x},${pp.y}`; }).join(' ');
+          return <polyline key={s.id} points={pts} fill="none" stroke={palette.miniStreet} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />;
+        })}
+
+        {/* Brücken — kleine helle Striche über der Limmat */}
+        {STREETS.filter((s) => s.side === 'bridge').map((s) => {
+          const a = project(s.points[0][0], s.points[0][1]);
+          const b = project(s.points[s.points.length - 1][0], s.points[s.points.length - 1][1]);
+          return <line key={s.id} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={palette.miniBridge} strokeWidth="7" strokeLinecap="round" />;
+        })}
+
+        {/* Fog-Veil — unerkundete Bereiche leicht einnebeln, freigelegte bleiben hell */}
+        <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.miniFog} mask="url(#miniFogMask)" />
+
+        {/* Spieler-Dot — pulsierend */}
+        {playerProj && (
+          <g>
+            <circle cx={playerProj.x} cy={playerProj.y} r="30" fill={palette.userPulseColor} opacity="0.45">
+              <animate attributeName="r" values="22;42;22" dur="1.5s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.55;0;0.55" dur="1.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx={playerProj.x} cy={playerProj.y} r="18" fill={palette.userMarkerInner} stroke={palette.userMarkerFill} strokeWidth="5" />
+          </g>
+        )}
+      </svg>
+    </button>
+  );
+});
+
+/* ============================================================================
+   OVERVIEW-MODAL — Vollkartenansicht (Top-Down, ohne Rotation/Tilt). Zeigt
+   Strassen, Fog-Status, POIs, Anekdoten, Landmarks und Spielerposition.
+============================================================================ */
+function OverviewModal({ palette, revealed, position, onClose }) {
+  const playerProj = position ? project(position[0], position[1]) : null;
+  return (
+    <div
+      className="fixed inset-0 z-[55] flex items-center justify-center p-4 animate-fadeIn"
+      style={{ background: 'rgba(0,0,0,0.7)' }}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-4xl rounded-2xl overflow-hidden"
+        style={{ aspectRatio: `${VIEWPORT.width} / ${VIEWPORT.height}`, background: palette.mapBg, border: `1px solid ${palette.cardBorder}`, boxShadow: palette.cardShadow }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <svg viewBox={`0 0 ${VIEWPORT.width} ${VIEWPORT.height}`} className="w-full h-full block" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <mask id="ovFogMask" maskUnits="userSpaceOnUse" x="0" y="0" width={VIEWPORT.width} height={VIEWPORT.height}>
+              <rect x="0" y="0" width={VIEWPORT.width} height={VIEWPORT.height} fill="white" />
+              {revealed.map((p, i) => (
+                <circle key={i} cx={p.x} cy={p.y} r={FOG_REVEAL_RADIUS_PX * 2} fill="black" />
+              ))}
+            </mask>
+            <linearGradient id="ovStarFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#FFE9B0" />
+              <stop offset="100%" stopColor="#C8923C" />
+            </linearGradient>
+          </defs>
+          <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.paperFill} />
+          {/* Zürichsee — Polygon mit klar gezeichnetem Umriss */}
+          <polygon
+            points={LAKE_PATH.map((p) => { const pp = project(p[0], p[1]); return `${pp.x},${pp.y}`; }).join(' ')}
+            fill={palette.lakeTop}
+            stroke={palette.lakeBottom}
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+            opacity="0.95"
+          />
+          {/* Limmat — dunkler Outline-Stroke unten, Wasserfüllung darüber, dezente Strömungslinie */}
+          {(() => {
+            const riverPts = RIVER_PATH.map((p) => project(p[0], p[1]));
+            const ptsStr = riverPts.map((p) => `${p.x},${p.y}`).join(' ');
+            return (
+              <g>
+                <polyline points={ptsStr} fill="none" stroke={palette.lakeBottom}
+                  strokeWidth="38" strokeLinecap="round" strokeLinejoin="round" opacity="0.95" />
+                <polyline points={ptsStr} fill="none" stroke={palette.lakeTop}
+                  strokeWidth="30" strokeLinecap="round" strokeLinejoin="round" />
+                <polyline points={ptsStr} fill="none" stroke={palette.riverHighlight}
+                  strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+              </g>
+            );
+          })()}
+          {/* Strassen */}
+          {SEGMENTS.map((seg) => {
+            const a = project(seg.a[0], seg.a[1]);
+            const b = project(seg.b[0], seg.b[1]);
+            return (
+              <line key={seg.id} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
+                stroke={palette.streetGhostStroke} strokeWidth="4" strokeLinecap="round" opacity="0.75" />
+            );
+          })}
+          {/* Fog-Veil */}
+          <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.fogColor} opacity="0.5" mask="url(#ovFogMask)" />
+          {/* POIs */}
+          {POIS.map((poi) => {
+            const p = project(poi.coords[0], poi.coords[1]);
+            const color = poi.kind === 'bar' ? palette.poiBarBg : poi.kind === 'restaurant' ? palette.poiRestaurantBg : palette.poiClubBg;
+            return (
+              <g key={poi.id}>
+                <circle cx={p.x} cy={p.y - 6} r="9" fill={color} stroke="#fff" strokeWidth="1.6" />
+                <circle cx={p.x} cy={p.y - 6} r="3" fill="#fff" opacity="0.85" />
+              </g>
+            );
+          })}
+          {/* Anekdoten */}
+          {ANEKDOTEN.map((an) => {
+            const p = project(an.coords[0], an.coords[1]);
+            return (
+              <circle key={an.id} cx={p.x} cy={p.y} r="6.5"
+                fill={palette.anekdoteUnlockedFill} stroke="#fff" strokeWidth="1.2" />
+            );
+          })}
+          {/* Landmarks (Sterne) */}
+          {LANDMARKS.map((lm) => {
+            const p = project(lm.coords[0], lm.coords[1]);
+            return (
+              <g key={lm.id} transform={`translate(${p.x},${p.y})`}>
+                <path d={STAR_PATH_LG} fill="url(#ovStarFill)" stroke="#7A4A1F" strokeWidth="1.2" strokeLinejoin="round" />
+              </g>
+            );
+          })}
+          {/* Spieler-Dot */}
+          {playerProj && (
+            <g>
+              <circle cx={playerProj.x} cy={playerProj.y} r="28" fill={palette.userPulseColor} opacity="0.4">
+                <animate attributeName="r" values="22;42;22" dur="2.2s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.5;0;0.5" dur="2.2s" repeatCount="indefinite" />
+              </circle>
+              <circle cx={playerProj.x} cy={playerProj.y} r="11" fill={palette.userMarkerInner} stroke={palette.userMarkerFill} strokeWidth="3" />
+            </g>
+          )}
+        </svg>
+        <button onClick={onClose}
+          className="absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md transition active:scale-95"
+          style={{ background: palette.cardBg, border: `1px solid ${palette.cardBorder}`, color: palette.text, boxShadow: palette.cardShadow }}
+          aria-label="Übersichtskarte schliessen"
+        >
+          <X size={18} />
+        </button>
+        <div className="absolute bottom-3 left-3 text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 rounded-full backdrop-blur-md"
+          style={{ background: palette.cardBg, color: palette.text, border: `1px solid ${palette.cardBorder}` }}>
+          Übersicht · Altstadt
+        </div>
       </div>
     </div>
   );
