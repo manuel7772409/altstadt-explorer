@@ -1637,10 +1637,13 @@ function WelcomeScreen({ onClose }) {
         </div>
         <p className="text-[10px] uppercase tracking-[0.4em] opacity-65 mb-3">Willkommen</p>
         <h1 className="leading-none mb-4" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 900, fontSize: '44px', letterSpacing: '-0.02em' }}>
-          Zürich
+          Zürich Altstadt
         </h1>
         <p className="text-base leading-relaxed opacity-85 mb-2" style={{ fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic' }}>
           Eine Stadt aus Wolken,<br />die nur deine Schritte vertreiben können.
+        </p>
+        <p className="text-xs uppercase tracking-[0.2em] opacity-75 mt-3" style={{ color: '#E6BE7A' }}>
+          Tipp: Beginne beim Bahnhof!
         </p>
         <p className="text-sm leading-relaxed opacity-65 mt-5 mb-7">
           Lüfte den Wolken-Schleier Gasse für Gasse, sammle Sterne an Wahrzeichen, entdecke versteckte Geschichten — und finde die besten Bars, Restaurants und Clubs der Stadt.
