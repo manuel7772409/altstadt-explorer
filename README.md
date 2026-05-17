@@ -1,115 +1,70 @@
-# Altstadt-Entdecker
+# Euro-Legend
 
-Erkunde Zürich Gasse für Gasse — eine Stadt aus Wolken, die nur deine Schritte vertreiben können.
+**Walk the walk, if you talk the talk. Eurolegends aren't born. They are made.**
 
-Eine React/Vite-Web-App, die direkt im Browser läuft (auch auf dem iPad), GPS nutzt und sich wie eine echte App anfühlt, wenn sie zum Home-Bildschirm hinzugefügt wird.
+A React/Vite web-app for the Euro Summer crowd. Pick a city, walk its streets,
+and earn the laurel — chapter by chapter. The first chapter ships with Zürich
+(Old Town). More cities are coming.
 
-## Voraussetzungen
+Runs entirely in the browser (incl. iPad / iPhone), uses real GPS when
+available, and feels like a native app once added to the home screen.
 
-- **Node.js 18+** ([nodejs.org](https://nodejs.org) — die LTS-Version reicht).
-- Ein Computer mit Mac, Windows oder Linux fürs Bauen.
-- Ein iPad (oder iPhone, Android-Phone, beliebiger Browser) zum Ausprobieren.
+## Stack
 
-## In 5 Minuten lokal starten
+- **React 18** + **Vite 5**
+- **Tailwind CSS** (utilities inline in JSX)
+- **lucide-react** for icons
+- **OpenStreetMap** via Overpass-API for true street/building geometry
+- Web Audio · Vibrate · Geolocation · Wake Lock · localStorage
+
+## Run it locally
 
 ```bash
-# 1. In den Projektordner wechseln
-cd altstadt-explorer
-
-# 2. Abhängigkeiten installieren (einmalig, dauert 1–2 Minuten)
 npm install
-
-# 3. Entwicklungsserver starten
 npm run dev
 ```
 
-Der Output zeigt zwei URLs, etwa:
+The dev server prints two URLs:
 
 ```
   ➜  Local:   http://localhost:5173/
-  ➜  Network: http://192.168.1.42:5173/
+  ➜  Network: http://192.168.x.x:5173/
 ```
 
-- **Local** → im Browser auf demselben Computer öffnen.
-- **Network** → diese URL kannst du im **iPad-Safari** öffnen, wenn iPad und Computer im selben WLAN sind. Schon hast du die App live auf dem iPad mit funktionierendem GPS.
+Open the **Network** URL from your phone on the same Wi-Fi to test on a
+real device. iOS Safari requires HTTPS for live GPS — use the Demo Mode or
+tap-to-walk simulation while on `http://`. Once deployed (Vercel, Netlify,
+etc.) HTTPS is automatic and GPS works.
 
-## Auf den iPad-Home-Screen legen (Pseudo-App)
+## Add to Home Screen (iOS)
 
-1. Im Safari die Network-URL öffnen.
-2. Teilen-Symbol unten antippen.
-3. **„Zum Home-Bildschirm"** wählen.
-4. Name bestätigen, fertig.
+1. Open the deployed URL in Safari.
+2. Tap the Share button.
+3. **Add to Home Screen**.
 
-Das App-Icon erscheint wie eine native App. Beim Tippen öffnet sie sich **im Vollbild ohne Browser-Leiste** (`display: standalone` im manifest), nutzt das eigene Icon und behält ihren Speicher (Fortschritt, Karten-Cache) in `localStorage`.
+The app launches fullscreen (`display: standalone`), uses the laurel icon,
+and persists progress in `localStorage`.
 
-## Ins Internet stellen (damit du die App auch ausserhalb deines WLANs nutzen kannst)
-
-### Schnellster Weg: Vercel (kostenlos, ~3 Minuten)
-
-1. **GitHub-Account erstellen** (falls nicht vorhanden) und ein neues Repository anlegen.
-2. Code lokal in das Repo schieben:
-   ```bash
-   git init
-   git add .
-   git commit -m "initial"
-   git branch -M main
-   git remote add origin https://github.com/DEIN-USER/altstadt-explorer.git
-   git push -u origin main
-   ```
-3. Auf [vercel.com](https://vercel.com) einloggen (mit GitHub).
-4. **„New Project"** → das eben erstellte Repo auswählen → **„Deploy"**.
-
-Vercel erkennt Vite automatisch, baut die App und gibt dir eine URL wie `altstadt-explorer-DEINNAME.vercel.app`. Diese URL kannst du auf jedem Gerät öffnen.
-
-### Alternative: Netlify
-
-1. `npm run build` ausführen (erzeugt `dist/`-Ordner).
-2. Auf [netlify.com](https://app.netlify.com/drop) den `dist/`-Ordner per Drag-and-Drop hochladen.
-3. URL ist sofort live.
-
-## Echte App im App Store (optional, fortgeschritten)
-
-Wenn du die App nicht nur als Web-App, sondern als echte iOS-App (mit Push-Notifications, App-Store-Listing usw.) haben willst, geht das mit **Capacitor**. Das setzt einen Mac, Xcode und einen Apple-Developer-Account ($99/Jahr) voraus.
+## Build
 
 ```bash
-npm install @capacitor/core @capacitor/ios
-npx cap init "Altstadt-Entdecker" "ch.dein.altstadt"
-npm run build
-npx cap add ios
-npx cap sync
-npx cap open ios
+npm run build       # → dist/
+npm run preview     # serve dist/ locally
 ```
 
-In Xcode dann auf „Run" klicken — die App installiert sich auf dem angeschlossenen iPad. Für die App Store Veröffentlichung brauchst du den Developer-Account und musst durch den Review-Prozess.
-
-## Bekannte Hinweise
-
-- **GPS auf iPad**: Funktioniert nur über **HTTPS** oder über `localhost`. Im lokalen Netzwerk (`192.168.x.x`) verlangt iOS Safari https. Lokal kannst du trotzdem testen — die App hat einen Demo- und Tap-to-Walk-Modus, die ohne GPS auskommen. Sobald du die App auf Vercel oder Netlify deployst, ist HTTPS automatisch dabei und GPS funktioniert.
-- **OSM-Daten beim ersten Start**: Beim allerersten Öffnen lädt die App die Karten-Geometrie (Häuser, Strassen, Wasser, Parks) von Overpass-API. Das dauert 5–20 Sekunden. Danach wird alles 30 Tage lang im `localStorage` gecached.
-- **Speicherplatz**: Der OSM-Cache kann bis zu ~5 MB im `localStorage` belegen. Manche Browser begrenzen das. Wenn das Speichern fehlschlägt, lädt die App die Daten beim nächsten Mal einfach neu.
-
-## Tech-Stack
-
-- **React 18** mit Hooks
-- **Vite 5** als Build-Tool
-- **Tailwind CSS** für Styling (alle Klassen sind im JSX inline)
-- **lucide-react** für Icons
-- **OpenStreetMap** via Overpass-API für Karten-Geometrie
-- Web Audio API · Vibrate API · Geolocation API · Wake Lock API · localStorage
-
-## Projekt-Struktur
+## Project structure
 
 ```
-altstadt-explorer/
+euro-legend/
 ├── public/
-│   ├── apple-touch-icon.png      iOS Home-Screen-Icon
-│   ├── icon-192.png · icon-512.png   PWA-Icons
-│   ├── favicon.svg
+│   ├── apple-touch-icon.png       iOS home-screen icon (laurel)
+│   ├── icon-192.png · icon-512.png   PWA icons
+│   ├── favicon.svg                laurel wreath SVG
 │   └── manifest.webmanifest
 ├── src/
-│   ├── App.jsx                   die ganze App (~3500 Zeilen)
-│   ├── main.jsx                  React-Einstiegspunkt
-│   └── index.css                 Tailwind-Direktiven + Reset
+│   ├── App.jsx                    the whole app (~4000 lines)
+│   ├── main.jsx                   React entry point
+│   └── index.css                  Tailwind directives + reset + safe-area
 ├── index.html
 ├── package.json
 ├── vite.config.js
@@ -117,4 +72,15 @@ altstadt-explorer/
 └── postcss.config.js
 ```
 
-Viel Spass beim Erkunden!
+## Notes
+
+- **OSM data** is fetched from Overpass on first launch (5–20 s) and cached
+  in `localStorage` for 30 days. Cache can exceed 5 MB — some browsers
+  reject the write, in which case the app re-fetches next time.
+- **UI is English; content stays local.** Street names, anecdotes, bar
+  names etc. stay in the language of the city (German for Zürich). Future
+  cities follow the same rule.
+- **Multi-city wiring** is in place (`CITIES` object), the UI for switching
+  is not — Zürich is the only chapter for now.
+
+Walk the walk.

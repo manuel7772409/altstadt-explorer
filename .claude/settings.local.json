@@ -4,7 +4,10 @@
       "PowerShell(Get-Command *)",
       "PowerShell(npm install *)",
       "PowerShell(npm run *)",
-      "PowerShell(Stop-Process *)"
+      "PowerShell(Stop-Process *)",
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\User\\\\Documents\\\\GitHub\\\\altstadt-explorer\\\\src\\\\App.jsx\" | Measure-Object -Line\\).Lines)",
+      "PowerShell(\"---\")",
+      "PowerShell(git config *)"
     ]
   }
 }

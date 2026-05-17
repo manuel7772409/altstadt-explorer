@@ -1,12 +1,12 @@
 {
-  "name": "Altstadt-Entdecker",
-  "short_name": "Altstadt",
-  "description": "Erkunde Zürich Gasse für Gasse — die Stadt aus Wolken, die nur deine Schritte vertreiben.",
+  "name": "Euro-Legend",
+  "short_name": "Euro-Legend",
+  "description": "Walk the cities, earn the legends. Premium street-by-street exploration for the Euro Summer generation.",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#2b2113",
-  "theme_color": "#2b2113",
+  "orientation": "any",
+  "background_color": "#050C24",
+  "theme_color": "#050C24",
   "icons": [
     {
       "src": "/apple-touch-icon.png",
@@ -24,6 +24,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

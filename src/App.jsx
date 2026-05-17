@@ -219,45 +219,45 @@ const FOUNTAINS = [
 const POIS = [
   // Bars
   { id: 'b-widder', kind: 'bar', name: 'Widder Bar', coords: [47.3724, 8.5413],
-    intro: 'Whisky-Tempel im Widder Hotel',
-    desc: 'Legendäre Bar im 5-Sterne-Hotel mit über 850 Whisky-Sorten und Live-Jazz fast jeden Abend. Eine der besten Hotelbars Europas.' },
+    intro: 'A whisky temple inside the Widder Hotel',
+    desc: 'Five-star hotel bar with 850+ whiskies on the shelf and live jazz most nights. Routinely named one of the best hotel bars in Europe.' },
   { id: 'b-kronenhalle', kind: 'bar', name: 'Kronenhalle Bar', coords: [47.3699, 8.5447],
-    intro: 'Picasso, Chagall, Cocktails',
-    desc: 'Die Kronenhalle Bar ist mit echten Werken von Picasso, Chagall, Miró und Matisse dekoriert. Klassische Bar-Etikette, weltberühmter „Ladykiller"-Cocktail.' },
+    intro: 'Picasso on the wall, cocktail in hand',
+    desc: 'Real Picassos, Chagalls, Mirós and Matisses on the walls. Classic bar etiquette, world-famous Ladykiller cocktail. No phones, no shouting, no excuses.' },
   { id: 'b-pigalle', kind: 'bar', name: 'Pigalle', coords: [47.3725, 8.5436],
-    intro: 'Niederdörfler-Institution',
-    desc: 'Klein, rauchig (im Geiste), immer voll. Stammbar für Künstler und Gscheidi seit Jahrzehnten — der Niederdorf-Klassiker schlechthin.' },
+    intro: 'Niederdorf institution',
+    desc: 'Small, smoky in spirit if not in fact, always packed. Where artists and locals (Gscheidi — the clever ones) have parked themselves for decades. The Niederdorf classic.' },
   { id: 'b-oldcrow', kind: 'bar', name: 'Old Crow', coords: [47.3702, 8.5417],
-    intro: 'Speakeasy-Cocktailbar',
-    desc: 'Versteckt in einem Hinterhof — schwer zu finden, immer voll. Erstklassige Cocktails, kleines dunkles Lokal, intime Atmosphäre.' },
+    intro: 'Hidden speakeasy cocktail bar',
+    desc: 'Tucked into a back courtyard — hard to find, always full. Serious cocktails, low light, low ceiling. Worth the hunt.' },
   { id: 'b-bar63', kind: 'bar', name: 'Bar 63 (Storchen)', coords: [47.3706, 8.5419],
-    intro: 'Hotel-Bar mit Limmat-Aussicht',
-    desc: 'Im Hotel Storchen direkt am Wasser — die wohl schönste Terrasse der Altstadt mit Blick auf Limmat und Grossmünster.' },
+    intro: 'Hotel terrace on the Limmat',
+    desc: 'Right on the river at Hotel Storchen — probably the best terrace in town, looking straight at the Grossmünster towers.' },
 
   // Restaurants
   { id: 'r-kronenhalle', kind: 'restaurant', name: 'Kronenhalle', coords: [47.3697, 8.5448],
-    intro: 'Schweizer Klassiker seit 1924',
-    desc: 'Joyce, Picasso, Stravinsky speisten hier. Klassische Küche, weisse Tischtücher, Geschnetzeltes Zürcher Art und Crêpes Suzette mit Tradition.' },
+    intro: 'Swiss classic since 1924',
+    desc: 'Joyce, Picasso and Stravinsky ate here. White tablecloths, classic kitchen, Geschnetzeltes Zürcher Art (veal in cream sauce) and Crêpes Suzette done the way they were done a century ago.' },
   { id: 'r-zeughauskeller', kind: 'restaurant', name: 'Zeughauskeller', coords: [47.3712, 8.5402],
-    intro: 'Mittelalterliche Bierhalle',
-    desc: 'Im ehemaligen Zürcher Zeughaus aus dem 15. Jh. — riesige Bratwurst, Rösti, Bier in Kruegen, Hellebarden an den Wänden.' },
+    intro: 'Medieval beer hall',
+    desc: 'Set in Zürich\'s 15th-century armoury — giant Bratwurst (sausage), Rösti, beer in stoneware mugs, halberds on the walls. Tourist trap, sure. Also: actually good.' },
   { id: 'r-swisschuchi', kind: 'restaurant', name: 'Swiss Chuchi', coords: [47.3719, 8.5444],
-    intro: 'Fondue-Wahrzeichen',
-    desc: 'Im Hotel Adler. Das touristische Fondue-Erlebnis Niederdorfs — laut, voll und genau das, was man erwartet.' },
+    intro: 'Landmark fondue',
+    desc: 'Inside Hotel Adler. The cliché Niederdorf fondue night — loud, crowded, exactly what you came for. Don\'t fight it.' },
   { id: 'r-dezaley', kind: 'restaurant', name: 'Le Dézaley', coords: [47.3713, 8.5448],
-    intro: 'Waadtländer Bistro',
-    desc: 'Charmante Holzbalken-Beiz mit Käseschnitten, Filets de Perche und Wein aus dem Lavaux. Wie ein Stück Genferseeufer mitten in Zürich.' },
+    intro: 'Bistro from the Vaud',
+    desc: 'A wood-beamed Beiz (Swiss-German for old-school tavern) doing Käseschnitten (cheese on toast, taken seriously), perch fillets and Lavaux wine. Lake-Geneva energy, dropped into Zürich.' },
   { id: 'r-rueden', kind: 'restaurant', name: 'Haus zum Rüden', coords: [47.3713, 8.5430],
-    intro: 'Gotisches Zunfthaus',
-    desc: 'Mittelalterliches Zunfthaus von 1348 — feine Schweizer Küche unter einem Holzgewölbe, das wie eine umgedrehte Kirche aussieht.' },
+    intro: 'Gothic guildhall, white linen',
+    desc: 'A 1348 guildhall — refined Swiss cooking under a wooden vault that looks like an upside-down church. Dress for it.' },
 
   // Clubs
   { id: 'c-mascotte', kind: 'club', name: 'Mascotte', coords: [47.3674, 8.5462],
-    intro: 'Zürichs ältester Musikclub',
-    desc: 'Seit 1917 am Bellevue. Konzerte, Live-Bands, Indie-Disco. Berühmt-berüchtigt: die Sonntagabend-Karaoke „Heaven".' },
+    intro: 'Zürich\'s oldest music club',
+    desc: 'On Bellevue since 1917. Concerts, live bands, indie-disco nights. Sunday karaoke ("Heaven") is famously, gloriously, a mess.' },
   { id: 'c-kaufleuten', kind: 'club', name: 'Kaufleuten', coords: [47.3704, 8.5392],
-    intro: 'Kult-Bühne der Stadt',
-    desc: 'Madonna, Bowie und Iggy Pop traten hier auf. Heute Klub, Theater und Restaurant in einem — eine der wichtigsten Kulturadressen der Schweiz.' },
+    intro: 'The cult stage in town',
+    desc: 'Madonna, Bowie and Iggy Pop all played here. Now a club / theatre / restaurant hybrid — one of the most important cultural addresses in Switzerland.' },
 ];
 
 const POI_RADIUS_M = 28;
@@ -282,21 +282,21 @@ const TREES = [
 
 const LANDMARKS = [
   { id: 'grossmuenster', name: 'Grossmünster', coords: [47.3702, 8.5443],
-    intro: 'Doppeltürmiges Wahrzeichen Zürichs',
-    desc: 'Die romanische Kirche aus dem 12. Jh. soll von Karl dem Grossen gegründet worden sein. Hier predigte Reformator Huldrych Zwingli ab 1519 — der Beginn der Schweizer Reformation.',
-    insider: 'Den Karlsturm besteigen für den schönsten Blick über die Altstadt.' },
+    intro: 'Zürich\'s twin-towered icon',
+    desc: 'A 12th-century Romanesque church, supposedly founded by Charlemagne himself. Huldrych Zwingli started preaching here in 1519 — the spark of the Swiss Reformation.',
+    insider: 'Climb the Karlsturm tower for the best view in the Old Town.' },
   { id: 'fraumuenster', name: 'Fraumünster', coords: [47.3700, 8.5413],
-    intro: 'Chagall-Glasfenster',
-    desc: 'Die ehemalige Frauenabtei beherbergt fünf Glasfenster von Marc Chagall (1970) und ein weiteres von Augusto Giacometti — einer der grössten Schätze Zürichs.',
-    insider: 'Am späten Vormittag ist das Licht durch die Fenster am intensivsten.' },
+    intro: 'The Chagall windows',
+    desc: 'A former abbey of women, now home to five stained-glass windows by Marc Chagall (1970) and one by Augusto Giacometti. One of Zürich\'s genuine treasures.',
+    insider: 'Late morning is when the light through the windows really sings.' },
   { id: 'lindenhof-hill', name: 'Lindenhof', coords: [47.3724, 8.5408],
-    intro: 'Aussichtshügel mit römischen Wurzeln',
-    desc: 'Auf diesem Hügel stand einst eine römische Zollstation und später eine kaiserliche Pfalz. Heute Schachspielen unter Linden, mit Panoramablick auf Niederdorf und Limmat.',
-    insider: 'Bei Sonnenuntergang besonders magisch — und immer kostenlos.' },
+    intro: 'View hill with Roman roots',
+    desc: 'A Roman customs post sat on this hill, then an imperial palace. Today: locals playing chess under linden trees, panoramic views over Niederdorf and the Limmat.',
+    insider: 'Hit it at sunset. Free, every night, no queue.' },
   { id: 'st-peter', name: 'St. Peter', coords: [47.3713, 8.5413],
-    intro: 'Grösstes Ziffernblatt Europas',
-    desc: 'Die älteste Pfarrkirche Zürichs hat das grösste Kirchturmziffernblatt Europas — 8.7 m Durchmesser. Der Turm diente als Feuerwache; die Wohnung des Türmers ist erhalten.',
-    insider: 'Der Minutenzeiger ist allein 5.7 m lang.' },
+    intro: 'Europe\'s biggest clock face',
+    desc: 'Zürich\'s oldest parish church, with the largest church-tower clock face in Europe — 8.7 m across. The tower used to be a fire watch; the tower-keeper\'s flat is still up there.',
+    insider: 'The minute hand alone is 5.7 m long.' },
 ];
 
 /* ============================================================================
@@ -305,75 +305,78 @@ const LANDMARKS = [
 
 const ANEKDOTEN = [
   { id: 'cabaret-voltaire', name: 'Cabaret Voltaire', coords: [47.3713, 8.5441],
-    intro: 'Geburtsort des Dadaismus',
-    desc: 'Hier gründeten 1916 Hugo Ball, Tristan Tzara und andere das Cabaret Voltaire — die Wiege der Dada-Bewegung. Während draussen der Erste Weltkrieg tobte, brüllte drinnen die Avantgarde.' },
-  { id: 'lenin', name: 'Lenins Wohnung', coords: [47.3708, 8.5443],
+    intro: 'Where Dada was born',
+    desc: '1916. Hugo Ball, Tristan Tzara and friends founded the Cabaret Voltaire here — ground zero for the Dada movement. The First World War raged outside; inside, the avant-garde screamed back.' },
+  { id: 'lenin', name: 'Lenin\'s flat', coords: [47.3708, 8.5443],
     intro: 'Spiegelgasse 14 (1916–1917)',
-    desc: 'Lenin und seine Frau Krupskaja wohnten hier 1916/17. Direkt neben dem Cabaret Voltaire — Revolutionäre der Politik neben Revolutionären der Kunst, ohne voneinander zu wissen.' },
+    desc: 'Lenin and his wife Krupskaya lived right here in 1916–17. Next door to the Cabaret Voltaire — political revolutionaries and art revolutionaries, side by side, neither knowing the other existed.' },
   { id: 'schipfe-craft', name: 'Schipfe', coords: [47.3714, 8.5418],
-    intro: 'Ältester Teil Zürichs',
-    desc: 'Hier am Limmatufer wurden seit dem Mittelalter Boote „geschöpft" — Waren entladen. Heute eines der charmantesten Handwerker-Quartiere der Stadt.' },
-  { id: 'lindenhof-rome', name: 'Römische Spuren', coords: [47.3724, 8.5410],
+    intro: 'The oldest part of Zürich',
+    desc: 'Boats were unloaded ("geschöpft") on this stretch of the Limmat from the Middle Ages on. Today it\'s one of the most charming craft and workshop quarters in town.' },
+  { id: 'lindenhof-rome', name: 'Roman traces', coords: [47.3724, 8.5410],
     intro: 'Castellum Turicum',
-    desc: 'Auf dem Lindenhof stand bis ins 4. Jh. das römische Zollkastell „Turicum" — Namensgeber Zürichs. Reste der Mauer kannst du im Lindenhof-Park noch sehen.' },
-  { id: 'augustiner-erker', name: 'Bemalte Erker', coords: [47.3720, 8.5407],
+    desc: 'A Roman customs fort called "Turicum" stood on the Lindenhof until the 4th century — that\'s where Zürich gets its name. Pieces of the old wall are still visible in the park.' },
+  { id: 'augustiner-erker', name: 'Painted bay windows', coords: [47.3720, 8.5407],
     intro: 'Augustinergasse',
-    desc: 'Die zauberhaft bemalten Erker entstanden im 17.–18. Jh. — jeder erzählte vom Beruf oder Status seiner Bewohner. Märchenkulisse in echt.' },
+    desc: 'The whimsical painted bay windows here went up in the 17th and 18th centuries — each one told you what the resident did for a living, or how much money they had. Fairy-tale stage set, but real.' },
   { id: 'doerfli', name: 'Das Dörfli', coords: [47.3722, 8.5437],
     intro: 'Niederdorf',
-    desc: 'Niederdorf wird von Einheimischen liebevoll „Dörfli" genannt — das Dorf in der Stadt. Mittelalterliche Gassen, Beizen, Strassenmusik bis spät in die Nacht.' },
+    desc: 'Locals call Niederdorf "Dörfli" (the little village) — the village inside the city. Medieval alleys, old taverns (Beizen), street music until late. Where you end up at 1 AM.' },
   { id: 'muensterhof-platz', name: 'Münsterhof', coords: [47.3703, 8.5410],
-    intro: 'Mittelalterlicher Marktplatz',
-    desc: 'Einer der ältesten Plätze Zürichs — hier wurden im Mittelalter Schweine, Salz und Tuch gehandelt. Heute autofrei und wunderbar zum Verweilen.' },
+    intro: 'Medieval market square',
+    desc: 'One of the oldest squares in Zürich — pigs, salt and cloth were sold here in the Middle Ages. Now: car-free, no stalls, perfect for doing nothing for an hour.' },
   { id: 'wasserkirche', name: 'Wasserkirche', coords: [47.3700, 8.5435],
-    intro: 'Felix und Regula',
-    desc: 'Hier sollen die Stadtheiligen Felix und Regula um 286 enthauptet worden sein — laut Legende trugen sie ihre Köpfe vierzig Schritte den Hügel hinauf zur Stelle des heutigen Grossmünsters.' },
+    intro: 'Felix and Regula',
+    desc: 'Legend says the patron saints Felix and Regula were beheaded right here around 286 AD — and then carried their own heads forty paces up the hill to where the Grossmünster now stands.' },
   { id: 'bahnhofstr-history', name: 'Bahnhofstrasse', coords: [47.3722, 8.5402],
-    intro: 'Vom Stadtgraben zur Luxusmeile',
-    desc: 'Die Bahnhofstrasse wurde 1864 auf einem zugeschütteten Stadtgraben angelegt. Heute eine der teuersten Einkaufsstrassen der Welt.' },
+    intro: 'From city moat to luxury mile',
+    desc: 'Bahnhofstrasse was laid down in 1864 on top of a filled-in city moat. Today: one of the most expensive shopping streets in the world. Same dirt, more diamonds.' },
   { id: 'keller-rindermarkt', name: 'Gottfried Keller', coords: [47.3713, 8.5444],
     intro: 'Rindermarkt 9',
-    desc: 'Schweizer Dichter Gottfried Keller wohnte 1855–1861 hier und schrieb am „Grünen Heinrich". Heute eine kleine Gasse mit Buchläden und versteckten Cafés.' },
+    desc: 'The Swiss writer Gottfried Keller lived here from 1855 to 1861, working on "Der grüne Heinrich". The alley is still small, still quiet, still full of bookshops and hidden cafés.' },
   { id: 'predigerkirche', name: 'Predigerkirche', coords: [47.3735, 8.5443],
-    intro: 'Ehemaliges Dominikanerkloster',
-    desc: 'Aus dem 13. Jh. — der Chor mit seinen Buntglasfenstern gehört zu den schönsten gotischen Räumen der Schweiz.' },
+    intro: 'Former Dominican monastery',
+    desc: '13th century. The choir, with its stained-glass windows, is one of the most beautiful Gothic rooms in Switzerland. Walk through quietly.' },
   { id: 'hirschen-platz', name: 'Hirschenplatz', coords: [47.3728, 8.5437],
-    intro: 'Hirsch und Mosaik',
-    desc: 'Der charmante kleine Platz mit Brunnen und altem „Hirschen"-Wirtshaus war einst Marktplatz. Achte auf die Hausfassaden — Mosaike erzählen Stadtgeschichten.' },
+    intro: 'A stag and a mosaic',
+    desc: 'A small charming square with a fountain and the old "Hirschen" inn, once a market. Look up at the façades — the mosaics tell city stories.' },
 ];
 
 /* ============================================================================
    LEVELS
 ============================================================================ */
 
+/* 8 tiers — Newbie → Legend. Emoji is part of the display name (bold-friendly). */
 const LEVELS = [
-  { name: 'Laie',      threshold: 0,  color: '#8C7355', accent: '#D6C2A3', icon: Footprints, desc: 'Du hast die Stadt gerade erst betreten.' },
-  { name: 'Rookie',    threshold: 5,  color: '#A06840', accent: '#E0B58A', icon: MapPin,     desc: 'Erste Schritte gemacht.' },
-  { name: 'Amateur',   threshold: 10, color: '#B07535', accent: '#E6BE7A', icon: Compass,    desc: 'Du findest dich langsam zurecht.' },
-  { name: 'Entdecker', threshold: 20, color: '#C28A3E', accent: '#EFCB7E', icon: Mountain,   desc: 'Die Gassen geben ihre Geheimnisse preis.' },
-  { name: 'Kenner',    threshold: 35, color: '#5F7B5C', accent: '#A6BC9A', icon: Sparkles,   desc: 'Besser als die meisten Touristen.' },
-  { name: 'Veteran',   threshold: 55, color: '#3F6E72', accent: '#8FB6B8', icon: Award,      desc: 'Ein wahrer Stadt-Veteran.' },
-  { name: 'Meister',   threshold: 75, color: '#7A3F5F', accent: '#C28FA8', icon: Trophy,     desc: 'Meister der verborgenen Pfade.' },
-  { name: 'Legende',   threshold: 90, color: '#C8923C', accent: '#F0D49E', icon: Crown,      desc: 'Eine lebende Legende.' },
+  { name: 'Rookie',   emoji: '🐣', threshold: 0,  color: '#7B8BAE', accent: '#B8C5DB', icon: Footprints, desc: 'You just stepped off the train.' },
+  { name: 'Wanderer', emoji: '🧭', threshold: 5,  color: '#5B7BBF', accent: '#9CB4DE', icon: MapPin,     desc: 'Direction unclear, vibes immaculate.' },
+  { name: 'Explorer', emoji: '🗺️', threshold: 10, color: '#3C66D6', accent: '#8FA8E8', icon: Compass,    desc: 'Getting the lay of the land.' },
+  { name: 'Local',    emoji: '🍷', threshold: 20, color: '#7A4A8C', accent: '#C39AD0', icon: Mountain,   desc: 'You order the wine, not the menu.' },
+  { name: 'Native',   emoji: '🎩', threshold: 35, color: '#A2376B', accent: '#D88FB1', icon: Sparkles,   desc: 'You walk like you live here.' },
+  { name: 'Insider',  emoji: '🥂', threshold: 55, color: '#C76A2E', accent: '#E8B58A', icon: Award,      desc: 'You know the back doors.' },
+  { name: 'Veteran',  emoji: '🏛️', threshold: 75, color: '#B8862C', accent: '#E6CB7E', icon: Trophy,     desc: 'Few have walked this far.' },
+  { name: 'Legend',   emoji: '👑', threshold: 90, color: '#D4A93C', accent: '#F2D88A', icon: Crown,      desc: 'Walk the walk. They\'ll talk the talk.' },
 ];
 
 /* ============================================================================
    DISTRICTS / CHAPTERS
 ============================================================================ */
 
+/* Districts — Roman-numeral chapters. Names stay local (Altstadt, Seefeld…),
+   subtitles are English for the traveler. */
 const DISTRICTS = [
-  { id: 'altstadt',    roman: 'I',   name: 'Altstadt',           subtitle: 'Mittelalterliche Gassen am Limmatufer',
-    icon: Building2,   color: '#C8923C', accent: '#F0D49E', available: true },
-  { id: 'seefeld',     roman: 'II',  name: 'Seefeld & Bellevue', subtitle: 'Promenade am Zürichsee',
-    icon: Waves,       color: '#3F6E72', accent: '#8FB6B8', available: false },
-  { id: 'langstrasse', roman: 'III', name: 'Langstrasse',        subtitle: 'Multikulti, Bars und Streetart',
-    icon: Music2,      color: '#7A3F5F', accent: '#C28FA8', available: false },
-  { id: 'kreis-5',     roman: 'IV',  name: 'Industriequartier',  subtitle: 'Hipster, Kunst, Frau Gerolds Garten',
-    icon: Feather,     color: '#5F7B5C', accent: '#A6BC9A', available: false },
-  { id: 'hochschulen', roman: 'V',   name: 'Hochschulgebiet',    subtitle: 'ETH, Polyterrasse, Aussicht',
-    icon: GraduationCap, color: '#1B3A5F', accent: '#7B96B5', available: false },
-  { id: 'enge',        roman: 'VI',  name: 'Enge & Botanik',     subtitle: 'Villen, Park, Zürichhorn',
-    icon: Trees,       color: '#A06840', accent: '#E0B58A', available: false },
+  { id: 'altstadt',    roman: 'I',   name: 'Altstadt',           subtitle: 'Medieval alleys along the Limmat',
+    icon: Building2,   color: '#D4A93C', accent: '#F2D88A', available: true },
+  { id: 'seefeld',     roman: 'II',  name: 'Seefeld & Bellevue', subtitle: 'The lakefront promenade',
+    icon: Waves,       color: '#00B5C9', accent: '#8FD4DE', available: false },
+  { id: 'langstrasse', roman: 'III', name: 'Langstrasse',        subtitle: 'Multikulti, bars, street art',
+    icon: Music2,      color: '#A2376B', accent: '#D88FB1', available: false },
+  { id: 'kreis-5',     roman: 'IV',  name: 'Industriequartier',  subtitle: 'Hipster scene, Frau Gerolds Garten',
+    icon: Feather,     color: '#7A4A8C', accent: '#C39AD0', available: false },
+  { id: 'hochschulen', roman: 'V',   name: 'Hochschulen',        subtitle: 'ETH, terraces, skyline views',
+    icon: GraduationCap, color: '#3C66D6', accent: '#8FA8E8', available: false },
+  { id: 'enge',        roman: 'VI',  name: 'Enge & Botanik',     subtitle: 'Villas, park, Zürichhorn',
+    icon: Trees,       color: '#5B8C5C', accent: '#A6BC9A', available: false },
 ];
 
 const UNLOCK_RADIUS_M = 22;
@@ -465,59 +468,59 @@ const getLevel = (pct) => {
 ============================================================================ */
 
 const ACHIEVEMENTS = [
-  { id: 'first-step',    name: 'Erster Schritt',     desc: 'Erste Gasse freigeschaltet',
-    icon: Footprints, color: '#A06840',
+  { id: 'first-step',    name: 'First Step',          desc: 'Cleared your first street',
+    icon: Footprints, color: '#3C66D6',
     check: (s) => s.unlocked.size >= 1 },
-  { id: 'first-star',    name: 'Sternstunde',         desc: 'Erstes Wahrzeichen besucht',
-    icon: Star, color: '#C8923C',
+  { id: 'first-star',    name: 'Star Power',          desc: 'Visited your first landmark',
+    icon: Star, color: '#D4A93C',
     check: (s) => s.stars.size >= 1 },
-  { id: 'first-anekdote', name: 'Erste Geschichte',   desc: 'Erste Anekdote entdeckt',
-    icon: BookOpen, color: '#7A3F5F',
+  { id: 'first-anekdote', name: 'Story Time',         desc: 'Uncovered your first anecdote',
+    icon: BookOpen, color: '#7A4A8C',
     check: (s) => s.anekdoten.size >= 1 },
-  { id: 'km-half',       name: 'Bummelschritt',       desc: '500 m in der Altstadt zurückgelegt',
-    icon: Route, color: '#5F7B5C',
+  { id: 'km-half',       name: 'Warm-up',             desc: 'Walked 500 m through town',
+    icon: Route, color: '#3C66D6',
     check: (s) => s.distance >= 500 },
-  { id: 'three-stars',   name: 'Sterne-Sammler',      desc: 'Drei Wahrzeichen entdeckt',
-    icon: Sparkles, color: '#C28A3E',
+  { id: 'three-stars',   name: 'Star Collector',      desc: 'Visited three landmarks',
+    icon: Sparkles, color: '#D4A93C',
     check: (s) => s.stars.size >= 3 },
-  { id: 'all-stars',     name: 'Komplettist',         desc: 'Alle vier Sterne der Altstadt',
-    icon: Crown, color: '#C8923C',
+  { id: 'all-stars',     name: 'Stargazer',           desc: 'All four landmarks of the chapter',
+    icon: Crown, color: '#D4A93C',
     check: (s) => s.stars.size >= LANDMARKS.length },
-  { id: 'bridges',       name: 'Brückenmeister',      desc: 'Alle drei Limmatbrücken überquert',
-    icon: Mountain, color: '#3F6E72',
+  { id: 'bridges',       name: 'Bridge Master',       desc: 'Crossed every bridge in town',
+    icon: Mountain, color: '#00B5C9',
     check: (s) => SEGMENTS_BY_SIDE.bridge.every((id) => s.unlocked.has(id)) },
-  { id: 'km-one',        name: 'Wandersmann',         desc: '1 Kilometer Erkundung',
-    icon: Award, color: '#7A3F5F',
+  { id: 'km-one',        name: 'Wanderer',            desc: 'Walked a full kilometre',
+    icon: Award, color: '#3C66D6',
     check: (s) => s.distance >= 1000 },
-  { id: 'east-side',     name: 'Niederdorf-Held',     desc: 'Alle Gassen der Ostseite',
-    icon: Award, color: '#7A3F5F',
+  { id: 'east-side',     name: 'East Side Story',     desc: 'Every alley on the east bank',
+    icon: Award, color: '#7A4A8C',
     check: (s) => SEGMENTS_BY_SIDE.east.every((id) => s.unlocked.has(id)) },
-  { id: 'west-side',     name: 'Lindenhof-Held',      desc: 'Alle Gassen der Westseite',
-    icon: Award, color: '#7A3F5F',
+  { id: 'west-side',     name: 'West Side Story',     desc: 'Every alley on the west bank',
+    icon: Award, color: '#7A4A8C',
     check: (s) => SEGMENTS_BY_SIDE.west.every((id) => s.unlocked.has(id)) },
-  { id: 'half-anekdoten', name: 'Geschichtenkenner',  desc: 'Hälfte aller Anekdoten entdeckt',
-    icon: BookOpen, color: '#7A3F5F',
+  { id: 'half-anekdoten', name: 'Half the Story',     desc: 'Half of all anecdotes uncovered',
+    icon: BookOpen, color: '#7A4A8C',
     check: (s) => s.anekdoten.size >= Math.ceil(ANEKDOTEN.length / 2) },
-  { id: 'all-anekdoten', name: 'Chronist',            desc: 'Alle Anekdoten entdeckt',
-    icon: Feather, color: '#C8923C',
+  { id: 'all-anekdoten', name: 'Chronicler',          desc: 'Every anecdote in this chapter',
+    icon: Feather, color: '#D4A93C',
     check: (s) => s.anekdoten.size >= ANEKDOTEN.length },
-  { id: 'first-bar',     name: 'Apéro',                desc: 'Erste Bar besucht',
-    icon: Martini, color: '#7A3F5F',
+  { id: 'first-bar',     name: 'Apéro',               desc: 'First bar in the book',
+    icon: Martini, color: '#A2376B',
     check: (s) => [...s.pois].some((id) => POIS.find((p) => p.id === id)?.kind === 'bar') },
-  { id: 'all-bars',      name: 'Bar-Hopper',           desc: 'Alle Bars besucht',
-    icon: Wine, color: '#7A3F5F',
+  { id: 'all-bars',      name: 'Bar-Hopper',          desc: 'Every bar visited',
+    icon: Wine, color: '#A2376B',
     check: (s) => POIS.filter((p) => p.kind === 'bar').every((p) => s.pois.has(p.id)) },
-  { id: 'all-restaurants', name: 'Genussmensch',       desc: 'Alle Restaurants besucht',
-    icon: ChefHat, color: '#A8542C',
+  { id: 'all-restaurants', name: 'Gourmand',          desc: 'Every restaurant visited',
+    icon: ChefHat, color: '#C76A2E',
     check: (s) => POIS.filter((p) => p.kind === 'restaurant').every((p) => s.pois.has(p.id)) },
-  { id: 'all-clubs',     name: 'Nachtschwärmer',       desc: 'Alle Clubs besucht',
+  { id: 'all-clubs',     name: 'Night Owl',           desc: 'Every club visited',
     icon: Disc3, color: '#3F4A8F',
     check: (s) => POIS.filter((p) => p.kind === 'club').every((p) => s.pois.has(p.id)) },
-  { id: 'half-altstadt', name: 'Halbe Altstadt',      desc: '50% aller Gassen erkundet',
-    icon: Trophy, color: '#C8923C',
+  { id: 'half-altstadt', name: 'Half the City',       desc: '50% of streets cleared',
+    icon: Trophy, color: '#C76A2E',
     check: (s) => s.unlocked.size >= TOTAL_SEGMENTS * 0.5 },
-  { id: 'legende',       name: 'Lebende Legende',     desc: '90% Erkundung erreicht',
-    icon: Crown, color: '#C8923C',
+  { id: 'legende',       name: 'Living Legend',       desc: '90% exploration reached',
+    icon: Crown, color: '#D4A93C',
     check: (s) => s.unlocked.size >= TOTAL_SEGMENTS * 0.9 },
 ];
 
@@ -574,9 +577,41 @@ const DEMO_ROUTE = [
    PERSISTENCE
 ============================================================================ */
 
-const STORAGE_KEY = 'altstadt-explorer-v6';
+const STORAGE_KEY = 'euro-legend-v1';
+const LEGACY_STORAGE_KEY = 'altstadt-explorer-v6';
 const OSM_CACHE_KEY = 'altstadt-osm-features-v3';
 const OSM_CACHE_TTL_MS = 30 * 86400 * 1000; // 30 days
+
+/* One-shot migration: copy progress from the V1.0 key, then mark the legacy
+   record as migrated so we never overwrite the v1 key from it again.
+   The user's "welcomeSeen" flag is intentionally reset so returning users
+   see the new Welcome screen once. */
+const migrateLegacyState = () => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const rawNew = window.localStorage.getItem(STORAGE_KEY);
+    if (rawNew) return JSON.parse(rawNew);
+    const rawLegacy = window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (!rawLegacy) return null;
+    const legacy = JSON.parse(rawLegacy);
+    if (legacy && legacy.__migratedTo === STORAGE_KEY) return null;
+    const migrated = {
+      ...legacy,
+      welcomeSeen: false,           // re-show the new Welcome screen
+      __migratedFrom: LEGACY_STORAGE_KEY,
+      migratedAt: Date.now(),
+    };
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+    /* Safety: keep the legacy blob but flag it. We don't delete in case the
+       user needs to roll back. */
+    window.localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify({
+      ...legacy, __migratedTo: STORAGE_KEY, __migratedAt: Date.now(),
+    }));
+    return migrated;
+  } catch (e) {
+    return null;
+  }
+};
 
 const OVERPASS_QUERY = `[out:json][timeout:90];
 (
@@ -673,7 +708,7 @@ const fetchOSMFeatures = async () => {
     if (tags.highway) {
       features.streets.push({
         id: 'osm-s-' + el.id,
-        name: tags.name || tags['name:de'] || tags.ref || tags.highway || 'Strasse',
+        name: tags.name || tags['name:de'] || tags.ref || tags.highway || 'Street',
         highway: tags.highway,
         isBridge: tags.bridge && tags.bridge !== 'no',
         isPedestrian: tags.highway === 'pedestrian' || tags.highway === 'footway' || tags.highway === 'path' || tags.foot === 'designated',
@@ -715,6 +750,9 @@ const fetchOSMFeatures = async () => {
 
 const loadState = async () => {
   if (typeof window === 'undefined') return null;
+  /* If euro-legend-v1 is missing but altstadt-explorer-v6 has data, migrate. */
+  const migrated = migrateLegacyState();
+  if (migrated) return migrated;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
@@ -861,238 +899,253 @@ const DEFAULT_SETTINGS = { soundOn: true, hapticsOn: true, themeMode: 'auto' };
    THEMING — Day / Night palette
 ============================================================================ */
 
+/* ============================================================================
+   EURO-LEGEND PALETTE
+   ----------------------------------------------------------------------------
+   Brand:      deep indigo primary (day-bg #0A1F4F, night-bg #050C24)
+   Accent 1:   Electric Blue #00E5FF  — CTAs, player marker, pulses, highlights
+   Accent 2:   Antique Gold  #D4A93C  — laurel, landmark stars, achievement glow
+   Surface:    translucent white over a warm off-white map (day),
+               dark frosted glass over indigo (night).
+   Map base:   warm off-white #F5F3EE (day) / deep indigo #101830 (night)
+   Water:      soft cyan #A8D5E8 (day) / steel #1E3A5F (night)
+   Parks:      muted sage #B8C9A8 (day) / dark moss #2A3B2D (night)
+   Streets:    off-white with soft shadow (day) / lighter blue-grey (night)
+============================================================================ */
+
 const PALETTES = {
   day: {
     name: 'day',
-    pageBg: 'radial-gradient(circle at 30% 20%, #efe1c4 0%, #e5d4b1 45%, #d8c399 100%)',
-    mapBg: '#e8d6b3',
-    paperFill: '#efe1c4',
-    paperNoiseColor: '0 0 0 0 0.65  0 0 0 0 0.5  0 0 0 0 0.3  0 0 0 0.06 0',
-    paperNoiseOpacity: 0.5,
+    /* Page background — warm off-white wash, very subtle radial. */
+    pageBg: 'radial-gradient(circle at 30% 20%, #FAF8F2 0%, #F5F3EE 45%, #ECE7D9 100%)',
+    /* Map base — warm off-white, never blank-white. */
+    mapBg: '#F5F3EE',
+    paperFill: '#F5F3EE',
+    paperNoiseColor: '0 0 0 0 0.96  0 0 0 0 0.95  0 0 0 0 0.93  0 0 0 0.04 0',
+    paperNoiseOpacity: 0.35,
     starfieldVisible: false,
-    text: '#2A1F12',
-    textMuted: 'rgba(60,40,20,0.6)',
-    cardBg: 'rgba(245,233,208,0.88)',
-    cardBorder: 'rgba(60,40,20,0.18)',
-    cardShadow: '0 4px 14px rgba(60,40,20,0.18)',
-    streetStroke: '#1B3A5F',
-    streetGhostStroke: '#a89272',
-    streetGhostOpacity: 0.35,
-    bridgeAccent: '#C8923C',
-    riverTop: '#5C9499',
-    riverBottom: '#2F5F65',
-    riverHighlight: '#9ABFC0',
-    riverOpacity: 0.85,
-    trailStroke: '#C8923C',
+    /* Foreground text — deep indigo for legibility on warm paper. */
+    text: '#0A1F4F',
+    textMuted: 'rgba(10,31,79,0.6)',
+    /* Frosted-glass surface for cards / pills / modals. */
+    cardBg: 'rgba(255,255,255,0.72)',
+    cardBorder: 'rgba(10,31,79,0.14)',
+    cardShadow: '0 8px 32px rgba(10,31,79,0.10), 0 2px 6px rgba(10,31,79,0.05)',
+    /* Generic stroke for street lines / outlines. */
+    streetStroke: '#0A1F4F',
+    streetGhostStroke: '#B5AFA0',
+    streetGhostOpacity: 0.32,
+    bridgeAccent: '#D4A93C',
+    /* Water — soft cyan-blue. */
+    riverTop: '#A8D5E8',
+    riverBottom: '#5E9CB8',
+    riverHighlight: '#D7ECF5',
+    riverOpacity: 0.95,
+    /* Walk trail — electric-blue dotted line. */
+    trailStroke: '#00E5FF',
     trailOpacity: 0.55,
-    compassStroke: '#5C3F22',
-    compassOpacity: 0.55,
-    vignette: 'rgba(60,40,20,0.18)',
-    userMarkerInner: '#C8923C',
-    userMarkerStroke: '#C8923C',
-    userMarkerFill: '#fff',
-    userPulseColor: '#C8923C',
-    starLockedStroke: '#5C3F22',
-    starLockedFill: 'rgba(245,233,208,0.7)',
-    anekdoteLockedFill: 'rgba(245,233,208,0.6)',
-    anekdoteLockedStroke: '#5C3F22',
-    anekdoteUnlockedFill: '#7A3F5F',
-    anekdoteUnlockedStroke: '#F5E9D0',
-    anekdoteIconColor: '#F5E9D0',
-    landmarkLabelStroke: 'rgba(245,233,208,0.85)',
-    bottomBarBg: 'rgba(245,233,208,0.55)',
-    bottomBarBorder: 'rgba(60,40,20,0.18)',
-    headerBorder: 'rgba(60,40,20,0.18)',
-    iconBtnBg: 'rgba(60,40,20,0.08)',
-    simModeOnBg: 'rgba(27,58,95,0.92)',
-    simModeOffBg: 'rgba(60,40,20,0.08)',
-    // Detailed map elements
-    blockFill: '#dec5a0',
-    blockStroke: 'rgba(60,40,20,0.22)',
-    blockShadow: 'rgba(60,40,20,0.12)',
-    plazaPaved: '#e8d6b3',
-    plazaPark: '#bfca9a',
-    plazaStroke: 'rgba(60,40,20,0.25)',
-    fountainOuter: '#5C3F22',
-    fountainInner: '#5C9499',
-    treeColor: '#5F7B5C',
-    treeShadow: 'rgba(60,40,20,0.2)',
-    lakeTop: '#8BB4B8',
-    lakeBottom: '#3F6E72',
-    hbfFill: '#c6a878',
-    hbfStroke: '#5C3F22',
-    tramTrack: 'rgba(60,40,20,0.35)',
-    contour: 'rgba(95,62,40,0.15)',
-    // Lifted street style (Pokemon Go inspired)
-    streetFill: '#FAF1D9',
-    streetOutline: '#3A2818',
-    streetShine: 'rgba(255,255,255,0.55)',
-    streetShadow: 'rgba(60,40,20,0.25)',
-    osmGhost: '#c6a978',          // OSM backdrop streets (always-visible context)
-    osmGhostOutline: 'rgba(80,55,30,0.4)',
-    // POI colors
-    poiBarBg: '#7A3F5F',
+    compassStroke: '#0A1F4F',
+    compassOpacity: 0.45,
+    vignette: 'rgba(10,31,79,0.10)',
+    /* User marker — electric blue. */
+    userMarkerInner: '#00E5FF',
+    userMarkerStroke: '#00E5FF',
+    userMarkerFill: '#FFFFFF',
+    userPulseColor: '#00E5FF',
+    /* Star landmarks. */
+    starLockedStroke: '#0A1F4F',
+    starLockedFill: 'rgba(255,255,255,0.6)',
+    anekdoteLockedFill: 'rgba(255,255,255,0.55)',
+    anekdoteLockedStroke: '#0A1F4F',
+    anekdoteUnlockedFill: '#7A4A8C',
+    anekdoteUnlockedStroke: '#FFFFFF',
+    anekdoteIconColor: '#FFFFFF',
+    landmarkLabelStroke: 'rgba(255,255,255,0.90)',
+    bottomBarBg: 'rgba(255,255,255,0.62)',
+    bottomBarBorder: 'rgba(10,31,79,0.10)',
+    headerBorder: 'rgba(10,31,79,0.10)',
+    iconBtnBg: 'rgba(10,31,79,0.06)',
+    simModeOnBg: 'rgba(0,229,255,0.85)',
+    simModeOffBg: 'rgba(10,31,79,0.06)',
+    /* City-block fill — cream-ivory, sits next to off-white streets. */
+    blockFill: '#ECE7D9',
+    blockStroke: 'rgba(10,31,79,0.18)',
+    blockShadow: 'rgba(10,31,79,0.10)',
+    plazaPaved: '#F0EDE2',
+    plazaPark: '#B8C9A8',
+    plazaStroke: 'rgba(10,31,79,0.18)',
+    fountainOuter: '#0A1F4F',
+    fountainInner: '#5E9CB8',
+    treeColor: '#7BA67C',
+    treeShadow: 'rgba(10,31,79,0.16)',
+    /* Lake — soft cyan. */
+    lakeTop: '#C6E2EE',
+    lakeBottom: '#5E9CB8',
+    hbfFill: '#E2DCC8',
+    hbfStroke: '#0A1F4F',
+    tramTrack: 'rgba(10,31,79,0.28)',
+    contour: 'rgba(10,31,79,0.10)',
+    /* Streets — off-white with crisp edge. */
+    streetFill: '#FFFFFF',
+    streetOutline: '#0A1F4F',
+    streetShine: 'rgba(255,255,255,0.65)',
+    streetShadow: 'rgba(10,31,79,0.18)',
+    osmGhost: '#FFFFFF',           // OSM backdrop streets — off-white
+    osmGhostOutline: 'rgba(10,31,79,0.22)',
+    /* POI accent colours. */
+    poiBarBg: '#A2376B',
     poiBarRing: '#F5C9DC',
-    poiRestaurantBg: '#A8542C',
+    poiRestaurantBg: '#C76A2E',
     poiRestaurantRing: '#F5D2A8',
     poiClubBg: '#3F4A8F',
     poiClubRing: '#C9D2F5',
-    poiPinShadow: 'rgba(60,40,20,0.35)',
-    poiLockedDesat: 0.55,        // grayscale ratio when not visited
-    // Fog-of-War — moderne, gedämpfte Wolkendecke (60% opak)
-    fogColor: '#C5CDD6',          // Grundfarbe der Decke
-    fogHighlight: '#DCE2EA',      // oberer Highlight-Ton (Volumen-Kante)
-    fogShadow: '#8E96A4',         // unterer Schatten-Ton
-    fogTextureTint: '0 0 0 0 0.96  0 0 0 0 0.97  0 0 0 0 1  0 0 0 0.55 -0.18', // Noise-Tönung (Tag)
-    // OSM features
-    osmBuildingFill: '#E8D2A8',
-    osmBuildingStroke: 'rgba(80,55,30,0.55)',
-    osmBuildingShadow: 'rgba(60,40,20,0.18)',
-    osmBuildingChurch: '#D5BB8A',
-    osmBuildingPart: 'rgba(80,55,30,0.18)',
-    osmParkFill: '#C5D7A6',
-    osmParkStroke: 'rgba(80,110,55,0.35)',
-    osmWaterFill: '#A6CDD2',
-    osmRailStroke: 'rgba(80,55,30,0.42)',
-    osmParkingFill: '#DFD4BD',
-    osmParkingStroke: 'rgba(80,55,30,0.25)',
-    osmBarrierStroke: 'rgba(80,55,30,0.5)',
-    // Brücken-Stil
-    bridgeFill: '#D6BE92',
-    bridgeRail: 'rgba(60,40,20,0.55)',
-    bridgeEdge: 'rgba(60,40,20,0.4)',
-    // Gebäude-Schatten (Ostseite, simuliert Licht aus NW)
-    buildingEastShadow: 'rgba(60,40,20,0.32)',
-    // Park-Textur (subtile Punkte)
-    parkTexture: 'rgba(80,110,55,0.45)',
-    // Mini-Map
-    miniBg: '#F1E7CF',
-    miniStreet: 'rgba(60,40,20,0.32)',
-    miniStreetMain: 'rgba(60,40,20,0.55)',
-    miniBuilding: 'rgba(80,55,30,0.18)',
-    miniWater: '#A6CDD2',
-    miniPark: '#BFCA9A',
-    miniBridge: '#D6BE92',
-    miniFog: 'rgba(120,110,90,0.45)',
-    miniBorder: 'rgba(60,40,20,0.35)',
-    // Welt-Label-Halo (für Texte auf der Karte)
-    labelHalo: 'rgba(245,233,208,0.92)',
+    poiPinShadow: 'rgba(10,31,79,0.28)',
+    poiLockedDesat: 0.55,
+    /* Fog-of-War — moody cool overcast. */
+    fogColor: '#C5CFE0',
+    fogHighlight: '#DDE4ED',
+    fogShadow: '#8E97A8',
+    fogTextureTint: '0 0 0 0 0.96  0 0 0 0 0.97  0 0 0 0 1  0 0 0 0.55 -0.18',
+    /* OSM features. */
+    osmBuildingFill: '#E8E3D2',
+    osmBuildingStroke: 'rgba(10,31,79,0.40)',
+    osmBuildingShadow: 'rgba(10,31,79,0.16)',
+    osmBuildingChurch: '#D7CFB7',
+    osmBuildingPart: 'rgba(10,31,79,0.14)',
+    osmParkFill: '#C9DAB0',
+    osmParkStroke: 'rgba(60,110,60,0.32)',
+    osmWaterFill: '#A8D5E8',
+    osmRailStroke: 'rgba(10,31,79,0.38)',
+    osmParkingFill: '#E0D9C6',
+    osmParkingStroke: 'rgba(10,31,79,0.22)',
+    osmBarrierStroke: 'rgba(10,31,79,0.42)',
+    /* Bridges — same warm tone as streets so they read as continuation. */
+    bridgeFill: '#F5F3EE',
+    bridgeRail: 'rgba(10,31,79,0.45)',
+    bridgeEdge: 'rgba(10,31,79,0.32)',
+    buildingEastShadow: 'rgba(10,31,79,0.26)',
+    parkTexture: 'rgba(60,110,60,0.40)',
+    /* Mini-map — frosted-glass card. */
+    miniBg: 'rgba(255,255,255,0.78)',
+    miniStreet: 'rgba(10,31,79,0.30)',
+    miniStreetMain: 'rgba(10,31,79,0.55)',
+    miniBuilding: 'rgba(10,31,79,0.14)',
+    miniWater: '#A8D5E8',
+    miniPark: '#B8C9A8',
+    miniBridge: '#F5F3EE',
+    miniFog: 'rgba(170,180,200,0.45)',
+    miniBorder: 'rgba(10,31,79,0.18)',
+    /* Label halo (for text laid over the map). */
+    labelHalo: 'rgba(255,255,255,0.92)',
   },
   night: {
     name: 'night',
-    pageBg: 'radial-gradient(circle at 30% 25%, #1f2541 0%, #141a30 50%, #0a0e1c 100%)',
-    mapBg: '#0e1428',
-    paperFill: '#10182e',
-    paperNoiseColor: '0 0 0 0 0.5  0 0 0 0 0.55  0 0 0 0 0.7  0 0 0 0.08 0',
-    paperNoiseOpacity: 0.35,
+    /* Page bg — deep indigo radial. */
+    pageBg: 'radial-gradient(circle at 30% 25%, #0A1F4F 0%, #07153A 50%, #050C24 100%)',
+    /* Map base — deep indigo. */
+    mapBg: '#101830',
+    paperFill: '#101830',
+    paperNoiseColor: '0 0 0 0 0.40  0 0 0 0 0.45  0 0 0 0 0.60  0 0 0 0.06 0',
+    paperNoiseOpacity: 0.30,
     starfieldVisible: true,
-    text: '#E8E2D0',
-    textMuted: 'rgba(232,226,208,0.55)',
-    cardBg: 'rgba(20,26,48,0.85)',
-    cardBorder: 'rgba(232,226,208,0.18)',
-    cardShadow: '0 4px 14px rgba(0,0,0,0.4)',
-    streetStroke: '#FFD27A',
-    streetGhostStroke: '#3a4566',
-    streetGhostOpacity: 0.45,
-    bridgeAccent: '#FFE9B0',
-    riverTop: '#5B7DA8',
-    riverBottom: '#2A4368',
-    riverHighlight: '#B8C9DE',
-    riverOpacity: 0.7,
-    trailStroke: '#FFE9B0',
-    trailOpacity: 0.7,
-    compassStroke: '#B8C9DE',
+    text: '#F2EEE5',
+    textMuted: 'rgba(242,238,229,0.55)',
+    /* Dark frosted glass. */
+    cardBg: 'rgba(10,31,79,0.55)',
+    cardBorder: 'rgba(242,238,229,0.15)',
+    cardShadow: '0 8px 32px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.20)',
+    streetStroke: '#00E5FF',
+    streetGhostStroke: '#2A3A60',
+    streetGhostOpacity: 0.5,
+    bridgeAccent: '#D4A93C',
+    riverTop: '#2D4F73',
+    riverBottom: '#1E3A5F',
+    riverHighlight: '#7AA8C5',
+    riverOpacity: 0.85,
+    trailStroke: '#00E5FF',
+    trailOpacity: 0.8,
+    compassStroke: '#9CB4DE',
     compassOpacity: 0.5,
-    vignette: 'rgba(0,0,0,0.5)',
-    userMarkerInner: '#FFD27A',
-    userMarkerStroke: '#FFE9B0',
-    userMarkerFill: '#0a0e1c',
-    userPulseColor: '#FFD27A',
-    starLockedStroke: '#B8C9DE',
-    starLockedFill: 'rgba(232,226,208,0.18)',
-    anekdoteLockedFill: 'rgba(232,226,208,0.15)',
-    anekdoteLockedStroke: '#B8C9DE',
-    anekdoteUnlockedFill: '#B98AC9',
-    anekdoteUnlockedStroke: '#0a0e1c',
-    anekdoteIconColor: '#0a0e1c',
-    landmarkLabelStroke: 'rgba(10,14,28,0.85)',
-    bottomBarBg: 'rgba(20,26,48,0.65)',
-    bottomBarBorder: 'rgba(232,226,208,0.12)',
-    headerBorder: 'rgba(232,226,208,0.12)',
-    iconBtnBg: 'rgba(232,226,208,0.1)',
-    simModeOnBg: 'rgba(91,125,168,0.5)',
-    simModeOffBg: 'rgba(232,226,208,0.08)',
-    // Detailed map elements
-    blockFill: '#1a2240',
-    blockStroke: 'rgba(232,226,208,0.12)',
-    blockShadow: 'rgba(0,0,0,0.4)',
-    plazaPaved: '#1f2848',
-    plazaPark: '#1d3034',
-    plazaStroke: 'rgba(232,226,208,0.15)',
-    fountainOuter: '#B8C9DE',
-    fountainInner: '#5B7DA8',
-    treeColor: '#3a5b4a',
+    vignette: 'rgba(0,0,0,0.55)',
+    userMarkerInner: '#00E5FF',
+    userMarkerStroke: '#FFFFFF',
+    userMarkerFill: '#050C24',
+    userPulseColor: '#00E5FF',
+    starLockedStroke: '#D4A93C',
+    starLockedFill: 'rgba(212,169,60,0.18)',
+    anekdoteLockedFill: 'rgba(242,238,229,0.15)',
+    anekdoteLockedStroke: '#D4A93C',
+    anekdoteUnlockedFill: '#D88FB1',
+    anekdoteUnlockedStroke: '#050C24',
+    anekdoteIconColor: '#050C24',
+    landmarkLabelStroke: 'rgba(5,12,36,0.85)',
+    bottomBarBg: 'rgba(10,31,79,0.55)',
+    bottomBarBorder: 'rgba(242,238,229,0.10)',
+    headerBorder: 'rgba(242,238,229,0.10)',
+    iconBtnBg: 'rgba(242,238,229,0.08)',
+    simModeOnBg: 'rgba(0,229,255,0.40)',
+    simModeOffBg: 'rgba(242,238,229,0.06)',
+    blockFill: '#161E38',
+    blockStroke: 'rgba(242,238,229,0.10)',
+    blockShadow: 'rgba(0,0,0,0.45)',
+    plazaPaved: '#1A2342',
+    plazaPark: '#2A3B2D',
+    plazaStroke: 'rgba(242,238,229,0.12)',
+    fountainOuter: '#9CB4DE',
+    fountainInner: '#2D4F73',
+    treeColor: '#385940',
     treeShadow: 'rgba(0,0,0,0.5)',
-    lakeTop: '#3a5d75',
-    lakeBottom: '#1a2c44',
-    hbfFill: '#26304d',
-    hbfStroke: '#B8C9DE',
-    tramTrack: 'rgba(232,226,208,0.18)',
-    contour: 'rgba(232,226,208,0.08)',
-    // Lifted street style (night)
-    streetFill: '#FFE9B0',
-    streetOutline: '#0A0E1C',
-    streetShine: 'rgba(255,255,255,0.4)',
+    lakeTop: '#2D4F73',
+    lakeBottom: '#1E3A5F',
+    hbfFill: '#1F2848',
+    hbfStroke: '#D4A93C',
+    tramTrack: 'rgba(242,238,229,0.16)',
+    contour: 'rgba(242,238,229,0.08)',
+    streetFill: '#1E2A4A',
+    streetOutline: '#050C24',
+    streetShine: 'rgba(255,255,255,0.30)',
     streetShadow: 'rgba(0,0,0,0.55)',
-    osmGhost: '#3a4566',
-    osmGhostOutline: 'rgba(232,226,208,0.18)',
-    // POI colors
-    poiBarBg: '#B98AC9',
+    osmGhost: '#3B4A6E',
+    osmGhostOutline: 'rgba(242,238,229,0.18)',
+    poiBarBg: '#D88FB1',
     poiBarRing: '#3D2148',
-    poiRestaurantBg: '#E0A26E',
+    poiRestaurantBg: '#E8B58A',
     poiRestaurantRing: '#3F2818',
-    poiClubBg: '#7B96D9',
+    poiClubBg: '#8FA8E8',
     poiClubRing: '#1F2848',
-    poiPinShadow: 'rgba(0,0,0,0.6)',
+    poiPinShadow: 'rgba(0,0,0,0.55)',
     poiLockedDesat: 0.7,
-    // Fog-of-War — moderne, gedämpfte Wolkendecke (60% opak)
-    fogColor: '#1F2A38',
-    fogHighlight: '#324252',
-    fogShadow: '#0E1622',
-    fogTextureTint: '0 0 0 0 0.18  0 0 0 0 0.22  0 0 0 0 0.30  0 0 0 0.55 -0.18',
-    // OSM features
-    osmBuildingFill: '#1f2848',
-    osmBuildingStroke: 'rgba(232,226,208,0.32)',
+    fogColor: '#1A2342',
+    fogHighlight: '#2A3658',
+    fogShadow: '#0A1130',
+    fogTextureTint: '0 0 0 0 0.10  0 0 0 0 0.14  0 0 0 0 0.24  0 0 0 0.55 -0.18',
+    osmBuildingFill: '#1F2848',
+    osmBuildingStroke: 'rgba(242,238,229,0.30)',
     osmBuildingShadow: 'rgba(0,0,0,0.5)',
-    osmBuildingChurch: '#2a345a',
-    osmBuildingPart: 'rgba(232,226,208,0.12)',
-    osmParkFill: '#1d3034',
-    osmParkStroke: 'rgba(140,180,140,0.2)',
-    osmWaterFill: '#1a2c44',
-    osmRailStroke: 'rgba(232,226,208,0.25)',
-    osmParkingFill: '#212a4a',
-    osmParkingStroke: 'rgba(232,226,208,0.18)',
-    osmBarrierStroke: 'rgba(232,226,208,0.32)',
-    // Brücken-Stil (Nacht)
-    bridgeFill: '#3a4670',
-    bridgeRail: 'rgba(232,226,208,0.45)',
-    bridgeEdge: 'rgba(232,226,208,0.32)',
-    // Gebäude-Schatten (Ostseite, simuliert Mondlicht aus NW)
+    osmBuildingChurch: '#2A3658',
+    osmBuildingPart: 'rgba(242,238,229,0.12)',
+    osmParkFill: '#2A3B2D',
+    osmParkStroke: 'rgba(140,180,140,0.20)',
+    osmWaterFill: '#1E3A5F',
+    osmRailStroke: 'rgba(242,238,229,0.25)',
+    osmParkingFill: '#1F2A48',
+    osmParkingStroke: 'rgba(242,238,229,0.18)',
+    osmBarrierStroke: 'rgba(242,238,229,0.32)',
+    bridgeFill: '#1E2A4A',
+    bridgeRail: 'rgba(212,169,60,0.55)',
+    bridgeEdge: 'rgba(212,169,60,0.35)',
     buildingEastShadow: 'rgba(0,0,0,0.5)',
-    // Park-Textur (subtile Punkte)
-    parkTexture: 'rgba(140,180,140,0.35)',
-    // Mini-Map (Nacht)
-    miniBg: '#16203a',
-    miniStreet: 'rgba(232,226,208,0.28)',
-    miniStreetMain: 'rgba(232,226,208,0.5)',
-    miniBuilding: 'rgba(232,226,208,0.18)',
-    miniWater: '#3a5d75',
-    miniPark: '#1d3034',
-    miniBridge: '#3a4670',
-    miniFog: 'rgba(20,28,46,0.6)',
-    miniBorder: 'rgba(232,226,208,0.28)',
-    // Welt-Label-Halo (Nacht)
-    labelHalo: 'rgba(10,14,28,0.92)',
+    parkTexture: 'rgba(140,180,140,0.30)',
+    miniBg: 'rgba(10,31,79,0.65)',
+    miniStreet: 'rgba(242,238,229,0.26)',
+    miniStreetMain: 'rgba(242,238,229,0.46)',
+    miniBuilding: 'rgba(242,238,229,0.14)',
+    miniWater: '#2D4F73',
+    miniPark: '#2A3B2D',
+    miniBridge: '#1E2A4A',
+    miniFog: 'rgba(10,17,48,0.55)',
+    miniBorder: 'rgba(242,238,229,0.22)',
+    labelHalo: 'rgba(5,12,36,0.92)',
   },
 };
 
@@ -1116,11 +1169,231 @@ const STARFIELD = (() => {
 })();
 
 /* ============================================================================
-   FOG-OF-WAR — Konstanten. Positions-basiertes Reveal, persistent.
+   FOG-OF-WAR — bold "unmapped territory" feel. Persistent reveal mask.
+   Reveal radius adapts to zoom: navigating ≪ overview.
 ============================================================================ */
-const FOG_REVEAL_RADIUS_PX = 15;       // Sichtradius um den Spieler in SVG-px
-const FOG_REVEAL_DEDUP_PX = 30;        // Mindestabstand zwischen gespeicherten Reveal-Punkten
-const FOG_OPACITY = 0.6;               // Deckkraft der Wolkendecke
+const FOG_REVEAL_RADIUS = {
+  overview: 120,   // zoomed-out: generous reveal halo
+  default:  70,    // normal map view
+  nav:      45,    // zoomed-in/nav mode: tight, deliberate
+};
+const FOG_REVEAL_DEDUP_PX = 24;        // min distance between persisted reveal points
+const FOG_OPACITY_DAY   = 0.82;        // unmapped territory tint (day)
+const FOG_OPACITY_NIGHT = 0.88;        // flashlight feel (night)
+/* Frontier glow — cyan halo at the moving edge near the player. */
+const FOG_FRONTIER_GLOW_PX = 12;
+const FOG_FRONTIER_COLOR   = 'rgba(0,229,255,0.30)';
+/* Gold burst on first reveal — soft radial flash. */
+const FOG_REVEAL_BURST_MS  = 600;
+const FOG_REVEAL_BURST_MAX_PER_SEC = 3;
+
+/* ============================================================================
+   TYPOGRAPHY — single source of truth for font stacks + display scale.
+============================================================================ */
+const TYPO = {
+  /* Display-XXL — only for the EURO LEGEND wordmark on welcome. */
+  wordmark: { fontFamily: '"Space Grotesk", "Inter", system-ui, sans-serif', fontWeight: 700, letterSpacing: '0.06em' },
+  /* Display-L — chapter / city headlines. */
+  display: { fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, letterSpacing: '-0.015em' },
+  /* Italic display — tagline / quotations. */
+  displayItalic: { fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic', fontWeight: 400 },
+  /* Body — anecdotes, modal text. */
+  body: { fontFamily: '"Inter", system-ui, sans-serif', fontWeight: 400 },
+  /* UI labels in caps with wide tracking. */
+  caps: { fontFamily: '"Inter", system-ui, sans-serif', fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' },
+  /* Small UI numbers + value text. */
+  ui: { fontFamily: '"Inter", system-ui, sans-serif', fontWeight: 500 },
+};
+
+/* ============================================================================
+   CITIES — wraps per-city geometry & content so future chapters
+   (paris, berlin, lisbon, barcelona…) are a new object entry, not a refactor.
+   Every render reads from CITIES[currentCity]. The Zürich constants above stay
+   exported as the active source of truth via this object.
+============================================================================ */
+const CITIES = {
+  zurich: {
+    id: 'zurich',
+    name: 'Zürich',
+    country: 'Switzerland',
+    chapters: {
+      altstadt: {
+        id: 'altstadt',
+        roman: 'I',
+        title: 'Altstadt',
+        subtitle: 'Medieval alleys along the Limmat',
+        locked: false,
+        bounds: BOUNDS,
+        viewport: VIEWPORT,
+        extent: EXTENT,
+        streets: STREETS,
+        streetsRaw: STREETS_RAW,
+        segments: SEGMENTS,
+        segmentsBySide: SEGMENTS_BY_SIDE,
+        totalSegments: TOTAL_SEGMENTS,
+        blocks: BLOCKS,
+        plazas: PLAZAS,
+        fountains: FOUNTAINS,
+        trees: TREES,
+        landmarks: LANDMARKS,
+        anekdoten: ANEKDOTEN,
+        pois: POIS,
+        river: RIVER_PATH,
+        lake: LAKE_PATH,
+        hbfBuilding: HBF_BUILDING,
+        hbfTracks: HBF_TRACKS,
+        tramLines: TRAM_LINES,
+        demoRoute: DEMO_ROUTE,
+        starfield: STARFIELD,
+        overpassQuery: OVERPASS_QUERY,
+      },
+      /* Stub chapters — locked, ship empty geometry. Render code already
+         guards against missing arrays. Populate as the chapters launch. */
+      seefeld: {
+        id: 'seefeld', roman: 'II', title: 'Seefeld & Bellevue',
+        subtitle: 'The lakefront promenade',
+        locked: true,
+        bounds: { minLat: 47.3540, maxLat: 47.3680, minLng: 8.5440, maxLng: 8.5600 },
+        viewport: VIEWPORT,
+        streets: [], streetsRaw: [], segments: [], segmentsBySide: { east: [], west: [], bridge: [] },
+        totalSegments: 0,
+        blocks: [], plazas: [], fountains: [], trees: [],
+        landmarks: [], anekdoten: [], pois: [],
+        river: [], lake: [],
+        hbfBuilding: [], hbfTracks: [], tramLines: [],
+        demoRoute: [], starfield: [],
+      },
+      langstrasse: {
+        id: 'langstrasse', roman: 'III', title: 'Langstrasse',
+        subtitle: 'Multikulti, bars, street art',
+        locked: true,
+        bounds: { minLat: 47.3735, maxLat: 47.3830, minLng: 8.5230, maxLng: 8.5370 },
+        viewport: VIEWPORT,
+        streets: [], streetsRaw: [], segments: [], segmentsBySide: { east: [], west: [], bridge: [] },
+        totalSegments: 0,
+        blocks: [], plazas: [], fountains: [], trees: [],
+        landmarks: [], anekdoten: [], pois: [],
+        river: [], lake: [],
+        hbfBuilding: [], hbfTracks: [], tramLines: [],
+        demoRoute: [], starfield: [],
+      },
+      'kreis-5': {
+        id: 'kreis-5', roman: 'IV', title: 'Industriequartier',
+        subtitle: 'Hipster scene, Frau Gerolds Garten',
+        locked: true,
+        bounds: { minLat: 47.3850, maxLat: 47.3950, minLng: 8.5100, maxLng: 8.5300 },
+        viewport: VIEWPORT,
+        streets: [], streetsRaw: [], segments: [], segmentsBySide: { east: [], west: [], bridge: [] },
+        totalSegments: 0,
+        blocks: [], plazas: [], fountains: [], trees: [],
+        landmarks: [], anekdoten: [], pois: [],
+        river: [], lake: [],
+        hbfBuilding: [], hbfTracks: [], tramLines: [],
+        demoRoute: [], starfield: [],
+      },
+      hochschulen: {
+        id: 'hochschulen', roman: 'V', title: 'Hochschulen',
+        subtitle: 'ETH, terraces, skyline views',
+        locked: true,
+        bounds: { minLat: 47.3760, maxLat: 47.3830, minLng: 8.5440, maxLng: 8.5560 },
+        viewport: VIEWPORT,
+        streets: [], streetsRaw: [], segments: [], segmentsBySide: { east: [], west: [], bridge: [] },
+        totalSegments: 0,
+        blocks: [], plazas: [], fountains: [], trees: [],
+        landmarks: [], anekdoten: [], pois: [],
+        river: [], lake: [],
+        hbfBuilding: [], hbfTracks: [], tramLines: [],
+        demoRoute: [], starfield: [],
+      },
+      enge: {
+        id: 'enge', roman: 'VI', title: 'Enge & Botanik',
+        subtitle: 'Villas, park, Zürichhorn',
+        locked: true,
+        bounds: { minLat: 47.3580, maxLat: 47.3670, minLng: 8.5260, maxLng: 8.5420 },
+        viewport: VIEWPORT,
+        streets: [], streetsRaw: [], segments: [], segmentsBySide: { east: [], west: [], bridge: [] },
+        totalSegments: 0,
+        blocks: [], plazas: [], fountains: [], trees: [],
+        landmarks: [], anekdoten: [], pois: [],
+        river: [], lake: [],
+        hbfBuilding: [], hbfTracks: [], tramLines: [],
+        demoRoute: [], starfield: [],
+      },
+    },
+  },
+  /* future: paris: { chapters: { … } }, berlin: { … }, … */
+};
+
+const DEFAULT_CITY = 'zurich';
+const DEFAULT_CHAPTER = 'altstadt';
+
+/* ============================================================================
+   LAUREL WREATH — parametric SVG component. Used as the brand mark
+   on welcome, achievements, and chapter-complete screens.
+============================================================================ */
+function LaurelWreath({ size = 120, monogram = 'EL', glow = false, className = '', style = {} }) {
+  return (
+    <svg
+      width={size} height={size} viewBox="0 0 100 100"
+      className={className}
+      style={{
+        filter: glow ? 'drop-shadow(0 0 24px rgba(212,169,60,0.55))' : 'drop-shadow(0 4px 14px rgba(0,0,0,0.25))',
+        ...style,
+      }}
+    >
+      <defs>
+        <linearGradient id={`el-leaf-${size}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stopColor="#F2D88A" />
+          <stop offset="55%" stopColor="#D4A93C" />
+          <stop offset="100%" stopColor="#9B7820" />
+        </linearGradient>
+        <linearGradient id={`el-leaf-r-${size}`} x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stopColor="#F2D88A" />
+          <stop offset="55%" stopColor="#D4A93C" />
+          <stop offset="100%" stopColor="#9B7820" />
+        </linearGradient>
+      </defs>
+
+      {/* Stem arcs */}
+      <path d="M 50,84 Q 18,52 50,14" fill="none" stroke="#B98F2A" strokeWidth="1.4" strokeLinecap="round" opacity="0.85" />
+      <path d="M 50,84 Q 82,52 50,14" fill="none" stroke="#B98F2A" strokeWidth="1.4" strokeLinecap="round" opacity="0.85" />
+
+      {/* Left leaves */}
+      <g fill={`url(#el-leaf-${size})`} stroke="#7E631C" strokeWidth="0.4" strokeLinejoin="round">
+        <path d="M 38,78 Q 27,76 24,68 Q 33,67 39,72 Z" />
+        <path d="M 30,70 Q 19,66 18,57 Q 27,58 33,64 Z" />
+        <path d="M 24,60 Q 14,54 16,44 Q 25,46 29,53 Z" />
+        <path d="M 22,49 Q 13,42 17,32 Q 26,35 28,42 Z" />
+        <path d="M 24,38 Q 17,30 23,21 Q 31,26 30,33 Z" />
+        <path d="M 30,28 Q 26,20 33,13 Q 39,19 35,25 Z" />
+        <path d="M 38,20 Q 36,12 44,8 Q 47,15 43,19 Z" />
+      </g>
+      {/* Right leaves (mirror) */}
+      <g fill={`url(#el-leaf-r-${size})`} stroke="#7E631C" strokeWidth="0.4" strokeLinejoin="round">
+        <path d="M 62,78 Q 73,76 76,68 Q 67,67 61,72 Z" />
+        <path d="M 70,70 Q 81,66 82,57 Q 73,58 67,64 Z" />
+        <path d="M 76,60 Q 86,54 84,44 Q 75,46 71,53 Z" />
+        <path d="M 78,49 Q 87,42 83,32 Q 74,35 72,42 Z" />
+        <path d="M 76,38 Q 83,30 77,21 Q 69,26 70,33 Z" />
+        <path d="M 70,28 Q 74,20 67,13 Q 61,19 65,25 Z" />
+        <path d="M 62,20 Q 64,12 56,8 Q 53,15 57,19 Z" />
+      </g>
+
+      {/* Ribbon knot at the bottom */}
+      <path d="M 44,82 Q 50,88 56,82 L 54,86 Q 50,90 46,86 Z"
+            fill={`url(#el-leaf-${size})`} stroke="#7E631C" strokeWidth="0.4" />
+
+      {monogram && (
+        <text x="50" y="56" textAnchor="middle"
+              fontFamily="'Fraunces', Georgia, serif"
+              fontStyle="italic" fontWeight="700"
+              fontSize="22" fill="#F2D88A" letterSpacing="-1">
+          {monogram}
+        </text>
+      )}
+    </svg>
+  );
+}
 
 const resolveTheme = (mode) => {
   if (mode === 'day') return 'day';
@@ -1139,6 +1412,13 @@ const resolveTheme = (mode) => {
 
 export default function App() {
   const [view, setView] = useState('districts'); // 'districts' | 'explore'
+  /* Multi-city / multi-chapter wiring. CITIES[currentCity].chapters[currentChapter]
+     is the active geometry + content. Today only zurich.altstadt is playable;
+     switching is not yet exposed in the UI. */
+  const [currentCity] = useState(DEFAULT_CITY);
+  const [currentChapter, setCurrentChapter] = useState(DEFAULT_CHAPTER);
+  const city = CITIES[currentCity];
+  const chapter = city.chapters[currentChapter];
   const [welcomeOpen, setWelcomeOpen] = useState(false);
 
   const [tracking, setTracking] = useState(false);
@@ -1178,8 +1458,11 @@ export default function App() {
   const [osmFeatures, setOsmFeatures] = useState(null);   // { buildings, water, parks, rail, churches }
   const [osmStatus, setOsmStatus] = useState('idle');     // idle | loading | ready | error
 
-  /* Fog-of-War: persistierte Reveal-Punkte in SVG-Koordinaten */
+  /* Fog-of-War: persisted reveal points in SVG coords. */
   const [revealed, setRevealed] = useState([]);
+  /* Gold "first-reveal" bursts — transient, auto-expire after FOG_REVEAL_BURST_MS. */
+  const [revealBursts, setRevealBursts] = useState([]);
+  const lastBurstSecRef = useRef({ sec: 0, count: 0 });
 
   /* Navigation: Heading (Kompass-Grad, kontinuierlich) + Overview-Modal */
   const [heading, setHeading] = useState(0);
@@ -1217,7 +1500,7 @@ export default function App() {
     if (document.getElementById(id)) return;
     const link = document.createElement('link');
     link.id = id; link.rel = 'stylesheet';
-    link.href = 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700&display=swap';
+    link.href = 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600;1,9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap';
     document.head.appendChild(link);
   }, []);
 
@@ -1422,7 +1705,7 @@ export default function App() {
       const names = [...new Set(newSegs.map((s) => s.streetName))];
       enqueueToast({
         type: 'street', title: names[0],
-        sub: names.length > 1 ? `+${names.length - 1} weitere Gassen` : 'Neu freigeschaltet',
+        sub: names.length > 1 ? `+${names.length} streets. Keep going.` : '+1 street. Keep going.',
       });
     }
 
@@ -1432,12 +1715,30 @@ export default function App() {
     else if (newAnek.length > 0) fbk('anekdote');
     else if (newSegs.length > 0) fbk('street');
 
+    /* Gold first-reveal burst — throttle to FOG_REVEAL_BURST_MAX_PER_SEC.
+       One burst per batch of new segments (at the player position). */
+    if (newSegs.length > 0) {
+      const now = Date.now();
+      const sec = Math.floor(now / 1000);
+      if (lastBurstSecRef.current.sec !== sec) {
+        lastBurstSecRef.current = { sec, count: 0 };
+      }
+      if (lastBurstSecRef.current.count < FOG_REVEAL_BURST_MAX_PER_SEC) {
+        lastBurstSecRef.current.count++;
+        const burstId = `${now}-${Math.random().toString(36).slice(2, 6)}`;
+        setRevealBursts((prev) => [...prev, { id: burstId, x: proj.x, y: proj.y, ts: now }]);
+        setTimeout(() => {
+          setRevealBursts((prev) => prev.filter((b) => b.id !== burstId));
+        }, FOG_REVEAL_BURST_MS + 60);
+      }
+    }
+
     // Journal — record everything discovered
     newStars.forEach((lm) => pushJournal({ type: 'star', name: lm.name, sub: lm.intro }));
     newAnek.forEach((an) => pushJournal({ type: 'anekdote', name: an.name, sub: an.intro }));
     newPois.forEach((p) => pushJournal({ type: 'poi', kind: p.kind, name: p.name, sub: p.intro }));
     const newStreetNames = [...new Set(newSegs.map((s) => s.streetName))];
-    newStreetNames.forEach((n) => pushJournal({ type: 'street', name: n, sub: 'Gasse freigeschaltet' }));
+    newStreetNames.forEach((n) => pushJournal({ type: 'street', name: n, sub: 'Street cleared' }));
 
     setTrail((prev) => {
       const next = [...prev, latlng];
@@ -1484,11 +1785,17 @@ export default function App() {
     if (!hydrated) return;
     if (levelIdx > lastLevelIdxRef.current) {
       lastLevelIdxRef.current = levelIdx;
-      setLevelUp(LEVELS[levelIdx]);
+      const lv = LEVELS[levelIdx];
+      setLevelUp(lv);
       fbk('level');
-      pushJournal({ type: 'level', name: LEVELS[levelIdx].name, sub: 'Neuer Rang erreicht' });
+      enqueueToast({
+        type: 'tier',
+        title: `You're now a ${lv.name} ${lv.emoji}.`,
+        sub: 'Walk the walk.',
+      });
+      pushJournal({ type: 'level', name: `${lv.emoji} ${lv.name}`, sub: 'New tier reached' });
     }
-  }, [levelIdx, hydrated, fbk, pushJournal]);
+  }, [levelIdx, hydrated, fbk, pushJournal, enqueueToast]);
 
   /* Chapter complete (100%) */
   useEffect(() => {
@@ -1497,9 +1804,14 @@ export default function App() {
       setChapterDoneSeen(true);
       setChapterDone(true);
       fbk('chapter');
-      pushJournal({ type: 'chapter', name: 'Altstadt erobert', sub: 'Kapitel I abgeschlossen' });
+      enqueueToast({
+        type: 'achievement',
+        title: 'Chapter cleared.',
+        sub: 'Eurolegends aren\'t born. They are made.',
+      });
+      pushJournal({ type: 'chapter', name: 'Altstadt conquered', sub: 'Chapter I complete' });
     }
-  }, [pct, hydrated, chapterDoneSeen, fbk, pushJournal]);
+  }, [pct, hydrated, chapterDoneSeen, fbk, pushJournal, enqueueToast]);
 
   /* Timer */
   useEffect(() => {
@@ -1519,7 +1831,7 @@ export default function App() {
   useEffect(() => {
     if (!tracking || simMode) return;
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
-      enqueueToast({ type: 'error', title: 'GPS nicht verfügbar', sub: 'Simulationsmodus aktiviert' });
+      enqueueToast({ type: 'error', title: 'GPS unavailable', sub: 'Switched to demo mode' });
       setSimMode(true);
       return;
     }
@@ -1528,7 +1840,7 @@ export default function App() {
         setAccuracy(pos.coords.accuracy);
         processPosition([pos.coords.latitude, pos.coords.longitude]);
       },
-      (err) => enqueueToast({ type: 'error', title: 'GPS-Fehler', sub: err.message }),
+      (err) => enqueueToast({ type: 'error', title: 'GPS error', sub: err.message }),
       { enableHighAccuracy: true, maximumAge: 1000, timeout: 15000 }
     );
     return () => {
@@ -1611,7 +1923,7 @@ export default function App() {
 
   /* Reset */
   const handleReset = () => {
-    if (typeof window !== 'undefined' && !window.confirm('Wirklich alle Fortschritte löschen?')) return;
+    if (typeof window !== 'undefined' && !window.confirm('Reset all progress? Streets, stars, anecdotes and stats will be cleared.')) return;
     stopDemo(); setTracking(false);
     setUnlocked(new Set()); setStars(new Set()); setAnekdoten(new Set()); setPois(new Set()); setAchievements(new Set());
     setTrail([]); setPosition(null); setElapsed(0); setDistance(0); setLevelUp(null); setChapterDone(false);
@@ -1636,13 +1948,21 @@ export default function App() {
         <DistrictsScreen
           palette={palette}
           stats={{ pct, level, levelIdx, stars: stars.size, anekdoten: anekdoten.size, pois: pois.size, achievements: achievements.size, distance, elapsed }}
-          onSelect={(id) => { if (id === 'altstadt') setView('explore'); }}
+          onSelect={(id) => {
+            const ch = city.chapters[id];
+            if (ch && !ch.locked) {
+              setCurrentChapter(id);
+              setView('explore');
+            } else {
+              enqueueToast({ type: 'lock', title: 'Locked.', sub: 'Walk the walk first.' });
+            }
+          }}
         />
       )}
       {view === 'explore' && (
         <ExploreScreen
           palette={palette}
-          state={{ tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, heading, showOverview, anyModalOpen: welcomeOpen || !!activeLandmark || !!activeAnekdote || !!activePoi || !!levelUp || chapterDone || showLegend || showAchievements || showJournal || showSettings || showLokale || showOverview }}
+          state={{ tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, revealBursts, heading, showOverview, anyModalOpen: welcomeOpen || !!activeLandmark || !!activeAnekdote || !!activePoi || !!levelUp || chapterDone || showLegend || showAchievements || showJournal || showSettings || showLokale || showOverview }}
           actions={{ handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, setShowOverview, processPosition, lastPosRef, setView,
             cycleTheme: () => setSettings((s) => {
               const next = s.themeMode === 'auto' ? (themeName === 'night' ? 'day' : 'night')
@@ -1654,7 +1974,12 @@ export default function App() {
         />
       )}
 
-      {welcomeOpen && hydrated && <WelcomeScreen onClose={() => setWelcomeOpen(false)} />}
+      {welcomeOpen && hydrated && (
+        <WelcomeScreen
+          onStart={() => { setWelcomeOpen(false); setView('explore'); }}
+          onDemo={() => { setWelcomeOpen(false); setView('explore'); runDemo(); }}
+        />
+      )}
       {toast && <ToastView toast={toast} />}
       {showLegend && <LegendModal onClose={() => setShowLegend(false)} pct={pct} levelIdx={levelIdx} />}
       {showAchievements && <AchievementsModal onClose={() => setShowAchievements(false)} earned={achievements} pct={pct} stars={stars} anekdoten={anekdoten} pois={pois} distance={distance} elapsed={elapsed} />}
@@ -1671,9 +1996,13 @@ export default function App() {
       <style>{`
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popIn {
-          0% { transform: scale(0.85); opacity: 0; }
-          60% { transform: scale(1.04); opacity: 1; }
-          100% { transform: scale(1); opacity: 1; }
+          0% { transform: scale(0.85) translateY(20px); opacity: 0; }
+          60% { transform: scale(1.02) translateY(0); opacity: 1; }
+          100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+          0% { transform: translateY(40px); opacity: 0; }
+          100% { transform: translateY(0); opacity: 1; }
         }
         @keyframes toastIn {
           0% { transform: translate(-50%, -8px); opacity: 0; }
@@ -1685,15 +2014,20 @@ export default function App() {
           0%, 100% { transform: translate(0, 0); }
           50% { transform: translate(8px, -6px); }
         }
+        @keyframes goldGlow {
+          0%, 100% { filter: drop-shadow(0 0 12px rgba(212,169,60,0.4)); }
+          50% { filter: drop-shadow(0 0 24px rgba(212,169,60,0.75)); }
+        }
         @keyframes confetti {
           0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
           100% { transform: translateY(120vh) rotate(720deg); opacity: 0; }
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .animate-spin { animation: spin 1s linear infinite; }
-        .animate-fadeIn { animation: fadeIn 220ms ease-out; }
-        .animate-popIn { animation: popIn 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .animate-toast { animation: toastIn 2.8s ease-out forwards; }
+        .animate-spin   { animation: spin 1s linear infinite; }
+        .animate-fadeIn { animation: fadeIn 220ms cubic-bezier(0.4, 0, 0.2, 1); }
+        .animate-popIn  { animation: popIn 380ms cubic-bezier(0.4, 0, 0.2, 1); }
+        .animate-slideUp { animation: slideUp 380ms cubic-bezier(0.4, 0, 0.2, 1); }
+        .animate-toast  { animation: toastIn 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
       `}</style>
     </>
   );
@@ -1703,55 +2037,111 @@ export default function App() {
    WELCOME SCREEN
 ============================================================================ */
 
-function WelcomeScreen({ onClose }) {
+function WelcomeScreen({ onStart, onDemo }) {
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4 animate-fadeIn"
-      style={{ background: 'radial-gradient(circle at 30% 30%, #2b2113 0%, #15100a 70%)', fontFamily: '"Manrope", sans-serif' }}
+      className="fixed inset-0 z-[60] animate-fadeIn flex"
+      style={{
+        background: 'radial-gradient(circle at 30% 25%, #0A1F4F 0%, #07153A 55%, #050C24 100%)',
+        color: '#F2EEE5',
+        fontFamily: TYPO.body.fontFamily,
+        paddingTop: 'env(safe-area-inset-top)',
+        paddingBottom: 'env(safe-area-inset-bottom)',
+        paddingLeft: 'env(safe-area-inset-left)',
+        paddingRight: 'env(safe-area-inset-right)',
+      }}
     >
-      {/* drifting cloud silhouettes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[0, 1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: `${[10, 55, 25, 70][i]}%`,
-              top: `${[20, 35, 65, 55][i]}%`,
-              width: `${[180, 240, 200, 280][i]}px`,
-              height: `${[90, 110, 95, 120][i]}px`,
-              background: 'radial-gradient(ellipse, rgba(245,233,208,0.12), transparent 70%)',
-              animation: `drift ${8 + i * 2}s ease-in-out ${i * 0.7}s infinite`,
-              filter: 'blur(20px)',
-            }}
-          />
-        ))}
-      </div>
+      {/* Subtle grain + radial vignette */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.45) 100%)',
+        mixBlendMode: 'multiply',
+      }} />
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.08]" preserveAspectRatio="none">
+        <filter id="welcomeGrain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" /></filter>
+        <rect width="100%" height="100%" filter="url(#welcomeGrain)" />
+      </svg>
 
-      <div className="relative max-w-md text-center px-6 py-10 animate-popIn" style={{ color: '#F5E9D0' }}>
-        <div className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-6" style={{ background: 'linear-gradient(135deg, #C8923C, #8C5C2A)', boxShadow: '0 0 0 6px rgba(200,146,60,0.15), 0 12px 30px rgba(0,0,0,0.4)' }}>
-          <Compass size={32} color="#F5E9D0" strokeWidth={2} />
+      {/* Layout switches between portrait stack and landscape split via flex */}
+      <div
+        className="relative w-full max-w-5xl mx-auto px-6 py-8 flex items-center justify-center
+                   flex-col landscape:flex-row landscape:gap-12 landscape:items-center"
+        style={{ minHeight: '100%' }}
+      >
+        {/* Logo block */}
+        <div className="flex flex-col items-center text-center landscape:items-start landscape:text-left landscape:flex-1 animate-popIn">
+          <LaurelWreath size={132} monogram="EL" glow />
+          <h1
+            className="mt-7"
+            style={{
+              ...TYPO.wordmark,
+              fontSize: 'clamp(40px, 9vw, 64px)',
+              lineHeight: 0.95,
+              color: '#FFFFFF',
+              letterSpacing: '0.04em',
+              textShadow: '0 2px 24px rgba(0,229,255,0.18)',
+            }}
+          >
+            EURO LEGEND
+          </h1>
+          <p className="mt-3" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.55, color: '#FFFFFF' }}>
+            Chapter I · Zürich · Old Town
+          </p>
         </div>
-        <p className="text-[10px] uppercase tracking-[0.4em] opacity-65 mb-3">Willkommen</p>
-        <h1 className="leading-none mb-4" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 900, fontSize: '44px', letterSpacing: '-0.02em' }}>
-          Zürich Altstadt
-        </h1>
-        <p className="text-base leading-relaxed opacity-85 mb-2" style={{ fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic' }}>
-          Eine Stadt aus Wolken,<br />die nur deine Schritte vertreiben können.
-        </p>
-        <p className="text-xs uppercase tracking-[0.2em] opacity-75 mt-3" style={{ color: '#E6BE7A' }}>
-          Tipp: Beginne beim Bahnhof!
-        </p>
-        <p className="text-sm leading-relaxed opacity-65 mt-5 mb-7">
-          Lüfte den Wolken-Schleier Gasse für Gasse, sammle Sterne an Wahrzeichen, entdecke versteckte Geschichten — und finde die besten Bars, Restaurants und Clubs der Stadt.
-        </p>
-        <button
-          onClick={onClose}
-          className="px-7 py-3 rounded-full font-semibold transition active:scale-95"
-          style={{ background: 'linear-gradient(135deg, #C8923C, #8C5C2A)', color: '#F5E9D0', fontFamily: '"Fraunces", Georgia, serif', letterSpacing: '0.02em', boxShadow: '0 8px 24px rgba(200,146,60,0.4)' }}
-        >
-          Reise beginnen
-        </button>
+
+        {/* Tagline + CTA block */}
+        <div className="flex flex-col items-center text-center landscape:items-start landscape:text-left landscape:flex-1 mt-8 landscape:mt-0 max-w-md animate-popIn">
+          <p
+            className="leading-snug"
+            style={{
+              ...TYPO.displayItalic,
+              fontSize: 'clamp(18px, 4.4vw, 22px)',
+              color: 'rgba(255,255,255,0.86)',
+            }}
+          >
+            Walk the walk, if you talk the talk.<br />
+            Eurolegends aren&apos;t born.<br />
+            They are made.
+          </p>
+
+          <div className="mt-8 w-full max-w-sm flex flex-col gap-3">
+            <button
+              onClick={onStart}
+              className="w-full rounded-xl tap"
+              style={{
+                minHeight: '56px',
+                background: '#00E5FF',
+                color: '#050C24',
+                fontFamily: TYPO.ui.fontFamily,
+                fontWeight: 700,
+                fontSize: '16px',
+                letterSpacing: '0.02em',
+                boxShadow: '0 8px 28px rgba(0,229,255,0.30), inset 0 1px 0 rgba(255,255,255,0.4)',
+              }}
+            >
+              Start in Zurich
+            </button>
+            <button
+              onClick={onDemo}
+              className="w-full rounded-xl tap"
+              style={{
+                minHeight: '56px',
+                background: 'transparent',
+                color: '#FFFFFF',
+                border: '1.5px solid rgba(255,255,255,0.35)',
+                fontFamily: TYPO.ui.fontFamily,
+                fontWeight: 600,
+                fontSize: '15px',
+                letterSpacing: '0.02em',
+              }}
+            >
+              Demo mode
+            </button>
+          </div>
+
+          <p className="mt-8" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.4, color: '#FFFFFF' }}>
+            More cities coming. Build your stamps.
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -1767,50 +2157,67 @@ function DistrictsScreen({ palette, stats, onSelect }) {
   const isNight = palette.name === 'night';
   return (
     <div
-      className="w-full min-h-screen flex flex-col"
+      className="w-full min-h-screen-dvh flex flex-col"
       style={{
         background: palette.pageBg,
-        fontFamily: '"Manrope", sans-serif', color: palette.text,
-        transition: 'background 800ms ease, color 600ms ease',
+        fontFamily: TYPO.body.fontFamily, color: palette.text,
+        transition: 'background 800ms var(--ease-premium), color 600ms var(--ease-premium)',
       }}
     >
-      <header className="px-5 pt-6 pb-4 flex items-start justify-between">
+      <header
+        className="px-5 pt-6 pb-4 flex items-start justify-between"
+        style={{ paddingTop: 'calc(env(safe-area-inset-top) + 24px)' }}
+      >
         <div>
-          <p className="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-1">Reise-Atlas</p>
-          <h1 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 800, fontSize: '32px', letterSpacing: '-0.02em', lineHeight: 1 }}>
+          <p style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.55 }} className="mb-1">City Atlas</p>
+          <h1 style={{ ...TYPO.display, fontWeight: 800, fontSize: '32px', lineHeight: 1 }}>
             Zürich
           </h1>
-          <p className="text-sm opacity-65 mt-1.5">{isNight ? 'Eine Stadt bei Nacht' : 'Wähle dein Kapitel'}</p>
+          <p className="text-sm opacity-65 mt-1.5">{isNight ? 'After dark' : 'By day'}</p>
         </div>
-        <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #C8923C, #8C5C2A)', boxShadow: 'inset 0 0 8px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.15)' }}>
-          <Compass size={24} color="#F5E9D0" strokeWidth={2.2} />
+        {/* Wordmark + laurel — tight pairing, 8px gap. Wordmark hides under 360px. */}
+        <div className="flex items-center" style={{ gap: 8 }}>
+          <span
+            className="hidden xs:inline-block sm:inline-block"
+            style={{
+              fontFamily: '"Space Grotesk", "Inter", sans-serif',
+              fontWeight: 500,
+              fontSize: 10,
+              letterSpacing: '0.12em',
+              color: isNight ? 'rgba(255,255,255,0.7)' : 'rgba(10,31,79,0.7)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            EURO LEGEND
+          </span>
+          <LaurelWreath size={48} monogram="EL" />
         </div>
       </header>
 
-      <div className="px-4 pb-8 flex-1 flex flex-col gap-3">
+      <div className="px-4 pb-8 flex-1 flex flex-col gap-3 relative">
         {DISTRICTS.map((d) => {
           const isAlt = d.id === 'altstadt';
           const Icon = d.icon;
-          const lockedBg = isNight ? 'rgba(232,226,208,0.05)' : 'rgba(60,40,20,0.06)';
-          const lockedBorder = isNight ? 'rgba(232,226,208,0.18)' : 'rgba(60,40,20,0.2)';
-          const lockedIcon = isNight ? 'rgba(232,226,208,0.4)' : 'rgba(60,40,20,0.5)';
-          const lockedBadge = isNight ? 'rgba(232,226,208,0.1)' : 'rgba(60,40,20,0.12)';
-          const lockedIconBg = isNight ? 'rgba(232,226,208,0.08)' : 'rgba(60,40,20,0.1)';
+          const lockedBg = isNight ? 'rgba(255,255,255,0.04)' : 'rgba(10,31,79,0.05)';
+          const lockedBorder = isNight ? 'rgba(255,255,255,0.18)' : 'rgba(10,31,79,0.20)';
+          const lockedIcon = isNight ? 'rgba(255,255,255,0.4)' : 'rgba(10,31,79,0.50)';
+          const lockedBadge = isNight ? 'rgba(255,255,255,0.10)' : 'rgba(10,31,79,0.10)';
+          const lockedIconBg = isNight ? 'rgba(255,255,255,0.08)' : 'rgba(10,31,79,0.08)';
           return (
             <button
               key={d.id}
-              onClick={() => d.available && onSelect(d.id)}
-              disabled={!d.available}
-              className="relative w-full text-left p-4 rounded-2xl transition active:scale-[0.99] overflow-hidden"
+              onClick={() => onSelect(d.id)}
+              className="relative w-full text-left p-4 rounded-2xl atlas-card overflow-hidden"
               style={{
                 background: d.available
                   ? `linear-gradient(135deg, ${d.color} 0%, ${d.accent} 100%)`
                   : lockedBg,
                 border: d.available ? 'none' : `1px dashed ${lockedBorder}`,
-                color: d.available ? '#F5E9D0' : palette.text,
+                color: d.available ? '#FFFFFF' : palette.text,
                 boxShadow: d.available ? `0 6px 18px ${d.color}40, inset 0 1px 0 rgba(255,255,255,0.2)` : 'none',
-                cursor: d.available ? 'pointer' : 'not-allowed',
-                opacity: d.available ? 1 : 0.7,
+                cursor: 'pointer',
+                opacity: d.available ? 1 : 0.78,
+                transition: 'transform 180ms var(--ease-premium), box-shadow 180ms var(--ease-premium), opacity 180ms var(--ease-premium)',
               }}
             >
               {d.available && (
@@ -1821,40 +2228,43 @@ function DistrictsScreen({ palette, stats, onSelect }) {
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{
-                    background: d.available ? 'rgba(245,233,208,0.18)' : lockedIconBg,
-                    border: d.available ? '1px solid rgba(245,233,208,0.3)' : 'none',
+                    background: d.available ? 'rgba(255,255,255,0.18)' : lockedIconBg,
+                    border: d.available ? '1px solid rgba(255,255,255,0.3)' : 'none',
                   }}
                 >
-                  {d.available ? <Icon size={22} color="#F5E9D0" strokeWidth={2} /> : <Lock size={18} color={lockedIcon} />}
+                  {d.available ? <Icon size={22} color="#FFFFFF" strokeWidth={2} /> : <Lock size={18} color={lockedIcon} />}
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-[10px] uppercase tracking-[0.22em] opacity-75" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600 }}>
-                      Kapitel {d.roman}
+                    <span style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.85 }}>
+                      Chapter {d.roman}
                     </span>
                     {!d.available && (
-                      <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-full" style={{ background: lockedBadge }}>
-                        Demnächst
+                      <span style={{ ...TYPO.caps, fontSize: '9px', background: lockedBadge }} className="px-1.5 py-0.5 rounded-full">
+                        Soon
                       </span>
                     )}
                   </div>
-                  <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.01em', lineHeight: 1.1 }}>
+                  <h2 style={{ ...TYPO.display, fontWeight: 700, fontSize: '20px', lineHeight: 1.1 }}>
                     {d.name}
                   </h2>
-                  <p className="text-[12px] opacity-80 mt-0.5 leading-snug">{d.subtitle}</p>
+                  <p className="text-[12px] opacity-85 mt-0.5 leading-snug">{d.subtitle}</p>
 
                   {isAlt && (
                     <div className="mt-3 space-y-2">
-                      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(0,0,0,0.18)' }}>
-                        <div className="h-full rounded-full transition-all duration-500" style={{ width: `${stats.pct}%`, background: 'linear-gradient(90deg, #FFE9B0, #F5E9D0)' }} />
+                      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(0,0,0,0.22)' }}>
+                        <div className="h-full rounded-full transition-all duration-500" style={{ width: `${stats.pct}%`, background: 'linear-gradient(90deg, #00E5FF, #FFFFFF)' }} />
                       </div>
-                      <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] opacity-90">
-                        <span className="flex items-center gap-1"><stats.level.icon size={11} /> {stats.level.name}</span>
+                      <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] opacity-95">
+                        <span className="flex items-center gap-1">
+                          <span style={{ fontSize: '12px' }}>{stats.level.emoji}</span>
+                          <span style={{ fontWeight: 700 }}>{stats.level.name}</span>
+                        </span>
                         <span>·</span>
                         <span>{stats.pct.toFixed(0)}%</span>
                         <span>·</span>
-                        <span className="flex items-center gap-1"><Star size={10} fill="#FFE9B0" stroke="none" /> {stats.stars}/{altstadtStars}</span>
+                        <span className="flex items-center gap-1"><Star size={10} fill="#F2D88A" stroke="none" /> {stats.stars}/{altstadtStars}</span>
                         <span>·</span>
                         <span className="flex items-center gap-1"><BookOpen size={10} /> {stats.anekdoten}/{altstadtAnek}</span>
                         <span>·</span>
@@ -1873,8 +2283,30 @@ function DistrictsScreen({ palette, stats, onSelect }) {
         })}
       </div>
 
-      <footer className="px-5 py-4 text-center text-[10px] opacity-50 tracking-wider">
-        Mehr Kapitel folgen — und schon bald: ein Live-Modus für Einheimische.
+      {/* Bottom vignette — soft scroll fade, deep indigo → transparent. */}
+      <div
+        className="pointer-events-none absolute left-0 right-0"
+        style={{
+          bottom: 0,
+          height: 80,
+          background: `linear-gradient(to top, ${isNight ? '#050C24' : '#0A1F4F'}26, transparent)`,
+        }}
+        aria-hidden
+      />
+
+      <footer
+        className="px-5 py-4 text-center relative"
+        style={{
+          fontFamily: '"Space Grotesk", "Inter", sans-serif',
+          fontWeight: 500,
+          fontSize: '11px',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          color: isNight ? 'rgba(255,255,255,0.5)' : 'rgba(10,31,79,0.5)',
+          paddingBottom: 'calc(env(safe-area-inset-bottom) + 16px)',
+        }}
+      >
+        More chapters coming. Build your stamps.
       </footer>
     </div>
   );
@@ -1885,12 +2317,16 @@ function DistrictsScreen({ palette, stats, onSelect }) {
 ============================================================================ */
 
 function ExploreScreen({ palette, state, actions }) {
-  const { tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, heading, showOverview, anyModalOpen } = state;
+  const { tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, revealBursts = [], heading, showOverview, anyModalOpen } = state;
   const { handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, setShowOverview, processPosition, lastPosRef, setView, cycleTheme } = actions;
 
   const svgRef = useRef(null);
   const LevelIcon = level.icon;
   const NextIcon = nextLevel?.icon;
+
+  /* Fog: bolder opacity (day/night). Reveal radius lerps between
+     "default" and "nav" as the camera zooms into the player. */
+  const fogOpacity = themeName === 'night' ? FOG_OPACITY_NIGHT : FOG_OPACITY_DAY;
 
   const progressInBracket = (() => {
     const lo = level.threshold, hi = nextLevel ? nextLevel.threshold : 100;
@@ -1999,6 +2435,8 @@ function ExploreScreen({ palette, state, actions }) {
     h: NAV_VIEWBOX_SIZE_RAW,
   };
   const tp = transitionProgress;
+  /* Fog reveal radius: default when stationary, narrows to nav radius when zoomed in. */
+  const fogRevealRadius = FOG_REVEAL_RADIUS.default + (FOG_REVEAL_RADIUS.nav - FOG_REVEAL_RADIUS.default) * tp;
   const viewBoxAttr = `${fullVB.x + (navVB.x - fullVB.x) * tp} ${fullVB.y + (navVB.y - fullVB.y) * tp} ${fullVB.w + (navVB.w - fullVB.w) * tp} ${fullVB.h + (navVB.h - fullVB.h) * tp}`;
 
   const effectiveTilt = NAV_TILT_DEG * tp;
@@ -2067,41 +2505,63 @@ function ExploreScreen({ palette, state, actions }) {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col" style={{ background: palette.pageBg, fontFamily: '"Manrope", sans-serif', color: palette.text, transition: 'background 800ms ease, color 600ms ease' }}>
-      <header className="px-3 pt-4 pb-3 flex items-center justify-between border-b" style={{ borderColor: palette.headerBorder, transition: 'border-color 600ms ease' }}>
+    <div
+      className="w-full flex flex-col min-h-screen-dvh"
+      style={{
+        background: palette.pageBg,
+        fontFamily: TYPO.body.fontFamily,
+        color: palette.text,
+        transition: 'background 800ms var(--ease-premium), color 600ms var(--ease-premium)',
+      }}
+    >
+      <header
+        className="px-3 pt-4 pb-3 flex items-center justify-between border-b"
+        style={{
+          borderColor: palette.headerBorder,
+          paddingTop: 'calc(env(safe-area-inset-top) + 12px)',
+          paddingLeft: 'calc(env(safe-area-inset-left) + 12px)',
+          paddingRight: 'calc(env(safe-area-inset-right) + 12px)',
+          transition: 'border-color 600ms var(--ease-premium)',
+        }}
+      >
         <div className="flex items-center gap-2">
-          <button onClick={() => setView('districts')} className="w-9 h-9 rounded-full flex items-center justify-center transition active:scale-95" style={{ background: palette.iconBtnBg, transition: 'background 400ms ease' }} aria-label="Zurück">
-            <ArrowLeft size={16} />
+          <button
+            onClick={() => setView('districts')}
+            className="rounded-full flex items-center justify-center tap"
+            style={{ width: 44, height: 44, background: palette.iconBtnBg }}
+            aria-label="Back"
+          >
+            <ArrowLeft size={18} />
           </button>
           <div>
-            <p className="text-[9px] uppercase tracking-[0.22em] opacity-60">Kapitel I</p>
-            <h1 className="text-lg leading-none tracking-tight" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, letterSpacing: '-0.01em' }}>
+            <p style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.55 }}>Chapter I</p>
+            <h1 className="text-lg leading-none" style={{ ...TYPO.display, fontWeight: 700 }}>
               Altstadt
             </h1>
           </div>
         </div>
         <div className="flex items-center gap-1.5">
-          <button onClick={cycleTheme} className="w-9 h-9 rounded-full flex items-center justify-center transition active:scale-95" style={{ background: palette.iconBtnBg, transition: 'background 400ms ease' }} aria-label="Tag/Nacht">
-            {themeName === 'night' ? <Moon size={16} /> : <Sun size={16} />}
+          <button onClick={cycleTheme} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg }} aria-label="Day / night">
+            {themeName === 'night' ? <Moon size={18} /> : <Sun size={18} />}
           </button>
-          <button onClick={() => setShowJournal(true)} className="w-9 h-9 rounded-full flex items-center justify-center transition active:scale-95" style={{ background: palette.iconBtnBg, transition: 'background 400ms ease' }} aria-label="Tagebuch">
-            <NotebookPen size={16} />
+          <button onClick={() => setShowJournal(true)} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg }} aria-label="Journal">
+            <NotebookPen size={18} />
           </button>
-          <button onClick={() => setShowAchievements(true)} className="relative w-9 h-9 rounded-full flex items-center justify-center transition active:scale-95" style={{ background: palette.iconBtnBg, transition: 'background 400ms ease' }} aria-label="Errungenschaften">
-            <Trophy size={16} />
+          <button onClick={() => setShowAchievements(true)} className="relative rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg }} aria-label="Achievements">
+            <Trophy size={18} />
             {achievements.size > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[10px] font-bold" style={{ background: '#C8923C', color: '#F5E9D0' }}>
+              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[10px] font-bold" style={{ background: '#D4A93C', color: '#0A1F4F' }}>
                 {achievements.size}
               </span>
             )}
           </button>
-          <button onClick={() => setShowSettings(true)} className="w-9 h-9 rounded-full flex items-center justify-center transition active:scale-95" style={{ background: palette.iconBtnBg, transition: 'background 400ms ease' }} aria-label="Einstellungen">
-            <SettingsIcon size={16} />
+          <button onClick={() => setShowSettings(true)} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg }} aria-label="Settings">
+            <SettingsIcon size={18} />
           </button>
         </div>
       </header>
 
-      <div className="relative flex-1 min-h-[420px] overflow-hidden" style={{ background: palette.mapBg, transition: 'background 800ms ease', perspective: '900px' }}>
+      <div className="relative flex-1 min-h-[420px] overflow-hidden map-no-zoom" style={{ background: palette.mapBg, transition: 'background 800ms var(--ease-premium)', perspective: '900px' }}>
         <svg
           ref={svgRef}
           viewBox={viewBoxAttr}
@@ -2181,16 +2641,29 @@ function ExploreScreen({ palette, state, actions }) {
               <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="3" seed="11" />
               <feColorMatrix type="matrix" values={palette.fogTextureTint} />
             </filter>
-            {/* Fog-of-War: Maske — weiss = Wolken sichtbar, schwarz/transparent = freigewischt */}
+            {/* Fog-of-War mask — white = fog visible, black/transparent = cleared.
+               Reveal radius adapts to zoom: navigation (45) ↔ default (70). */}
             <mask id="fogMask" maskUnits="userSpaceOnUse" x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h}>
               <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h} fill="white" />
               {revealed.map((p, i) => (
                 <circle key={i}
                   cx={p.x} cy={p.y}
-                  r={FOG_REVEAL_RADIUS_PX}
+                  r={fogRevealRadius}
                   fill="url(#fogReveal)" />
               ))}
             </mask>
+            {/* Gold "first-reveal" burst gradient. */}
+            <radialGradient id="fogBurst" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stopColor="#D4A93C" stopOpacity="0.85" />
+              <stop offset="50%"  stopColor="#D4A93C" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#D4A93C" stopOpacity="0" />
+            </radialGradient>
+            {/* Cyan frontier glow gradient — at the moving player edge. */}
+            <radialGradient id="fogFrontier" cx="50%" cy="50%" r="50%">
+              <stop offset="55%"  stopColor="#00E5FF" stopOpacity="0" />
+              <stop offset="80%"  stopColor="#00E5FF" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#00E5FF" stopOpacity="0" />
+            </radialGradient>
           </defs>
 
           <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h} fill={palette.paperFill} style={{ transition: 'fill 800ms ease' }} />
@@ -2591,16 +3064,44 @@ function ExploreScreen({ palette, state, actions }) {
             );
           })}
 
-          {/* Fog-of-War: flächendeckende Wolken-Schicht, maskiert durch
-              gespeicherte Reveal-Punkte. Volumen via vertikalem Gradient (Highlight
-              oben, Shadow unten) + Turbulence-Textur für gemalten Look. */}
-          <g mask="url(#fogMask)" style={{ pointerEvents: 'none', opacity: FOG_OPACITY }}>
+          {/* Fog-of-War — bold "unmapped territory" layer with paint-textured volume.
+              Theme-driven opacity: day 82%, night 88%. */}
+          <g mask="url(#fogMask)" style={{ pointerEvents: 'none', opacity: fogOpacity, transition: 'opacity 600ms var(--ease-premium)' }}>
             <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h}
-              fill="url(#fogGrad)"
+              fill={themeName === 'night' ? 'rgba(5,12,36,1)' : 'rgba(10,31,79,1)'}
               style={{ transition: 'fill 600ms ease' }} />
             <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h}
-              filter="url(#fogTexture)" opacity="0.55" />
+              fill="url(#fogGrad)" opacity="0.55"
+              style={{ transition: 'fill 600ms ease' }} />
+            <rect x={EXTENT.x} y={EXTENT.y} width={EXTENT.w} height={EXTENT.h}
+              filter="url(#fogTexture)" opacity="0.45" />
           </g>
+
+          {/* Cyan frontier glow — soft halo around the player's active discovery edge.
+              Only when in nav mode (i.e., position is known and camera has zoomed in). */}
+          {userPos && tp > 0.15 && (
+            <g style={{ pointerEvents: 'none', opacity: tp }}>
+              <circle cx={userPos.x} cy={userPos.y}
+                r={fogRevealRadius + FOG_FRONTIER_GLOW_PX}
+                fill="url(#fogFrontier)" />
+            </g>
+          )}
+
+          {/* Gold first-reveal bursts — transient flashes when a new street unlocks. */}
+          {revealBursts.length > 0 && (
+            <g style={{ pointerEvents: 'none' }}>
+              {revealBursts.map((b) => (
+                <circle key={b.id}
+                  cx={b.x} cy={b.y}
+                  fill="url(#fogBurst)">
+                  <animate attributeName="r" from="6" to={fogRevealRadius * 1.6}
+                    dur={`${FOG_REVEAL_BURST_MS}ms`} fill="freeze" />
+                  <animate attributeName="opacity" from="0.95" to="0"
+                    dur={`${FOG_REVEAL_BURST_MS}ms`} fill="freeze" />
+                </circle>
+              ))}
+            </g>
+          )}
 
 
           {/* Trail */}
@@ -2817,58 +3318,82 @@ function ExploreScreen({ palette, state, actions }) {
             Position/Revealed werden auf 500ms throttled gerendert (Mini-Map = React.memo). */}
         <MiniMap palette={palette} revealed={miniRevealed} position={miniPosition} onOpen={() => setShowOverview(true)} hidden={anyModalOpen} />
 
-        {/* Status card oben — rechts neben der Mini-Map */}
-        <div className="absolute top-3 px-3.5 py-2.5 rounded-xl backdrop-blur-md" style={{ left: 184, background: palette.cardBg, border: `1px solid ${palette.cardBorder}`, boxShadow: palette.cardShadow, maxWidth: 'calc(100% - 200px)', transition: 'background 600ms ease, border-color 600ms ease' }}>
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: level.color, boxShadow: `0 0 0 2px ${level.accent}` }}>
-              <LevelIcon size={17} color="#fff" strokeWidth={2.2} />
-            </div>
-            <div className="min-w-0">
-              <div className="text-[18px] leading-none truncate" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, color: level.color, letterSpacing: '-0.01em' }}>
-                {level.name}
-              </div>
-              <div className="text-[10px] uppercase tracking-[0.15em] mt-1 opacity-65">
-                {pct.toFixed(1)}% · {streetsTouched}/{STREETS.length} Gassen
-              </div>
-            </div>
+        {/* Status pill — TIER N · ROOKIE 🐣 + progress + next-tier hint. Tap → tier modal. */}
+        <button
+          onClick={() => setShowLegend(true)}
+          className="absolute px-3.5 py-2.5 rounded-xl backdrop-blur-md text-left tap"
+          style={{
+            top: 'max(12px, env(safe-area-inset-top))',
+            left: 'calc(max(12px, env(safe-area-inset-left)) + 172px)',
+            background: palette.cardBg,
+            border: `1px solid ${palette.cardBorder}`,
+            boxShadow: palette.cardShadow,
+            maxWidth: 'calc(100% - max(12px, env(safe-area-inset-left)) - max(12px, env(safe-area-inset-right)) - 184px)',
+            transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
+          }}
+          aria-label="Tier overview"
+        >
+          <div style={{
+            fontFamily: '"Space Grotesk", "Inter", sans-serif',
+            fontWeight: 500,
+            fontSize: '10px',
+            letterSpacing: '0.10em',
+            textTransform: 'uppercase',
+            opacity: 0.75,
+            color: palette.text,
+          }}>
+            Tier {levelIdx + 1} · <span style={{ color: level.color, fontWeight: 700 }}>{level.name}</span> <span style={{ letterSpacing: 0 }}>{level.emoji}</span>
           </div>
-          <div className="mt-2.5">
-            <div className="h-1.5 rounded-full overflow-hidden" style={{ background: palette.name === 'night' ? 'rgba(232,226,208,0.15)' : 'rgba(60,40,20,0.12)' }}>
-              <div className="h-full rounded-full transition-all duration-500" style={{ width: `${progressInBracket}%`, background: `linear-gradient(90deg, ${level.color}, ${level.accent})` }} />
+          <div className="mt-1.5 text-[12px]" style={{ ...TYPO.ui, color: palette.text }}>
+            {streetsTouched} of {STREETS.length} streets cleared · {pct.toFixed(0)}%
+          </div>
+          <div className="mt-2">
+            <div className="h-1.5 rounded-full overflow-hidden" style={{ background: palette.name === 'night' ? 'rgba(255,255,255,0.10)' : 'rgba(10,31,79,0.10)' }}>
+              <div className="h-full rounded-full transition-all duration-500" style={{ width: `${progressInBracket}%`, background: 'linear-gradient(90deg, #00E5FF, #6CF1FF)' }} />
             </div>
             {nextLevel ? (
-              <div className="flex items-center justify-between mt-1.5 text-[10px] opacity-65">
-                <span>nächste Stufe</span>
+              <div className="flex items-center justify-between mt-1.5" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.6 }}>
+                <span>Next tier</span>
                 <span className="flex items-center gap-1">
-                  {NextIcon && <NextIcon size={10} />} {nextLevel.name} bei {nextLevel.threshold}%
+                  {nextLevel.emoji} {nextLevel.name} · {nextLevel.threshold}%
                 </span>
               </div>
             ) : (
-              <div className="text-[10px] opacity-65 mt-1.5 italic">Höchste Stufe erreicht</div>
+              <div className="mt-1.5 italic" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.6, fontStyle: 'italic' }}>Top tier reached</div>
             )}
           </div>
-        </div>
+        </button>
 
-        {/* Stars + stats top-right */}
-        <div className="absolute top-3 right-3 px-3 py-2 rounded-xl backdrop-blur-md" style={{ background: palette.cardBg, border: `1px solid ${palette.cardBorder}`, boxShadow: palette.cardShadow, transition: 'background 600ms ease, border-color 600ms ease' }}>
+        {/* Stars + stats card top-right */}
+        <div
+          className="absolute px-3 py-2 rounded-xl backdrop-blur-md"
+          style={{
+            top: 'max(12px, env(safe-area-inset-top))',
+            right: 'max(12px, env(safe-area-inset-right))',
+            background: palette.cardBg,
+            border: `1px solid ${palette.cardBorder}`,
+            boxShadow: palette.cardShadow,
+            transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
+          }}
+        >
           <div className="flex items-center gap-1.5 justify-end">
             {LANDMARKS.map((lm) => {
               const isUnlocked = stars.has(lm.id);
               return (
-                <button key={lm.id} onClick={() => setActiveLandmark(lm)} className="transition active:scale-90" aria-label={lm.name}>
-                  <Star size={18} fill={isUnlocked ? '#C8923C' : 'transparent'} color={isUnlocked ? '#7A4A1F' : palette.textMuted} strokeWidth={isUnlocked ? 1.5 : 1.8} />
+                <button key={lm.id} onClick={() => setActiveLandmark(lm)} className="tap" aria-label={lm.name}>
+                  <Star size={18} fill={isUnlocked ? '#D4A93C' : 'transparent'} color={isUnlocked ? '#9B7820' : palette.textMuted} strokeWidth={isUnlocked ? 1.5 : 1.8} />
                 </button>
               );
             })}
           </div>
-          <div className="text-[10px] uppercase tracking-[0.15em] mt-1.5 opacity-65 text-right">
-            {stars.size}/{LANDMARKS.length} Wahrzeichen
+          <div className="mt-1.5 text-right" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.65 }}>
+            {stars.size}/{LANDMARKS.length} Landmarks
           </div>
           <div className="flex items-center gap-1 justify-end mt-1 text-[10px] opacity-65">
-            <BookOpen size={10} /> {anekdoten.size}/{ANEKDOTEN.length} Anekdoten
+            <BookOpen size={10} /> {anekdoten.size}/{ANEKDOTEN.length} Anecdotes
           </div>
-          <button onClick={() => setShowLokale(true)} className="flex items-center gap-1 justify-end mt-1 text-[10px] opacity-75 transition active:scale-95 ml-auto" aria-label="Alle Lokale ansehen">
-            <Martini size={10} /> {pois.size}/{POIS.length} Lokale <ArrowUpRight size={9} className="opacity-60" />
+          <button onClick={() => setShowLokale(true)} className="flex items-center gap-1 justify-end mt-1 text-[10px] opacity-75 tap ml-auto" aria-label="Open hotspots list">
+            <Martini size={10} /> {pois.size}/{POIS.length} Hot spots <ArrowUpRight size={9} className="opacity-60" />
           </button>
           <div className="border-t mt-1.5 pt-1.5 space-y-0.5" style={{ borderColor: palette.cardBorder }}>
             <div className="flex items-center gap-1.5 justify-end text-[11px] opacity-70">
@@ -2881,7 +3406,7 @@ function ExploreScreen({ palette, state, actions }) {
         </div>
 
         {tracking && nextStarHint && nextStarHint.d > STAR_RADIUS_M && nextStarHint.d < 250 && (
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[11px] flex items-center gap-2" style={{ background: 'rgba(200,146,60,0.95)', color: '#2A1F12', fontWeight: 600, boxShadow: '0 4px 12px rgba(0,0,0,0.18)' }}>
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[11px] flex items-center gap-2" style={{ background: 'rgba(212,169,60,0.95)', color: '#0A1F4F', fontWeight: 600, boxShadow: '0 4px 12px rgba(10,31,79,0.18)' }}>
             <ArrowUpRight size={12} />
             <span>{nextStarHint.lm.name} · {Math.round(nextStarHint.d)} m</span>
           </div>
@@ -2889,8 +3414,8 @@ function ExploreScreen({ palette, state, actions }) {
 
         {tracking && nearestPoi && nearestPoi.d > POI_RADIUS_M && nearestPoi.d < 90 && (!nextStarHint || nextStarHint.d >= 250) && (
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[11px] flex items-center gap-2" style={{
-            background: nearestPoi.p.kind === 'bar' ? 'rgba(122,63,95,0.95)' : nearestPoi.p.kind === 'restaurant' ? 'rgba(168,84,44,0.95)' : 'rgba(63,74,143,0.95)',
-            color: '#F5E9D0', fontWeight: 600, boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+            background: nearestPoi.p.kind === 'bar' ? 'rgba(162,55,107,0.95)' : nearestPoi.p.kind === 'restaurant' ? 'rgba(199,106,46,0.95)' : 'rgba(63,74,143,0.95)',
+            color: '#F2EEE5', fontWeight: 600, boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
           }}>
             <span>{nearestPoi.p.kind === 'bar' ? '🍸' : nearestPoi.p.kind === 'restaurant' ? '🍴' : '💿'}</span>
             <span>{nearestPoi.p.name} · {Math.round(nearestPoi.d)} m</span>
@@ -2900,48 +3425,61 @@ function ExploreScreen({ palette, state, actions }) {
         {osmStatus === 'loading' && (
           <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[10px] flex items-center gap-1.5 backdrop-blur-md" style={{ background: palette.cardBg, border: `1px solid ${palette.cardBorder}`, color: palette.textMuted, boxShadow: palette.cardShadow }}>
             <Loader2 size={11} className="animate-spin" />
-            <span>Karte wird geladen…</span>
+            <span>Loading map…</span>
           </div>
         )}
 
         {simMode && tracking && !demoRunning && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[11px] flex items-center gap-1.5" style={{ background: 'rgba(60,40,20,0.85)', color: '#F5E9D0' }}>
-            <Wand2 size={11} /> Auf Karte tippen, um zu „gehen"
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[11px] flex items-center gap-1.5" style={{ background: 'rgba(10,31,79,0.85)', color: '#F2EEE5' }}>
+            <Wand2 size={11} /> Tap the map to walk
           </div>
         )}
 
         {tracking && (wakeLockActive || bgActive) && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full text-[10px] flex items-center gap-1.5" style={{ background: 'rgba(95,123,92,0.92)', color: '#F5E9D0' }}>
-            <Moon size={10} /> {bgActive ? 'Hintergrund-Modus' : 'Bildschirm bleibt an'}
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full text-[10px] flex items-center gap-1.5" style={{ background: 'rgba(0,229,255,0.55)', color: '#050C24' }}>
+            <Moon size={10} /> {bgActive ? 'Background mode' : 'Screen stays on'}
           </div>
         )}
       </div>
 
-      <div className="px-4 py-4 flex flex-col gap-3 border-t" style={{ borderColor: palette.bottomBarBorder, background: palette.bottomBarBg, transition: 'background 600ms ease, border-color 600ms ease' }}>
+      <div
+        className="px-4 py-4 flex flex-col gap-3 border-t"
+        style={{
+          borderColor: palette.bottomBarBorder,
+          background: palette.bottomBarBg,
+          paddingBottom: 'calc(env(safe-area-inset-bottom) + 16px)',
+          paddingLeft: 'calc(env(safe-area-inset-left) + 16px)',
+          paddingRight: 'calc(env(safe-area-inset-right) + 16px)',
+          transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
+        }}
+      >
         <button
           onClick={handleStart}
-          className="w-full h-12 rounded-xl flex items-center justify-center gap-2 font-semibold transition active:scale-[0.98]"
+          className="w-full rounded-xl flex items-center justify-center gap-2 tap"
           style={{
-            background: tracking ? 'linear-gradient(135deg, #7A3F5F, #5A2D45)' : 'linear-gradient(135deg, #C8923C, #8C5C2A)',
-            color: '#F5E9D0',
-            boxShadow: '0 4px 12px rgba(60,40,20,0.25), inset 0 1px 0 rgba(255,255,255,0.18)',
-            fontFamily: '"Fraunces", Georgia, serif', letterSpacing: '0.01em',
+            minHeight: '56px',
+            background: tracking ? 'linear-gradient(135deg, #A2376B, #6B2348)' : '#00E5FF',
+            color: tracking ? '#FFFFFF' : '#050C24',
+            boxShadow: tracking
+              ? '0 6px 24px rgba(162,55,107,0.35), inset 0 1px 0 rgba(255,255,255,0.18)'
+              : '0 6px 24px rgba(0,229,255,0.35), inset 0 1px 0 rgba(255,255,255,0.4)',
+            fontFamily: TYPO.ui.fontFamily, fontWeight: 700, fontSize: '15px', letterSpacing: '0.02em',
           }}
         >
-          {tracking ? <><Pause size={17} /> Tracking pausieren</> : <><Play size={17} /> Erkundung starten</>}
+          {tracking ? <><Pause size={17} /> Pause tracking</> : <><Play size={17} /> Walk with GPS</>}
         </button>
         <div className="flex items-center gap-2">
-          <button onClick={() => setSimMode((v) => !v)} className="flex-1 h-10 rounded-lg text-xs flex items-center justify-center gap-2 transition active:scale-[0.98]" style={{ background: simMode ? palette.simModeOnBg : palette.simModeOffBg, color: simMode ? '#F5E9D0' : palette.text }}>
-            <Wand2 size={13} /> Simulation {simMode ? 'an' : 'aus'}
+          <button onClick={() => setSimMode((v) => !v)} className="flex-1 rounded-lg text-xs flex items-center justify-center gap-2 tap" style={{ minHeight: '44px', background: simMode ? palette.simModeOnBg : palette.simModeOffBg, color: simMode ? '#050C24' : palette.text, fontWeight: 600 }}>
+            <Wand2 size={13} /> Demo mode {simMode ? 'on' : 'off'}
           </button>
-          <button onClick={demoRunning ? stopDemo : runDemo} className="flex-1 h-10 rounded-lg text-xs flex items-center justify-center gap-2 transition active:scale-[0.98]" style={{ background: demoRunning ? 'rgba(122,63,95,0.92)' : palette.simModeOffBg, color: demoRunning ? '#F5E9D0' : palette.text }}>
-            <Navigation size={13} /> {demoRunning ? 'Demo stoppen' : 'Demo-Tour'}
+          <button onClick={demoRunning ? stopDemo : runDemo} className="flex-1 rounded-lg text-xs flex items-center justify-center gap-2 tap" style={{ minHeight: '44px', background: demoRunning ? 'rgba(162,55,107,0.92)' : palette.simModeOffBg, color: demoRunning ? '#FFFFFF' : palette.text, fontWeight: 600 }}>
+            <Navigation size={13} /> {demoRunning ? 'Stop demo' : 'Demo tour'}
           </button>
         </div>
         <p className="text-[10px] text-center opacity-55 px-4">
-          {accuracy && !simMode ? `GPS-Genauigkeit: ±${Math.round(accuracy)} m. ` : ''}
-          {wakeLockActive && tracking ? 'Bildschirm bleibt automatisch an. ' : ''}
-          Sterne sind Wahrzeichen, kleine Punkte verbergen Geschichten.
+          {accuracy && !simMode ? `GPS accuracy ±${Math.round(accuracy)} m · ` : ''}
+          {wakeLockActive && tracking ? 'Screen stays on · ' : ''}
+          Add to Home Screen for the full ride.
         </p>
       </div>
     </div>
@@ -3024,41 +3562,56 @@ function ToastView({ toast }) {
   const isAnek = toast.type === 'anekdote';
   const isPoi = toast.type === 'poi';
   const isErr = toast.type === 'error';
+  const isLock = toast.type === 'lock';
+  const isTier = toast.type === 'tier';
   const poiKind = isPoi ? toast.kind : null;
-  const bg = isErr ? 'rgba(120,40,40,0.95)'
-    : isStar ? 'linear-gradient(135deg, #C8923C, #8C5C2A)'
-    : isAch ? 'linear-gradient(135deg, #7A3F5F, #5A2D45)'
-    : isAnek ? 'linear-gradient(135deg, #5F4A6F, #3F2D55)'
-    : poiKind === 'bar' ? 'linear-gradient(135deg, #7A3F5F, #4A2541)'
-    : poiKind === 'restaurant' ? 'linear-gradient(135deg, #A8542C, #6B3318)'
+  const bg = isErr ? 'rgba(162,55,55,0.95)'
+    : isLock ? 'linear-gradient(135deg, #0A1F4F, #050C24)'
+    : isTier ? 'linear-gradient(135deg, #D4A93C, #9B7820)'
+    : isStar ? 'linear-gradient(135deg, #D4A93C, #9B7820)'
+    : isAch ? 'linear-gradient(135deg, #7A4A8C, #4A2360)'
+    : isAnek ? 'linear-gradient(135deg, #7A4A8C, #3F2D55)'
+    : poiKind === 'bar' ? 'linear-gradient(135deg, #A2376B, #4A2541)'
+    : poiKind === 'restaurant' ? 'linear-gradient(135deg, #C76A2E, #6B3318)'
     : poiKind === 'club' ? 'linear-gradient(135deg, #3F4A8F, #1F274F)'
-    : 'rgba(27,58,95,0.95)';
-  const Icon = isStar ? Star
+    : 'rgba(10,31,79,0.95)';
+  const Icon = isLock ? Lock
+    : isTier ? Crown
+    : isStar ? Star
     : isAch ? Trophy
     : isAnek ? BookOpen
     : poiKind === 'bar' ? Martini
     : poiKind === 'restaurant' ? UtensilsCrossed
     : poiKind === 'club' ? Disc3
     : Sparkles;
-  const label = isStar ? '★ Wahrzeichen entdeckt'
-    : isAch ? 'Errungenschaft'
-    : isAnek ? 'Anekdote entdeckt'
-    : poiKind === 'bar' ? '🍸 Bar besucht'
-    : poiKind === 'restaurant' ? '🍴 Restaurant besucht'
-    : poiKind === 'club' ? '💿 Club besucht'
+  const label = isLock ? toast.sub
+    : isTier ? toast.sub
+    : isStar ? '★ Landmark unlocked'
+    : isAch ? 'Achievement unlocked'
+    : isAnek ? 'Anecdote discovered'
+    : poiKind === 'bar' ? '🍸 Bar checked in'
+    : poiKind === 'restaurant' ? '🍴 Restaurant checked in'
+    : poiKind === 'club' ? '💿 Club checked in'
     : toast.sub;
   return (
     <div
       key={toast.ts}
       className="fixed left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-xl flex items-center gap-2.5 animate-toast"
-      style={{ top: '120px', background: bg, color: '#F5E9D0', boxShadow: '0 8px 24px rgba(0,0,0,0.25)', maxWidth: '90%', zIndex: 30 }}
+      style={{
+        top: 'calc(env(safe-area-inset-top) + 120px)',
+        background: bg,
+        color: '#FFFFFF',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+        maxWidth: '90%',
+        zIndex: 30,
+      }}
     >
-      <Icon size={16} fill={isStar ? '#FFE9B0' : 'none'} />
+      <Icon size={16} fill={isStar ? '#F2D88A' : 'none'} />
       <div className="min-w-0">
-        <div className="text-sm leading-tight truncate" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600 }}>
+        <div className="text-sm leading-tight truncate" style={{ ...TYPO.ui, fontWeight: 700 }}>
           {toast.title}
         </div>
-        <div className="text-[10px] opacity-80 uppercase tracking-wider">
+        <div style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.85 }}>
           {label}
         </div>
       </div>
@@ -3068,58 +3621,78 @@ function ToastView({ toast }) {
 
 function LegendModal({ onClose, pct, levelIdx }) {
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.55)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl p-5 max-h-[85vh] overflow-y-auto" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl p-5 max-h-[85vh] overflow-y-auto"
+        style={{
+          background: 'rgba(255,255,255,0.96)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-start justify-between mb-3">
-          <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px' }}>Wie funktioniert's?</h2>
-          <button onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(60,40,20,0.1)' }}><X size={16} /></button>
+          <div>
+            <h2 style={{ ...TYPO.display, fontWeight: 700, fontSize: '22px' }}>Tiers &amp; how it works</h2>
+            <p style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.55, marginTop: 2 }}>8 tiers from Rookie to Legend</p>
+          </div>
+          <button onClick={onClose} className="w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(10,31,79,0.08)' }}><X size={16} /></button>
         </div>
+
         <p className="text-sm opacity-80 leading-relaxed mb-4">
-          Lauf durch die Altstadt — jede Gasse wird von Wolken befreit. Sterne markieren Wahrzeichen, kleine Punkte verbergen Geschichten.
+          Walk the streets. Each one clears the fog. Stars mark landmarks. Small dots hide stories. Pins are bars, restaurants and clubs worth your night.
         </p>
 
-        <h3 className="text-[11px] uppercase tracking-[0.18em] opacity-65 mb-2 mt-4 flex items-center gap-1.5">
-          <Star size={11} fill="#C8923C" stroke="none" /> Sterne (Wahrzeichen)
+        <h3 className="mt-4 mb-2 flex items-center gap-1.5" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.65 }}>
+          <Star size={11} fill="#D4A93C" stroke="none" /> Landmarks
         </h3>
         <p className="text-[12px] opacity-75 leading-relaxed mb-3">
-          Vier Wahrzeichen, vier Sterne. Sie sind als feine Konturen sichtbar — auch noch nicht eingesammelt — damit du dich sofort orientieren kannst. Komm näher als 32 m, um sie freizuschalten.
+          {LANDMARKS.length} landmarks per chapter, drawn as star outlines so you can spot them in the fog. Get within 32 m to unlock.
         </p>
 
-        <h3 className="text-[11px] uppercase tracking-[0.18em] opacity-65 mb-2 mt-4 flex items-center gap-1.5">
-          <BookOpen size={11} /> Anekdoten (Geschichten)
+        <h3 className="mt-4 mb-2 flex items-center gap-1.5" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.65 }}>
+          <BookOpen size={11} /> Anecdotes
         </h3>
         <p className="text-[12px] opacity-75 leading-relaxed mb-3">
-          {ANEKDOTEN.length} versteckte Geschichten warten in den Gassen — Lenins Wohnung, das Cabaret Voltaire, römische Spuren. Komm an einem Punkt vorbei, um die Geschichte zu lesen.
+          {ANEKDOTEN.length} hidden stories — Lenin&apos;s flat, the Cabaret Voltaire, Roman ruins. Walk past, the story unlocks.
         </p>
 
-        <h3 className="text-[11px] uppercase tracking-[0.18em] opacity-65 mb-2 mt-4 flex items-center gap-1.5">
-          <Martini size={11} /> Lokale (Bars · Restaurants · Clubs)
+        <h3 className="mt-4 mb-2 flex items-center gap-1.5" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.65 }}>
+          <Martini size={11} /> Hot spots (bars · restaurants · clubs)
         </h3>
         <p className="text-[12px] opacity-75 leading-relaxed mb-3">
-          {POIS.length} ausgewählte Adressen — die besten Bars (🍸), legendäre Restaurants (🍴) und Clubs (💿) der Altstadt. Pin-Marker über der Karte. Komm näher als 28 m, um sie zu „besuchen" und Details freizuschalten.
+          {POIS.length} curated addresses — the best bars (🍸), serious restaurants (🍴) and clubs (💿). Floating pins on the map. Within 28 m to check in.
         </p>
 
-        <h3 className="text-[11px] uppercase tracking-[0.18em] opacity-65 mb-2 mt-4 flex items-center gap-1.5">
-          Karte aus OpenStreetMap
-        </h3>
-        <p className="text-[12px] opacity-75 leading-relaxed mb-3">
-          Häuser, Strassen, Parks und Wasserflächen kommen direkt von OpenStreetMap — millimetergenau und immer aktuell. Die hellen, hervorgehobenen Strecken sind die Gassen, die du bereits freigeschaltet hast.
-        </p>
-
-        <h3 className="text-[11px] uppercase tracking-[0.18em] opacity-65 mb-2 mt-4">Stufen</h3>
+        <h3 className="mt-4 mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.65 }}>Tiers</h3>
         <div className="space-y-1.5">
           {LEVELS.map((lv, i) => {
-            const Icon = lv.icon;
             const reached = pct >= lv.threshold;
+            const isCurrent = i === levelIdx;
+            const isNext = i === levelIdx + 1;
             return (
-              <div key={lv.name} className="flex items-center gap-3 p-2 rounded-lg" style={{ background: i === levelIdx ? 'rgba(200,146,60,0.15)' : 'transparent', opacity: reached ? 1 : 0.45 }}>
-                <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: lv.color }}>
-                  <Icon size={15} color="#fff" strokeWidth={2.2} />
+              <div
+                key={lv.name}
+                className="flex items-center gap-3 p-2.5 rounded-lg"
+                style={{
+                  background: isCurrent
+                    ? 'rgba(0,229,255,0.15)'
+                    : isNext
+                      ? 'rgba(212,169,60,0.10)'
+                      : 'transparent',
+                  border: isCurrent ? '1px solid rgba(0,229,255,0.4)' : '1px solid transparent',
+                  opacity: reached ? 1 : 0.55,
+                }}
+              >
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: lv.color, fontSize: '18px' }}>
+                  <span>{lv.emoji}</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '14px', color: lv.color }}>{lv.name}</span>
-                    <span className="text-[10px] uppercase tracking-wider opacity-60">ab {lv.threshold}%</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span style={{ ...TYPO.ui, fontWeight: 700, fontSize: '14px', color: lv.color }}>{lv.name}</span>
+                    <span style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.6 }}>Tier {i + 1} · {lv.threshold}%+</span>
+                    {isNext && <span style={{ ...TYPO.caps, fontSize: '9px', color: '#D4A93C' }}>Next goal</span>}
                   </div>
                   <div className="text-[11px] opacity-70 leading-tight">{lv.desc}</div>
                 </div>
@@ -3128,9 +3701,9 @@ function LegendModal({ onClose, pct, levelIdx }) {
           })}
         </div>
 
-        <h3 className="text-[11px] uppercase tracking-[0.18em] opacity-65 mb-2 mt-5">Hintergrund-Modus</h3>
+        <h3 className="mt-5 mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.65 }}>Background mode</h3>
         <p className="text-[12px] opacity-75 leading-relaxed">
-          Während des Trackings hält der Bildschirm sich aktiv. Fortschritt wird automatisch gespeichert. Echtes Hintergrund-Tracking bei geschlossener App folgt mit der nativen Version.
+          While tracking, the screen stays on and progress auto-saves. True background tracking (app fully closed) ships with the native build.
         </p>
       </div>
     </div>
@@ -3141,32 +3714,44 @@ function AchievementsModal({ onClose, earned, pct, stars, anekdoten, pois, dista
   const total = ACHIEVEMENTS.length;
   const poisSize = pois ? pois.size : 0;
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.55)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl p-5 max-h-[88vh] overflow-y-auto" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl p-5 max-h-[88vh] overflow-y-auto"
+        style={{
+          background: 'rgba(255,255,255,0.96)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-start justify-between mb-3">
-          <div>
-            <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px' }}>Errungenschaften</h2>
-            <p className="text-[11px] uppercase tracking-[0.18em] opacity-60 mt-0.5">{earned.size} von {total}</p>
+          <div className="flex items-center gap-3">
+            <LaurelWreath size={48} monogram="" glow />
+            <div>
+              <h2 style={{ ...TYPO.display, fontWeight: 700, fontSize: '22px' }}>Achievements</h2>
+              <p style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.55, marginTop: 2 }}>{earned.size} of {total} earned</p>
+            </div>
           </div>
-          <button onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(60,40,20,0.1)' }}><X size={16} /></button>
+          <button onClick={onClose} className="w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(10,31,79,0.08)' }}><X size={16} /></button>
         </div>
 
         <div className="grid grid-cols-2 gap-2 mb-4">
           {[
-            { label: 'Erkundung', value: `${pct.toFixed(1)}%`, icon: Compass },
-            { label: 'Wahrzeichen', value: `${stars.size}/${LANDMARKS.length}`, icon: Star },
-            { label: 'Anekdoten', value: `${anekdoten.size}/${ANEKDOTEN.length}`, icon: BookOpen },
-            { label: 'Lokale', value: `${poisSize}/${POIS.length}`, icon: Martini },
-            { label: 'Strecke', value: fmtDist(distance), icon: Route },
-            { label: 'Zeit', value: fmtTime(elapsed), icon: Clock },
+            { label: 'Cleared', value: `${pct.toFixed(1)}%`, icon: Compass },
+            { label: 'Landmarks', value: `${stars.size}/${LANDMARKS.length}`, icon: Star },
+            { label: 'Anecdotes', value: `${anekdoten.size}/${ANEKDOTEN.length}`, icon: BookOpen },
+            { label: 'Hot spots', value: `${poisSize}/${POIS.length}`, icon: Martini },
+            { label: 'Distance', value: fmtDist(distance), icon: Route },
+            { label: 'Time', value: fmtTime(elapsed), icon: Clock },
           ].map((stat) => {
             const I = stat.icon;
             return (
-              <div key={stat.label} className="p-2.5 rounded-lg" style={{ background: 'rgba(60,40,20,0.06)' }}>
-                <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider opacity-60">
+              <div key={stat.label} className="p-2.5 rounded-lg" style={{ background: 'rgba(10,31,79,0.06)' }}>
+                <div className="flex items-center gap-1.5" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.6 }}>
                   <I size={10} /> {stat.label}
                 </div>
-                <div className="mt-1 text-base tabular-nums" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700 }}>
+                <div className="mt-1 text-base tabular-nums" style={{ ...TYPO.ui, fontWeight: 700 }}>
                   {stat.value}
                 </div>
               </div>
@@ -3175,29 +3760,34 @@ function AchievementsModal({ onClose, earned, pct, stars, anekdoten, pois, dista
         </div>
 
         <div className="mb-4">
-          <div className="text-[10px] uppercase tracking-wider opacity-60 mb-1">Errungenschafts-Fortschritt</div>
-          <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(60,40,20,0.12)' }}>
-            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(earned.size / total) * 100}%`, background: 'linear-gradient(90deg, #C8923C, #FFE9B0)' }} />
+          <div className="mb-1" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.6 }}>Badge progress</div>
+          <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(10,31,79,0.10)' }}>
+            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(earned.size / total) * 100}%`, background: 'linear-gradient(90deg, #00E5FF, #D4A93C)' }} />
           </div>
         </div>
 
-        <h3 className="text-[11px] uppercase tracking-[0.18em] opacity-65 mb-2">Abzeichen</h3>
+        <h3 className="mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.65 }}>Badges</h3>
+        {earned.size === 0 && (
+          <p className="mb-3 text-[13px] opacity-75" style={{ ...TYPO.displayItalic }}>
+            No legends yet. Walk the walk.
+          </p>
+        )}
         <div className="space-y-2">
           {ACHIEVEMENTS.map((a) => {
             const isEarned = earned.has(a.id);
             const Icon = a.icon;
             return (
-              <div key={a.id} className="flex items-center gap-3 p-2.5 rounded-lg" style={{ background: isEarned ? 'rgba(200,146,60,0.12)' : 'rgba(60,40,20,0.04)', opacity: isEarned ? 1 : 0.6 }}>
-                <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 relative" style={{ background: isEarned ? a.color : 'rgba(60,40,20,0.15)' }}>
-                  {isEarned ? <Icon size={16} color="#fff" strokeWidth={2.2} /> : <Lock size={14} color="rgba(60,40,20,0.5)" />}
+              <div key={a.id} className="flex items-center gap-3 p-2.5 rounded-lg" style={{ background: isEarned ? 'rgba(212,169,60,0.10)' : 'rgba(10,31,79,0.04)', opacity: isEarned ? 1 : 0.6 }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 relative" style={{ background: isEarned ? a.color : 'rgba(10,31,79,0.12)' }}>
+                  {isEarned ? <Icon size={16} color="#fff" strokeWidth={2.2} /> : <Lock size={14} color="rgba(10,31,79,0.45)" />}
                   {isEarned && (
-                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full flex items-center justify-center" style={{ background: '#5F7B5C' }}>
-                      <CheckCircle2 size={10} color="#fff" />
+                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full flex items-center justify-center" style={{ background: '#00E5FF' }}>
+                      <CheckCircle2 size={10} color="#050C24" />
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '13px', color: isEarned ? a.color : '#2A1F12' }}>
+                  <div style={{ ...TYPO.ui, fontWeight: 700, fontSize: '14px', color: isEarned ? a.color : '#0A1F4F' }}>
                     {a.name}
                   </div>
                   <div className="text-[11px] opacity-70 leading-tight">{a.desc}</div>
@@ -3215,28 +3805,28 @@ function JournalModal({ entries, onClose }) {
   const fmtRelative = (ts) => {
     const diff = Date.now() - ts;
     const s = Math.floor(diff / 1000);
-    if (s < 60) return 'gerade eben';
+    if (s < 60) return 'just now';
     const m = Math.floor(s / 60);
-    if (m < 60) return `vor ${m} min`;
+    if (m < 60) return `${m} min ago`;
     const h = Math.floor(m / 60);
-    if (h < 24) return `vor ${h} Std`;
+    if (h < 24) return `${h} h ago`;
     const d = Math.floor(h / 24);
-    if (d === 1) return 'gestern';
-    if (d < 7) return `vor ${d} Tagen`;
-    return new Date(ts).toLocaleDateString('de-CH', { day: '2-digit', month: 'short' });
+    if (d === 1) return 'yesterday';
+    if (d < 7) return `${d} d ago`;
+    return new Date(ts).toLocaleDateString('en-US', { day: '2-digit', month: 'short' });
   };
   const groupOf = (ts) => {
     const d = new Date(ts);
     const today = new Date(); today.setHours(0, 0, 0, 0);
     const yesterday = new Date(today.getTime() - 86400000);
     const dDay = new Date(d); dDay.setHours(0, 0, 0, 0);
-    if (dDay.getTime() === today.getTime()) return 'Heute';
-    if (dDay.getTime() === yesterday.getTime()) return 'Gestern';
-    return 'Früher';
+    if (dDay.getTime() === today.getTime()) return 'Today';
+    if (dDay.getTime() === yesterday.getTime()) return 'Yesterday';
+    return 'Earlier';
   };
 
   const grouped = useMemo(() => {
-    const out = { Heute: [], Gestern: [], Früher: [] };
+    const out = { Today: [], Yesterday: [], Earlier: [] };
     entries.forEach((e) => out[groupOf(e.ts)].push(e));
     return out;
   }, [entries]);
@@ -3246,48 +3836,57 @@ function JournalModal({ entries, onClose }) {
     return map[type] || Footprints;
   };
   const colorFor = (type) => {
-    const map = { street: '#1B3A5F', star: '#C8923C', anekdote: '#7A3F5F', achievement: '#5F7B5C', level: '#A06840', chapter: '#C8923C' };
-    return map[type] || '#5C3F22';
+    const map = { street: '#3C66D6', star: '#D4A93C', anekdote: '#7A4A8C', achievement: '#00B5C9', level: '#C76A2E', chapter: '#D4A93C' };
+    return map[type] || '#0A1F4F';
   };
   const labelFor = (type) => {
-    const map = { street: 'Gasse', star: 'Wahrzeichen', anekdote: 'Anekdote', achievement: 'Errungenschaft', level: 'Neuer Rang', chapter: 'Kapitel' };
+    const map = { street: 'Street', star: 'Landmark', anekdote: 'Anecdote', achievement: 'Achievement', level: 'New tier', chapter: 'Chapter' };
     return map[type] || '';
   };
 
   const total = entries.length;
 
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.55)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl overflow-hidden max-h-[88vh] flex flex-col" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
-        <div className="px-5 py-4 flex items-start justify-between" style={{ background: 'linear-gradient(135deg, #5C3F22, #3F2A14)', color: '#F5E9D0' }}>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl overflow-hidden max-h-[88vh] flex flex-col"
+        style={{
+          background: 'rgba(255,255,255,0.96)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="px-5 py-4 flex items-start justify-between" style={{ background: 'linear-gradient(135deg, #0A1F4F, #050C24)', color: '#F2EEE5' }}>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(245,233,208,0.18)' }}>
-              <NotebookPen size={20} />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(0,229,255,0.20)' }}>
+              <NotebookPen size={20} color="#00E5FF" />
             </div>
             <div>
-              <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px' }}>Tagebuch</h2>
-              <p className="text-[11px] opacity-80 mt-0.5">{total} {total === 1 ? 'Eintrag' : 'Einträge'}</p>
+              <h2 style={{ ...TYPO.display, fontWeight: 700, fontSize: '22px' }}>Discoveries</h2>
+              <p className="text-[11px] opacity-80 mt-0.5">{total} {total === 1 ? 'entry' : 'entries'}</p>
             </div>
           </div>
-          <button onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.2)' }}><X size={16} /></button>
+          <button onClick={onClose} className="w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(0,0,0,0.25)' }}><X size={16} /></button>
         </div>
 
         <div className="overflow-y-auto px-5 py-4 flex-1">
           {total === 0 ? (
             <div className="text-center py-10">
               <Feather size={36} className="mx-auto mb-3 opacity-40" />
-              <p className="text-sm opacity-65 leading-relaxed" style={{ fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic' }}>
-                Noch keine Entdeckungen.<br />
-                Fang an zu erkunden, um deine Reise zu dokumentieren.
+              <p className="text-sm opacity-65 leading-relaxed" style={{ ...TYPO.displayItalic }}>
+                No discoveries yet.<br />
+                Start walking. The log writes itself.
               </p>
             </div>
           ) : (
-            ['Heute', 'Gestern', 'Früher'].map((group) => {
+            ['Today', 'Yesterday', 'Earlier'].map((group) => {
               const items = grouped[group];
               if (!items || items.length === 0) return null;
               return (
                 <div key={group} className="mb-4 last:mb-0">
-                  <h3 className="text-[10px] uppercase tracking-[0.22em] opacity-60 mb-2 sticky top-0 py-1" style={{ background: '#F5E9D0' }}>
+                  <h3 className="mb-2 sticky top-0 py-1" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6, background: 'rgba(255,255,255,0.95)' }}>
                     {group}
                   </h3>
                   <div className="space-y-1.5">
@@ -3295,19 +3894,19 @@ function JournalModal({ entries, onClose }) {
                       const Icon = iconFor(entry.type);
                       const color = colorFor(entry.type);
                       return (
-                        <div key={entry.id} className="flex items-start gap-3 p-2.5 rounded-lg" style={{ background: 'rgba(60,40,20,0.04)' }}>
+                        <div key={entry.id} className="flex items-start gap-3 p-2.5 rounded-lg" style={{ background: 'rgba(10,31,79,0.04)' }}>
                           <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: color }}>
-                            <Icon size={14} color="#fff" strokeWidth={2.2} fill={entry.type === 'star' ? '#FFE9B0' : 'none'} />
+                            <Icon size={14} color="#fff" strokeWidth={2.2} fill={entry.type === 'star' ? '#F2D88A' : 'none'} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-baseline justify-between gap-2">
-                              <div className="text-[13px] truncate" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, color }}>
+                              <div className="text-[13px] truncate" style={{ ...TYPO.ui, fontWeight: 700, color }}>
                                 {entry.name}
                               </div>
                               <div className="text-[10px] opacity-60 shrink-0 tabular-nums">{fmtRelative(entry.ts)}</div>
                             </div>
                             <div className="flex items-center gap-1.5 text-[10px] opacity-65 mt-0.5">
-                              <span className="uppercase tracking-wider">{labelFor(entry.type)}</span>
+                              <span style={{ ...TYPO.caps, fontSize: '9px' }}>{labelFor(entry.type)}</span>
                               {entry.sub && <><span>·</span><span className="truncate">{entry.sub}</span></>}
                             </div>
                           </div>
@@ -3331,41 +3930,50 @@ function SettingsModal({ palette, themeName, settings, setSettings, onReset, onC
     <button
       onClick={disabled ? undefined : onChange}
       disabled={disabled}
-      className="w-full flex items-center gap-3 p-3 rounded-lg text-left transition active:scale-[0.99]"
-      style={{ background: 'rgba(60,40,20,0.05)', cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1 }}
+      className="w-full flex items-center gap-3 p-3 rounded-lg text-left tap"
+      style={{ background: 'rgba(10,31,79,0.05)', cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1 }}
     >
-      <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: on ? '#C8923C' : 'rgba(60,40,20,0.15)' }}>
-        <I size={16} color={on ? '#F5E9D0' : 'rgba(60,40,20,0.6)'} strokeWidth={2.2} />
+      <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: on ? '#00E5FF' : 'rgba(10,31,79,0.12)' }}>
+        <I size={16} color={on ? '#050C24' : 'rgba(10,31,79,0.6)'} strokeWidth={2.2} />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="text-[13px]" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700 }}>{label}</div>
+        <div className="text-[14px]" style={{ ...TYPO.ui, fontWeight: 700 }}>{label}</div>
         <div className="text-[11px] opacity-65 leading-tight">{desc}</div>
       </div>
-      <div className="w-10 h-6 rounded-full relative shrink-0" style={{ background: on ? '#C8923C' : 'rgba(60,40,20,0.2)', transition: 'background 200ms' }}>
-        <div className="absolute top-0.5 w-5 h-5 rounded-full bg-white" style={{ left: on ? '20px' : '2px', transition: 'left 200ms', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
+      <div className="w-10 h-6 rounded-full relative shrink-0" style={{ background: on ? '#00E5FF' : 'rgba(10,31,79,0.18)', transition: 'background 200ms var(--ease-premium)' }}>
+        <div className="absolute top-0.5 w-5 h-5 rounded-full bg-white" style={{ left: on ? '20px' : '2px', transition: 'left 200ms var(--ease-premium)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
       </div>
     </button>
   );
 
   const themeOptions = [
-    { id: 'auto',  label: 'Automatisch', desc: 'Nachts dunkel, tagsüber hell' },
-    { id: 'day',   label: 'Tag',         desc: 'Pergament-Karte, hell' },
-    { id: 'night', label: 'Nacht',       desc: 'Sternenhimmel, Lampenlicht' },
+    { id: 'auto',  label: 'Auto',  desc: 'Dark at night, light by day' },
+    { id: 'day',   label: 'Day',   desc: 'Warm paper, full light' },
+    { id: 'night', label: 'Night', desc: 'Indigo, starfield, glow' },
   ];
 
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.55)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl p-5 max-h-[88vh] overflow-y-auto" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl p-5 max-h-[88vh] overflow-y-auto"
+        style={{
+          background: 'rgba(255,255,255,0.96)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-start justify-between mb-4">
-          <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px' }}>Einstellungen</h2>
-          <button onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(60,40,20,0.1)' }}><X size={16} /></button>
+          <h2 style={{ ...TYPO.display, fontWeight: 700, fontSize: '22px' }}>Settings</h2>
+          <button onClick={onClose} className="w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(10,31,79,0.08)' }}><X size={16} /></button>
         </div>
 
-        <h3 className="text-[10px] uppercase tracking-[0.22em] opacity-60 mb-2 flex items-center gap-1.5">
-          Erscheinung
+        <h3 className="mb-2 flex items-center gap-1.5" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6 }}>
+          Appearance
           {settings.themeMode === 'auto' && (
-            <span className="text-[9px] normal-case tracking-normal opacity-80 px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(60,40,20,0.08)' }}>
-              gerade: {themeName === 'night' ? 'Nacht' : 'Tag'}
+            <span className="px-1.5 py-0.5 rounded-full" style={{ ...TYPO.caps, fontSize: '8px', opacity: 0.85, background: 'rgba(10,31,79,0.08)' }}>
+              now: {themeName === 'night' ? 'Night' : 'Day'}
             </span>
           )}
         </h3>
@@ -3379,39 +3987,38 @@ function SettingsModal({ palette, themeName, settings, setSettings, onReset, onC
               <button
                 key={opt.id}
                 onClick={() => setSettings((s) => ({ ...s, themeMode: opt.id }))}
-                className="relative p-3 rounded-xl text-left transition active:scale-[0.97] overflow-hidden"
+                className="relative p-3 rounded-xl text-left tap overflow-hidden"
                 style={{
                   background: isActive
-                    ? (isNight ? 'linear-gradient(135deg, #1f2541, #0a0e1c)' : isDay ? 'linear-gradient(135deg, #efe1c4, #C8923C)' : 'linear-gradient(135deg, #C8923C, #8C5C2A)')
-                    : 'rgba(60,40,20,0.05)',
-                  color: isActive ? '#F5E9D0' : '#2A1F12',
-                  boxShadow: isActive ? '0 4px 12px rgba(60,40,20,0.25)' : 'none',
-                  border: isActive ? 'none' : '1px solid rgba(60,40,20,0.1)',
+                    ? (isNight ? 'linear-gradient(135deg, #0A1F4F, #050C24)' : isDay ? 'linear-gradient(135deg, #F5F3EE, #D4A93C)' : 'linear-gradient(135deg, #00E5FF, #0A1F4F)')
+                    : 'rgba(10,31,79,0.05)',
+                  color: isActive ? (isDay ? '#0A1F4F' : '#FFFFFF') : '#0A1F4F',
+                  boxShadow: isActive ? '0 6px 18px rgba(10,31,79,0.25)' : 'none',
+                  border: isActive ? 'none' : '1px solid rgba(10,31,79,0.1)',
                 }}
               >
-                {/* Decorative miniature */}
                 {isNight && isActive && (
                   <div className="absolute top-1 right-1 opacity-70">
-                    <svg width="20" height="20"><circle cx="6" cy="6" r="0.8" fill="#F5E9D0" /><circle cx="14" cy="9" r="0.6" fill="#F5E9D0" /><circle cx="10" cy="14" r="0.7" fill="#F5E9D0" /></svg>
+                    <svg width="20" height="20"><circle cx="6" cy="6" r="0.8" fill="#F2EEE5" /><circle cx="14" cy="9" r="0.6" fill="#F2EEE5" /><circle cx="10" cy="14" r="0.7" fill="#F2EEE5" /></svg>
                   </div>
                 )}
-                <div className="w-8 h-8 rounded-full flex items-center justify-center mb-1.5" style={{ background: isActive ? 'rgba(245,233,208,0.2)' : 'rgba(60,40,20,0.08)' }}>
+                <div className="w-8 h-8 rounded-full flex items-center justify-center mb-1.5" style={{ background: isActive ? 'rgba(255,255,255,0.22)' : 'rgba(10,31,79,0.08)' }}>
                   {opt.id === 'auto' ? (
-                    <div className="text-[14px]" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700 }}>A</div>
+                    <div className="text-[14px]" style={{ ...TYPO.display, fontWeight: 700 }}>A</div>
                   ) : Icon ? (
-                    <Icon size={15} color={isActive ? '#F5E9D0' : '#2A1F12'} />
+                    <Icon size={15} color={isActive ? (isDay ? '#0A1F4F' : '#FFFFFF') : '#0A1F4F'} />
                   ) : null}
                 </div>
-                <div className="text-[12px] leading-tight" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700 }}>
+                <div className="text-[12px] leading-tight" style={{ ...TYPO.ui, fontWeight: 700 }}>
                   {opt.label}
                 </div>
-                <div className="text-[9px] opacity-75 leading-tight mt-0.5">{opt.desc}</div>
+                <div className="text-[9px] opacity-80 leading-tight mt-0.5">{opt.desc}</div>
               </button>
             );
           })}
         </div>
 
-        <h3 className="text-[10px] uppercase tracking-[0.22em] opacity-60 mb-2">Sinneserlebnis</h3>
+        <h3 className="mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6 }}>Senses</h3>
         <div className="space-y-2 mb-5">
           <Toggle
             on={settings.soundOn}
@@ -3419,55 +4026,55 @@ function SettingsModal({ palette, themeName, settings, setSettings, onReset, onC
               if (!settings.soundOn) { getAudioCtx(); SFX.street(); }
               setSettings((s) => ({ ...s, soundOn: !s.soundOn }));
             }}
-            label="Klänge"
-            desc="Sanfte Töne bei jeder Entdeckung"
+            label="Sound"
+            desc="Soft chime on every discovery"
             icon={settings.soundOn ? Volume2 : VolumeX}
           />
           <Toggle
             on={settings.hapticsOn && vibrateSupported}
             onChange={() => setSettings((s) => ({ ...s, hapticsOn: !s.hapticsOn }))}
-            label="Vibration"
-            desc={vibrateSupported ? 'Haptisches Feedback auf dem Smartphone' : 'Auf diesem Gerät nicht verfügbar'}
+            label="Haptics"
+            desc={vibrateSupported ? 'Phone vibration cues' : 'Not supported on this device'}
             icon={Vibrate}
             disabled={!vibrateSupported}
           />
         </div>
 
-        <h3 className="text-[10px] uppercase tracking-[0.22em] opacity-60 mb-2">Hilfe</h3>
-        <div className="p-3 rounded-lg mb-5" style={{ background: 'rgba(60,40,20,0.05)' }}>
-          <div className="text-[12px] leading-relaxed opacity-80">
+        <h3 className="mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6 }}>How it works</h3>
+        <div className="p-3 rounded-lg mb-5" style={{ background: 'rgba(10,31,79,0.05)' }}>
+          <div className="text-[12px] leading-relaxed opacity-85">
             <p className="mb-2">
-              <strong style={{ fontFamily: '"Fraunces", Georgia, serif' }}>Sterne</strong> markieren Wahrzeichen — komm näher als 32 m.
+              <strong>Stars</strong> mark landmarks — get within 32 m.
             </p>
             <p className="mb-2">
-              <strong style={{ fontFamily: '"Fraunces", Georgia, serif' }}>Anekdoten</strong> sind versteckte Geschichten — komm näher als 28 m.
+              <strong>Anecdotes</strong> are hidden stories — get within 28 m.
             </p>
             <p>
-              <strong style={{ fontFamily: '"Fraunces", Georgia, serif' }}>Gassen</strong> werden bei 22 m Annäherung von Wolken befreit.
+              <strong>Streets</strong> clear at 22 m proximity.
             </p>
           </div>
         </div>
 
-        <h3 className="text-[10px] uppercase tracking-[0.22em] opacity-60 mb-2">Über</h3>
-        <p className="text-[11px] opacity-60 leading-relaxed mb-5 px-1">
-          Altstadt-Entdecker · Kapitel I (Zürich)<br />
-          Eine Reise durch Wolken, eine Gasse nach der anderen.
+        <h3 className="mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6 }}>About</h3>
+        <p className="text-[11px] opacity-65 leading-relaxed mb-5 px-1">
+          Euro-Legend · Chapter I (Zürich · Old Town)<br />
+          Walk the cities. Earn the legends.
         </p>
 
-        <h3 className="text-[10px] uppercase tracking-[0.22em] opacity-60 mb-2">Daten</h3>
+        <h3 className="mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6 }}>Data</h3>
         <button
           onClick={onReset}
-          className="w-full flex items-center gap-3 p-3 rounded-lg text-left transition active:scale-[0.99]"
-          style={{ background: 'rgba(122,63,95,0.1)', border: '1px solid rgba(122,63,95,0.25)' }}
+          className="w-full flex items-center gap-3 p-3 rounded-lg text-left tap"
+          style={{ background: 'rgba(162,55,107,0.10)', border: '1px solid rgba(162,55,107,0.25)' }}
         >
-          <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: '#7A3F5F' }}>
-            <RefreshCw size={16} color="#F5E9D0" strokeWidth={2.2} />
+          <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: '#A2376B' }}>
+            <RefreshCw size={16} color="#FFFFFF" strokeWidth={2.2} />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-[13px]" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, color: '#7A3F5F' }}>
-              Fortschritt zurücksetzen
+            <div className="text-[14px]" style={{ ...TYPO.ui, fontWeight: 700, color: '#A2376B' }}>
+              Reset progress
             </div>
-            <div className="text-[11px] opacity-65 leading-tight">Alle Wolken erscheinen wieder</div>
+            <div className="text-[11px] opacity-65 leading-tight">Streets, stars and stamps return to zero</div>
           </div>
         </button>
       </div>
@@ -3477,36 +4084,49 @@ function SettingsModal({ palette, themeName, settings, setSettings, onReset, onC
 
 function LandmarkModal({ lm, unlocked, dist, onClose }) {
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.6)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl overflow-hidden animate-popIn" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
-        <div className="px-5 py-4 relative" style={{ background: unlocked ? 'linear-gradient(135deg, #C8923C, #8C5C2A)' : 'linear-gradient(135deg, #5C3F22, #3F2A14)', color: '#F5E9D0' }}>
-          <button onClick={onClose} className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.2)' }}><X size={16} /></button>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl overflow-hidden animate-popIn"
+        style={{
+          background: 'rgba(255,255,255,0.97)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="px-5 py-5 relative" style={{ background: unlocked ? 'linear-gradient(135deg, #D4A93C, #9B7820)' : 'linear-gradient(135deg, #0A1F4F, #050C24)', color: '#FFFFFF' }}>
+          <button onClick={onClose} className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(0,0,0,0.25)' }}><X size={16} /></button>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: unlocked ? '#FFE9B0' : 'rgba(245,233,208,0.2)' }}>
-              {unlocked ? <Star size={26} fill="#C8923C" color="#7A4A1F" strokeWidth={1.5} /> : <Lock size={20} color="#F5E9D0" />}
-            </div>
+            {unlocked ? (
+              <LaurelWreath size={56} monogram="" glow />
+            ) : (
+              <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'rgba(212,169,60,0.20)' }}>
+                <Lock size={20} color="#D4A93C" />
+              </div>
+            )}
             <div className="flex-1 min-w-0">
-              <div className="text-[10px] uppercase tracking-[0.2em] opacity-80">{unlocked ? 'Eingesammelt' : 'Noch nicht entdeckt'}</div>
-              <h2 className="leading-tight" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '22px', letterSpacing: '-0.01em' }}>
+              <div style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.85 }}>{unlocked ? 'Landmark unlocked' : 'Not yet discovered'}</div>
+              <h2 className="leading-tight" style={{ ...TYPO.display, fontWeight: 700, fontSize: '22px' }}>
                 {lm.name}
               </h2>
-              <div className="text-xs opacity-80 mt-0.5">{lm.intro}</div>
+              <div className="text-xs opacity-85 mt-0.5">{lm.intro}</div>
             </div>
           </div>
         </div>
         <div className="px-5 py-4">
           <p className="text-sm leading-relaxed">{lm.desc}</p>
           {lm.insider && (
-            <div className="mt-3 p-3 rounded-lg" style={{ background: 'rgba(200,146,60,0.12)', border: '1px solid rgba(200,146,60,0.3)' }}>
-              <div className="text-[10px] uppercase tracking-[0.18em] opacity-65 mb-0.5 flex items-center gap-1">
-                <Sparkles size={10} /> Insider-Tipp
+            <div className="mt-3 p-3 rounded-lg" style={{ background: 'rgba(212,169,60,0.12)', border: '1px solid rgba(212,169,60,0.30)' }}>
+              <div className="mb-0.5 flex items-center gap-1" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.7 }}>
+                <Sparkles size={10} /> Insider tip
               </div>
               <div className="text-[12px] leading-relaxed">{lm.insider}</div>
             </div>
           )}
           {!unlocked && dist != null && (
             <div className="mt-3 text-[12px] opacity-75 flex items-center gap-1.5">
-              <Navigation size={12} /> ca. {Math.round(dist)} m entfernt — komm näher als 32 m, um den Stern einzusammeln.
+              <Navigation size={12} /> ~{Math.round(dist)} m away · get within 32 m to claim the star.
             </div>
           )}
         </div>
@@ -3517,36 +4137,45 @@ function LandmarkModal({ lm, unlocked, dist, onClose }) {
 
 function AnekdoteModal({ an, unlocked, dist, onClose }) {
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.6)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl overflow-hidden animate-popIn" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
-        <div className="px-5 py-4 relative" style={{ background: unlocked ? 'linear-gradient(135deg, #7A3F5F, #5A2D45)' : 'linear-gradient(135deg, #4A3F5F, #2D2545)', color: '#F5E9D0' }}>
-          <button onClick={onClose} className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.2)' }}><X size={16} /></button>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl overflow-hidden animate-popIn"
+        style={{
+          background: 'rgba(255,255,255,0.97)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="px-5 py-4 relative" style={{ background: unlocked ? 'linear-gradient(135deg, #7A4A8C, #3F2D55)' : 'linear-gradient(135deg, #0A1F4F, #050C24)', color: '#FFFFFF' }}>
+          <button onClick={onClose} className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(0,0,0,0.25)' }}><X size={16} /></button>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: unlocked ? 'rgba(245,233,208,0.25)' : 'rgba(245,233,208,0.12)' }}>
-              {unlocked ? <BookOpen size={22} color="#F5E9D0" strokeWidth={2} /> : <Lock size={18} color="#F5E9D0" />}
+            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: unlocked ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.10)' }}>
+              {unlocked ? <BookOpen size={22} color="#FFFFFF" strokeWidth={2} /> : <Lock size={18} color="#FFFFFF" />}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[10px] uppercase tracking-[0.2em] opacity-80">{unlocked ? 'Anekdote' : 'Noch nicht entdeckt'}</div>
-              <h2 className="leading-tight" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.01em' }}>
+              <div style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.85 }}>{unlocked ? 'Anecdote' : 'Not yet discovered'}</div>
+              <h2 className="leading-tight" style={{ ...TYPO.display, fontWeight: 700, fontSize: '20px' }}>
                 {an.name}
               </h2>
-              <div className="text-xs opacity-80 mt-0.5">{an.intro}</div>
+              <div className="text-xs opacity-85 mt-0.5">{an.intro}</div>
             </div>
           </div>
         </div>
         <div className="px-5 py-4">
           {unlocked ? (
-            <p className="text-sm leading-relaxed" style={{ fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic' }}>
+            <p className="text-sm leading-relaxed" style={{ ...TYPO.displayItalic, fontSize: '15px' }}>
               {an.desc}
             </p>
           ) : (
             <p className="text-sm leading-relaxed opacity-70">
-              Die Geschichte enthüllt sich, sobald du diesen Ort persönlich besuchst.
+              The story unlocks the moment you stand there yourself.
             </p>
           )}
           {!unlocked && dist != null && (
             <div className="mt-3 text-[12px] opacity-75 flex items-center gap-1.5">
-              <Navigation size={12} /> ca. {Math.round(dist)} m entfernt — komm näher als 28 m.
+              <Navigation size={12} /> ~{Math.round(dist)} m away · get within 28 m.
             </div>
           )}
         </div>
@@ -3559,52 +4188,61 @@ function PoiModal({ poi, unlocked, dist, onClose }) {
   const kindLabel = poi.kind === 'bar' ? 'Bar' : poi.kind === 'restaurant' ? 'Restaurant' : 'Club';
   const Icon = poi.kind === 'bar' ? Martini : poi.kind === 'restaurant' ? UtensilsCrossed : Disc3;
   const headerBg = unlocked
-    ? (poi.kind === 'bar' ? 'linear-gradient(135deg, #7A3F5F, #4A2541)'
-        : poi.kind === 'restaurant' ? 'linear-gradient(135deg, #A8542C, #6B3318)'
+    ? (poi.kind === 'bar' ? 'linear-gradient(135deg, #A2376B, #4A2541)'
+        : poi.kind === 'restaurant' ? 'linear-gradient(135deg, #C76A2E, #6B3318)'
         : 'linear-gradient(135deg, #3F4A8F, #1F274F)')
-    : 'linear-gradient(135deg, #5A4D5A, #2D262D)';
+    : 'linear-gradient(135deg, #0A1F4F, #050C24)';
   const accentEmoji = poi.kind === 'bar' ? '🍸' : poi.kind === 'restaurant' ? '🍴' : '💿';
   const h = new Date().getHours();
   const isOpen = poi.kind === 'bar' ? (h >= 17 || h < 2)
     : poi.kind === 'restaurant' ? ((h >= 11 && h < 14) || (h >= 18 && h < 23))
     : (h >= 22 || h < 4);
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.6)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl overflow-hidden animate-popIn" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
-        <div className="px-5 py-4 relative" style={{ background: headerBg, color: '#F5E9D0' }}>
-          <button onClick={onClose} className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.2)' }}><X size={16} /></button>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl overflow-hidden animate-popIn"
+        style={{
+          background: 'rgba(255,255,255,0.97)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="px-5 py-4 relative" style={{ background: headerBg, color: '#FFFFFF' }}>
+          <button onClick={onClose} className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(0,0,0,0.25)' }}><X size={16} /></button>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: unlocked ? 'rgba(245,233,208,0.25)' : 'rgba(245,233,208,0.12)' }}>
-              {unlocked ? <Icon size={22} color="#F5E9D0" strokeWidth={2} /> : <Lock size={18} color="#F5E9D0" />}
+            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: unlocked ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.10)' }}>
+              {unlocked ? <Icon size={22} color="#FFFFFF" strokeWidth={2} /> : <Lock size={18} color="#FFFFFF" />}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <div className="text-[10px] uppercase tracking-[0.2em] opacity-80">{accentEmoji} {unlocked ? `${kindLabel} besucht` : kindLabel}</div>
-                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider" style={{ background: isOpen ? 'rgba(154,208,143,0.25)' : 'rgba(0,0,0,0.25)', color: '#F5E9D0' }}>
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: isOpen ? '#9AD08F' : 'rgba(245,233,208,0.5)' }} />
-                  {isOpen ? 'offen' : 'zu'}
+              <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                <div style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.85 }}>{accentEmoji} {unlocked ? `${kindLabel} · checked in` : kindLabel}</div>
+                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full" style={{ ...TYPO.caps, fontSize: '8px', background: isOpen ? 'rgba(0,229,255,0.30)' : 'rgba(0,0,0,0.30)', color: '#FFFFFF' }}>
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: isOpen ? '#00E5FF' : 'rgba(255,255,255,0.5)' }} />
+                  {isOpen ? 'open' : 'closed'}
                 </div>
               </div>
-              <h2 className="leading-tight" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.01em' }}>
+              <h2 className="leading-tight" style={{ ...TYPO.display, fontWeight: 700, fontSize: '20px' }}>
                 {poi.name}
               </h2>
-              <div className="text-xs opacity-80 mt-0.5">{poi.intro}</div>
+              <div className="text-xs opacity-85 mt-0.5">{poi.intro}</div>
             </div>
           </div>
         </div>
         <div className="px-5 py-4">
           {unlocked ? (
-            <p className="text-sm leading-relaxed" style={{ fontFamily: '"Fraunces", Georgia, serif' }}>
+            <p className="text-sm leading-relaxed">
               {poi.desc}
             </p>
           ) : (
             <p className="text-sm leading-relaxed opacity-70">
-              Geh hin, schau rein — die Beschreibung schaltet sich frei, sobald du näher als 28 m kommst.
+              Walk past the door. The full write-up unlocks within 28 m.
             </p>
           )}
           {!unlocked && dist != null && (
             <div className="mt-3 text-[12px] opacity-75 flex items-center gap-1.5">
-              <Navigation size={12} /> ca. {Math.round(dist)} m entfernt
+              <Navigation size={12} /> ~{Math.round(dist)} m away
             </div>
           )}
         </div>
@@ -3638,23 +4276,32 @@ function LokaleListModal({ pois, position, onClose, onSelect }) {
   const clubCount = enriched.filter((p) => p.kind === 'club').length;
 
   const filters = [
-    { id: 'all', label: 'Alle', count: POIS.length },
+    { id: 'all', label: 'All', count: POIS.length },
     { id: 'bar', label: 'Bars', count: barCount, icon: Martini },
     { id: 'restaurant', label: 'Restaurants', count: restCount, icon: UtensilsCrossed },
     { id: 'club', label: 'Clubs', count: clubCount, icon: Disc3 },
-    { id: 'visited', label: 'Besucht', count: visitedCount, icon: CheckCircle2 },
+    { id: 'visited', label: 'Visited', count: visitedCount, icon: CheckCircle2 },
   ];
 
   return (
-    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.6)', backdropFilter: 'blur(6px)' }} onClick={onClose}>
-      <div className="w-full max-w-md rounded-2xl max-h-[88vh] overflow-hidden flex flex-col" style={{ background: '#F5E9D0', boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }} onClick={(e) => e.stopPropagation()}>
-        <div className="px-5 pt-5 pb-3 border-b" style={{ borderColor: 'rgba(60,40,20,0.12)' }}>
+    <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.65)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-md rounded-2xl max-h-[88vh] overflow-hidden flex flex-col"
+        style={{
+          background: 'rgba(255,255,255,0.97)',
+          color: '#0A1F4F',
+          boxShadow: '0 24px 60px rgba(5,12,36,0.55)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="px-5 pt-5 pb-3 border-b" style={{ borderColor: 'rgba(10,31,79,0.10)' }}>
           <div className="flex items-start justify-between mb-3">
             <div>
-              <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: '20px' }}>Lokale</h2>
-              <p className="text-[11px] uppercase tracking-[0.18em] opacity-60 mt-0.5">{visitedCount} von {POIS.length} besucht</p>
+              <h2 style={{ ...TYPO.display, fontWeight: 700, fontSize: '22px' }}>Hot spots</h2>
+              <p style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6, marginTop: 2 }}>{visitedCount} of {POIS.length} checked in</p>
             </div>
-            <button onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(60,40,20,0.1)' }}><X size={16} /></button>
+            <button onClick={onClose} className="w-9 h-9 rounded-full flex items-center justify-center tap" style={{ background: 'rgba(10,31,79,0.08)' }}><X size={16} /></button>
           </div>
           {/* Filter chips */}
           <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-5 px-5" style={{ scrollbarWidth: 'none' }}>
@@ -3663,11 +4310,11 @@ function LokaleListModal({ pois, position, onClose, onSelect }) {
               const Icon = f.icon;
               return (
                 <button key={f.id} onClick={() => setFilter(f.id)}
-                  className="shrink-0 px-3 py-1.5 rounded-full text-[12px] flex items-center gap-1.5 transition active:scale-95"
+                  className="shrink-0 px-3 py-1.5 rounded-full text-[12px] flex items-center gap-1.5 tap"
                   style={{
-                    background: isActive ? '#2A1F12' : 'rgba(60,40,20,0.08)',
-                    color: isActive ? '#F5E9D0' : '#2A1F12',
-                    fontWeight: isActive ? 600 : 500,
+                    background: isActive ? '#0A1F4F' : 'rgba(10,31,79,0.08)',
+                    color: isActive ? '#FFFFFF' : '#0A1F4F',
+                    fontWeight: isActive ? 700 : 500,
                   }}>
                   {Icon && <Icon size={11} />}
                   <span>{f.label}</span>
@@ -3680,11 +4327,11 @@ function LokaleListModal({ pois, position, onClose, onSelect }) {
         <div className="flex-1 overflow-y-auto px-3 py-2">
           {filtered.length === 0 ? (
             <div className="text-center py-12 opacity-60 text-sm">
-              Keine Einträge in dieser Kategorie.
+              Nothing in this category yet.
             </div>
           ) : filtered.map((p) => {
             const Icon = p.kind === 'bar' ? Martini : p.kind === 'restaurant' ? UtensilsCrossed : Disc3;
-            const accent = p.kind === 'bar' ? '#7A3F5F' : p.kind === 'restaurant' ? '#A8542C' : '#3F4A8F';
+            const accent = p.kind === 'bar' ? '#A2376B' : p.kind === 'restaurant' ? '#C76A2E' : '#3F4A8F';
             const h = new Date().getHours();
             const isOpen = p.kind === 'bar' ? (h >= 17 || h < 2)
               : p.kind === 'restaurant' ? ((h >= 11 && h < 14) || (h >= 18 && h < 23))
@@ -3693,28 +4340,28 @@ function LokaleListModal({ pois, position, onClose, onSelect }) {
               <button
                 key={p.id}
                 onClick={() => { onSelect(p); onClose(); }}
-                className="w-full flex items-center gap-3 p-2.5 rounded-lg transition active:scale-[0.99] text-left"
-                style={{ background: p.visited ? 'rgba(200,146,60,0.10)' : 'transparent' }}
+                className="w-full flex items-center gap-3 p-2.5 rounded-lg tap text-left"
+                style={{ background: p.visited ? 'rgba(0,229,255,0.08)' : 'transparent' }}
               >
-                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 relative" style={{ background: p.visited ? accent : 'rgba(60,40,20,0.12)' }}>
-                  {p.visited ? <Icon size={16} color="#F5E9D0" /> : <Icon size={15} color="rgba(60,40,20,0.5)" />}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 relative" style={{ background: p.visited ? accent : 'rgba(10,31,79,0.10)' }}>
+                  {p.visited ? <Icon size={16} color="#FFFFFF" /> : <Icon size={15} color="rgba(10,31,79,0.5)" />}
                   {p.visited && (
-                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full flex items-center justify-center" style={{ background: '#5F7B5C' }}>
-                      <CheckCircle2 size={9} color="#fff" />
+                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full flex items-center justify-center" style={{ background: '#00E5FF' }}>
+                      <CheckCircle2 size={9} color="#050C24" />
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <div className="text-sm font-semibold truncate" style={{ fontFamily: '"Fraunces", Georgia, serif', color: p.visited ? '#2A1F12' : 'rgba(42,31,18,0.7)' }}>
+                    <div className="text-sm font-semibold truncate" style={{ ...TYPO.ui, fontWeight: 700, color: p.visited ? '#0A1F4F' : 'rgba(10,31,79,0.7)' }}>
                       {p.name}
                     </div>
-                    {isOpen && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#5F7B5C' }} title="jetzt offen" />}
+                    {isOpen && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#00E5FF' }} title="open now" />}
                   </div>
                   <div className="text-[11px] opacity-65 truncate">{p.intro}</div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="text-[10px] uppercase tracking-wider opacity-55" style={{ color: accent }}>
+                  <div style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.65, color: accent }}>
                     {p.kind === 'bar' ? 'Bar' : p.kind === 'restaurant' ? 'Restaurant' : 'Club'}
                   </div>
                   {p.dist != null && (
@@ -3733,20 +4380,38 @@ function LokaleListModal({ pois, position, onClose, onSelect }) {
 }
 
 function LevelUpModal({ level, onClose }) {
-  const I = level.icon;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.7)', backdropFilter: 'blur(8px)' }} onClick={onClose}>
-      <div className="text-center px-6 py-8 rounded-3xl max-w-sm relative overflow-hidden animate-popIn" style={{ background: `linear-gradient(135deg, ${level.accent}, #F5E9D0 60%, ${level.accent})`, boxShadow: `0 24px 60px rgba(0,0,0,0.4), 0 0 0 3px ${level.color}` }} onClick={(e) => e.stopPropagation()}>
-        <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4" style={{ background: level.color, boxShadow: `0 0 0 6px ${level.accent}, 0 8px 24px rgba(0,0,0,0.25)` }}>
-          <I size={36} color="#fff" strokeWidth={2} />
-        </div>
-        <div className="text-[10px] uppercase tracking-[0.3em] opacity-65 mb-1">Neuer Rang</div>
-        <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 900, fontSize: '38px', color: level.color, letterSpacing: '-0.02em', lineHeight: 1 }}>
-          {level.name}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.75)', backdropFilter: 'blur(12px)' }} onClick={onClose}>
+      <div
+        className="text-center px-6 py-8 rounded-3xl max-w-sm relative overflow-hidden animate-popIn"
+        style={{
+          background: 'linear-gradient(135deg, #0A1F4F 0%, #050C24 100%)',
+          color: '#FFFFFF',
+          boxShadow: `0 24px 60px rgba(0,0,0,0.55), 0 0 0 2px ${level.color}, 0 0 80px ${level.color}40`,
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <LaurelWreath size={100} monogram="" glow />
+        <div className="mt-4" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.55 }}>New tier reached</div>
+        <div className="text-5xl mt-2">{level.emoji}</div>
+        <h2 className="mt-2" style={{ ...TYPO.display, fontWeight: 900, fontSize: '36px', color: level.color, lineHeight: 1 }}>
+          You&apos;re now a {level.name}.
         </h2>
-        <p className="mt-3 text-sm opacity-80 leading-snug">{level.desc}</p>
-        <button onClick={onClose} className="mt-5 px-6 py-2.5 rounded-full text-sm font-semibold transition active:scale-95" style={{ background: level.color, color: '#F5E9D0', fontFamily: '"Fraunces", Georgia, serif' }}>
-          Weiter erkunden
+        <p className="mt-3" style={{ ...TYPO.displayItalic, fontSize: '15px', opacity: 0.85 }}>
+          Walk the walk.
+        </p>
+        <p className="mt-2 text-sm opacity-70 leading-snug">{level.desc}</p>
+        <button
+          onClick={onClose}
+          className="mt-6 px-7 py-3 rounded-xl tap"
+          style={{
+            background: '#00E5FF', color: '#050C24',
+            ...TYPO.ui, fontWeight: 700, fontSize: '14px',
+            boxShadow: '0 6px 20px rgba(0,229,255,0.35)',
+            minHeight: '48px',
+          }}
+        >
+          Keep going
         </button>
       </div>
     </div>
@@ -3756,11 +4421,10 @@ function LevelUpModal({ level, onClose }) {
 function ChapterCompleteModal({ stars, anekdoten, pois, elapsed, distance, onClose, onBack }) {
   const poisVal = pois != null ? pois : 0;
   return (
-    <div className="fixed inset-0 z-[55] flex items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(20,15,10,0.78)', backdropFilter: 'blur(10px)' }} onClick={onClose}>
-      {/* Confetti */}
+    <div className="fixed inset-0 z-[55] flex items-center justify-center p-4 animate-fadeIn" style={{ background: 'rgba(5,12,36,0.82)', backdropFilter: 'blur(12px)' }} onClick={onClose}>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 24 }).map((_, i) => {
-          const colors = ['#C8923C', '#FFE9B0', '#7A3F5F', '#5F7B5C', '#3F6E72'];
+        {Array.from({ length: 28 }).map((_, i) => {
+          const colors = ['#D4A93C', '#F2D88A', '#00E5FF', '#FFFFFF'];
           return (
             <div key={i}
               className="absolute"
@@ -3778,29 +4442,45 @@ function ChapterCompleteModal({ stars, anekdoten, pois, elapsed, distance, onClo
         })}
       </div>
 
-      <div className="relative max-w-md w-full text-center px-6 py-8 rounded-3xl animate-popIn" style={{ background: 'linear-gradient(135deg, #F5E9D0, #FFE9B0 50%, #F5E9D0)', boxShadow: '0 24px 60px rgba(0,0,0,0.5), 0 0 0 3px #C8923C' }} onClick={(e) => e.stopPropagation()}>
-        <div className="w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #C8923C, #8C5C2A)', boxShadow: '0 0 0 8px rgba(200,146,60,0.2), 0 8px 24px rgba(0,0,0,0.3)' }}>
-          <Crown size={44} color="#F5E9D0" strokeWidth={1.8} />
-        </div>
-        <p className="text-[11px] uppercase tracking-[0.35em] opacity-70 mb-1" style={{ color: '#7A4A1F' }}>Kapitel I abgeschlossen</p>
-        <h2 style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 900, fontSize: '36px', color: '#7A4A1F', letterSpacing: '-0.02em', lineHeight: 1 }}>
-          Altstadt erobert
+      <div
+        className="relative max-w-md w-full text-center px-6 py-8 rounded-3xl animate-popIn"
+        style={{
+          background: 'linear-gradient(135deg, #0A1F4F 0%, #050C24 100%)',
+          color: '#FFFFFF',
+          boxShadow: '0 24px 60px rgba(0,0,0,0.55), 0 0 0 2px #D4A93C, 0 0 100px rgba(212,169,60,0.35)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <LaurelWreath size={120} monogram="EL" glow />
+        <p className="mt-3" style={{ ...TYPO.caps, fontSize: '11px', opacity: 0.7, color: '#D4A93C' }}>Chapter I complete</p>
+        <h2 style={{ ...TYPO.display, fontWeight: 900, fontSize: '36px', color: '#FFFFFF', lineHeight: 1 }} className="mt-1">
+          Chapter cleared.
         </h2>
-        <p className="mt-3 text-sm leading-relaxed opacity-80 px-2" style={{ fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic' }}>
-          Du hast jede Gasse berührt, jeden Stein gesehen — die Wolken sind verschwunden, die Stadt ist deine.
+        <p className="mt-3 leading-relaxed opacity-90 px-2" style={{ ...TYPO.displayItalic, fontSize: '17px' }}>
+          Eurolegends aren&apos;t born.<br />They are made.
         </p>
         <div className="grid grid-cols-3 gap-2 mt-5 mb-5">
-          <Stat icon={Star} value={`${stars}/${LANDMARKS.length}`} label="Wahrzeichen" />
-          <Stat icon={BookOpen} value={`${anekdoten}/${ANEKDOTEN.length}`} label="Anekdoten" />
-          <Stat icon={Martini} value={`${poisVal}/${POIS.length}`} label="Lokale" />
-          <Stat icon={Route} value={fmtDist(distance)} label="Strecke" />
-          <Stat icon={Clock} value={fmtTime(elapsed)} label="Zeit" />
-          <Stat icon={Trophy} value="100%" label="Erkundet" />
+          <Stat icon={Star} value={`${stars}/${LANDMARKS.length}`} label="Landmarks" />
+          <Stat icon={BookOpen} value={`${anekdoten}/${ANEKDOTEN.length}`} label="Anecdotes" />
+          <Stat icon={Martini} value={`${poisVal}/${POIS.length}`} label="Hot spots" />
+          <Stat icon={Route} value={fmtDist(distance)} label="Distance" />
+          <Stat icon={Clock} value={fmtTime(elapsed)} label="Time" />
+          <Stat icon={Trophy} value="100%" label="Cleared" />
         </div>
-        <button onClick={onBack} className="w-full h-12 rounded-xl font-semibold transition active:scale-[0.98]" style={{ background: 'linear-gradient(135deg, #C8923C, #8C5C2A)', color: '#F5E9D0', fontFamily: '"Fraunces", Georgia, serif', boxShadow: '0 6px 18px rgba(200,146,60,0.4)' }}>
-          Zum nächsten Kapitel
+        <button
+          onClick={onBack}
+          className="w-full rounded-xl tap"
+          style={{
+            minHeight: '52px',
+            background: '#00E5FF', color: '#050C24',
+            ...TYPO.ui, fontWeight: 700, fontSize: '15px',
+            boxShadow: '0 6px 22px rgba(0,229,255,0.40)',
+          }}
+        >
+          Next chapter
         </button>
-        <button onClick={onClose} className="mt-2 text-xs opacity-65">Hier bleiben</button>
+        <button onClick={onClose} className="mt-3 text-xs opacity-65" style={{ ...TYPO.caps, fontSize: '10px' }}>Stay here</button>
       </div>
     </div>
   );
@@ -3808,11 +4488,11 @@ function ChapterCompleteModal({ stars, anekdoten, pois, elapsed, distance, onClo
 
 function Stat({ icon: I, value, label }) {
   return (
-    <div className="p-2.5 rounded-lg text-left" style={{ background: 'rgba(122,74,31,0.08)' }}>
-      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider opacity-60" style={{ color: '#7A4A1F' }}>
+    <div className="p-2.5 rounded-lg text-left" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(212,169,60,0.18)' }}>
+      <div className="flex items-center gap-1.5" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.7, color: '#D4A93C' }}>
         <I size={10} /> {label}
       </div>
-      <div className="mt-0.5 text-base tabular-nums" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, color: '#7A4A1F' }}>
+      <div className="mt-0.5 text-base tabular-nums" style={{ ...TYPO.ui, fontWeight: 700, color: '#FFFFFF' }}>
         {value}
       </div>
     </div>
@@ -3832,16 +4512,19 @@ const MiniMap = React.memo(function MiniMap({ palette, revealed, position, onOpe
   return (
     <button
       onClick={onOpen}
-      className="absolute top-3 left-3 z-30 rounded-[10px] overflow-hidden transition-opacity duration-300 active:scale-[0.97]"
+      className="absolute z-30 rounded-[12px] overflow-hidden tap backdrop-blur-md"
       style={{
+        top: 'max(12px, env(safe-area-inset-top))',
+        left: 'max(12px, env(safe-area-inset-left))',
         width: 160, height: 160,
         background: palette.miniBg,
         border: `1px solid ${palette.miniBorder}`,
         boxShadow: palette.cardShadow,
         opacity: hidden ? 0 : 1,
         pointerEvents: hidden ? 'none' : 'auto',
+        transition: 'opacity 300ms var(--ease-premium), background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
       }}
-      aria-label="Übersichtskarte öffnen"
+      aria-label="Open overview map"
     >
       <svg viewBox={`0 0 ${VIEWPORT.width} ${VIEWPORT.height}`} className="w-full h-full block" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -3948,7 +4631,7 @@ function OverviewModal({ palette, revealed, position, onClose }) {
             <mask id="ovFogMask" maskUnits="userSpaceOnUse" x="0" y="0" width={VIEWPORT.width} height={VIEWPORT.height}>
               <rect x="0" y="0" width={VIEWPORT.width} height={VIEWPORT.height} fill="white" />
               {revealed.map((p, i) => (
-                <circle key={i} cx={p.x} cy={p.y} r={FOG_REVEAL_RADIUS_PX * 2} fill="black" />
+                <circle key={i} cx={p.x} cy={p.y} r={FOG_REVEAL_RADIUS.overview} fill="black" />
               ))}
             </mask>
             <linearGradient id="ovStarFill" x1="0" y1="0" x2="0" y2="1">
@@ -3991,7 +4674,10 @@ function OverviewModal({ palette, revealed, position, onClose }) {
             );
           })}
           {/* Fog-Veil */}
-          <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.fogColor} opacity="0.5" mask="url(#ovFogMask)" />
+          <rect width={VIEWPORT.width} height={VIEWPORT.height}
+            fill={palette.name === 'night' ? 'rgba(5,12,36,1)' : 'rgba(10,31,79,1)'}
+            opacity={palette.name === 'night' ? 0.78 : 0.72}
+            mask="url(#ovFogMask)" />
           {/* POIs */}
           {POIS.map((poi) => {
             const p = project(poi.coords[0], poi.coords[1]);
@@ -4032,15 +4718,17 @@ function OverviewModal({ palette, revealed, position, onClose }) {
           )}
         </svg>
         <button onClick={onClose}
-          className="absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md transition active:scale-95"
+          className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-md tap"
           style={{ background: palette.cardBg, border: `1px solid ${palette.cardBorder}`, color: palette.text, boxShadow: palette.cardShadow }}
-          aria-label="Übersichtskarte schliessen"
+          aria-label="Close overview"
         >
           <X size={18} />
         </button>
-        <div className="absolute bottom-3 left-3 text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 rounded-full backdrop-blur-md"
-          style={{ background: palette.cardBg, color: palette.text, border: `1px solid ${palette.cardBorder}` }}>
-          Übersicht · Altstadt
+        <div
+          className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full backdrop-blur-md"
+          style={{ ...TYPO.caps, fontSize: '10px', background: palette.cardBg, color: palette.text, border: `1px solid ${palette.cardBorder}` }}
+        >
+          Overview · Altstadt
         </div>
       </div>
     </div>

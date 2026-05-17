@@ -8,19 +8,75 @@ html, body, #root {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent iOS rubber-band overscroll on the body */
   overscroll-behavior: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  /* Allow safe-area insets on iPhone notch / iPad rounded corners */
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  background: #1a140d;
+  background: #050C24;
+  color: #F2EEE5;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
-/* Disable text selection on UI chrome — feels more like a native app */
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Disable text selection on UI chrome — feels more like a native app.
+   Body text inside modals / anecdotes remains selectable / zoomable. */
 button, .no-select {
   -webkit-user-select: none;
   user-select: none;
+}
+
+/* Safe-area helpers — apply explicitly on absolutely-positioned UI chrome. */
+.safe-top    { padding-top:    env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-left   { padding-left:   env(safe-area-inset-left); }
+.safe-right  { padding-right:  env(safe-area-inset-right); }
+.safe-all    {
+  padding-top:    env(safe-area-inset-top);
+  padding-right:  env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left:   env(safe-area-inset-left);
+}
+
+/* Map area: disable touch zoom & double-tap zoom, but leave the rest
+   of the app (modals, anecdote text) zoomable for accessibility. */
+.map-no-zoom {
+  touch-action: pan-x pan-y;
+}
+
+/* Premium ease — match motion design across the app. */
+:root {
+  --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tap feedback for buttons that opt into .tap */
+.tap {
+  transition: transform 120ms var(--ease-premium), opacity 200ms var(--ease-premium);
+}
+.tap:active {
+  transform: scale(0.97);
+}
+
+/* min-height that prefers dvh (handles iOS Safari URL bar) and falls back to vh */
+.min-h-screen-dvh {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Atlas chapter card — hover lift on desktop, press scale on touch. */
+@media (hover: hover) {
+  .atlas-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 28px rgba(10, 31, 79, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+}
+.atlas-card:active {
+  transform: scale(0.97);
 }
