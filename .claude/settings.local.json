@@ -7,7 +7,10 @@
       "PowerShell(Stop-Process *)",
       "PowerShell(\\(Get-Content \"C:\\\\Users\\\\User\\\\Documents\\\\GitHub\\\\altstadt-explorer\\\\src\\\\App.jsx\" | Measure-Object -Line\\).Lines)",
       "PowerShell(\"---\")",
-      "PowerShell(git config *)"
+      "PowerShell(git config *)",
+      "PowerShell(\\(Get-Content src\\\\App.jsx | Measure-Object -Line\\).Lines)",
+      "PowerShell(Start-Sleep -Seconds 3; if \\(Test-Path \"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-User-Documents-GitHub-altstadt-explorer\\\\d5830e9f-965c-40c5-b1c4-32695abbbb3b\\\\tasks\\\\b0nmwtw4s.output\"\\) { \\(Get-Item \"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-User-Documents-GitHub-altstadt-explorer\\\\d5830e9f-965c-40c5-b1c4-32695abbbb3b\\\\tasks\\\\b0nmwtw4s.output\"\\).Length; Get-Content \"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-User-Documents-GitHub-altstadt-explorer\\\\d5830e9f-965c-40c5-b1c4-32695abbbb3b\\\\tasks\\\\b0nmwtw4s.output\" })",
+      "PowerShell(Get-NetTCPConnection *)"
     ]
   }
 }

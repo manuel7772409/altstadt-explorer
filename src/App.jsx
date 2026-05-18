@@ -6,6 +6,7 @@ import {
   BookOpen, Feather, Building2, Trees, Music2, GraduationCap, Waves,
   Settings as SettingsIcon, Volume2, VolumeX, Vibrate, NotebookPen, Sun,
   Martini, UtensilsCrossed, Disc3, Wine, ChefHat, Loader2,
+  Music, Headphones,
 } from 'lucide-react';
 
 /* ============================================================================
@@ -893,7 +894,310 @@ const HAPTIC = {
   chapter: [80, 40, 80, 40, 120],
 };
 
-const DEFAULT_SETTINGS = { soundOn: true, hapticsOn: true, themeMode: 'auto' };
+/* ============================================================================
+   AMBIENT MUSIC — dark minimal techno loop generated in-browser.
+
+   Reference vibe: Boris Brejcha — "Never Look Back" (NOT used here, copyright).
+   This is an original loop: 125 BPM, A minor, 8 bars (~15.4s), seamless.
+
+   Layers:
+     1) 4-on-the-floor kick (sine 55 Hz, fast decay)
+     2) Closed hihat on dotted 8ths, slight L/R alternation
+     3) Bass on A2 (~110 Hz), syncopated, low-pass filtered sawtooth
+     4) Pluck synth — A-minor-pentatonic motif (A4-C5-E5-A4-G4-E5-A4-rest)
+        every 4 bars, panned, short decay
+     5) Reverb-tail bell every 8 bars on bar 8
+
+   iOS Safari blocks AudioContext until a user gesture. The engine is started
+   from the music toggle button, which counts as a gesture.
+============================================================================ */
+
+const MUSIC_BPM = 125;
+const MUSIC_BEAT = 60 / MUSIC_BPM;          // 0.48s
+const MUSIC_BAR  = 4 * MUSIC_BEAT;          // 1.92s
+const MUSIC_LOOP_BARS = 8;
+const MUSIC_LOOP_DUR = MUSIC_LOOP_BARS * MUSIC_BAR; // 15.36s
+
+const MusicEngine = (() => {
+  let ctx = null;
+  let masterGain = null;
+  let convolver = null;
+  let dryGain = null;
+  let wetGain = null;
+  let compressor = null;
+  let lookaheadTimer = null;
+  let nextLoopStart = 0;
+  let running = false;
+  let volume = 0.35;
+  let ducked = false;
+
+  /* Make a tiny algorithmic reverb impulse: 1.4s exp decay noise. */
+  const makeImpulse = (audioCtx) => {
+    const sr = audioCtx.sampleRate;
+    const len = Math.floor(sr * 1.6);
+    const impulse = audioCtx.createBuffer(2, len, sr);
+    for (let ch = 0; ch < 2; ch++) {
+      const data = impulse.getChannelData(ch);
+      for (let i = 0; i < len; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2);
+      }
+    }
+    return impulse;
+  };
+
+  const ensure = () => {
+    if (ctx) return ctx;
+    const audioCtx = getAudioCtx();
+    if (!audioCtx) return null;
+    ctx = audioCtx;
+    compressor = ctx.createDynamicsCompressor();
+    compressor.threshold.value = -18;
+    compressor.knee.value = 12;
+    compressor.ratio.value = 3.5;
+    compressor.attack.value = 0.006;
+    compressor.release.value = 0.18;
+    masterGain = ctx.createGain();
+    masterGain.gain.value = ducked ? volume * 0.4 : volume;
+    convolver = ctx.createConvolver();
+    convolver.buffer = makeImpulse(ctx);
+    dryGain = ctx.createGain(); dryGain.gain.value = 0.78;
+    wetGain = ctx.createGain(); wetGain.gain.value = 0.22;
+    compressor.connect(masterGain);
+    masterGain.connect(dryGain);
+    masterGain.connect(convolver);
+    convolver.connect(wetGain);
+    dryGain.connect(ctx.destination);
+    wetGain.connect(ctx.destination);
+    return ctx;
+  };
+
+  /* Voice helpers — schedule one-shot notes against the bus. */
+  const kick = (t) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(110, t);
+    o.frequency.exponentialRampToValueAtTime(38, t + 0.08);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.95, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.42);
+    o.connect(g); g.connect(compressor);
+    o.start(t); o.stop(t + 0.5);
+  };
+
+  const hat = (t, pan = 0) => {
+    /* Filtered noise burst — closed hihat. */
+    const dur = 0.06;
+    const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1);
+    const src = ctx.createBufferSource(); src.buffer = buf;
+    const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 6500;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.14, t + 0.003);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+    const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    if (panner) panner.pan.value = pan;
+    src.connect(hp); hp.connect(g);
+    if (panner) { g.connect(panner); panner.connect(compressor); }
+    else g.connect(compressor);
+    src.start(t); src.stop(t + dur);
+  };
+
+  const bass = (t, freq, dur) => {
+    const o = ctx.createOscillator();
+    const lp = ctx.createBiquadFilter();
+    const g = ctx.createGain();
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(freq, t);
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(360, t);
+    lp.frequency.exponentialRampToValueAtTime(180, t + dur);
+    lp.Q.value = 6;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.22, t + 0.008);
+    g.gain.setValueAtTime(0.22, t + dur - 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.connect(lp); lp.connect(g); g.connect(compressor);
+    o.start(t); o.stop(t + dur + 0.02);
+  };
+
+  const pluck = (t, freq, dur = 0.45, pan = 0, vol = 0.16) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    const lp = ctx.createBiquadFilter();
+    o.type = 'triangle';
+    o.frequency.setValueAtTime(freq, t);
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(2200, t);
+    lp.frequency.exponentialRampToValueAtTime(700, t + dur);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(vol, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    if (panner) panner.pan.value = pan;
+    o.connect(lp); lp.connect(g);
+    if (panner) { g.connect(panner); panner.connect(compressor); }
+    else g.connect(compressor);
+    o.start(t); o.stop(t + dur + 0.05);
+  };
+
+  const bell = (t, freq = 1318.51, vol = 0.10) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(vol, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 1.6);
+    o.connect(g); g.connect(compressor);
+    o.start(t); o.stop(t + 1.7);
+  };
+
+  /* A-minor scale (Hz): A2 110, A3 220, C4 261.63, D4 293.66, E4 329.63,
+     G4 392, A4 440, C5 523.25, E5 659.25 */
+  const PLUCK_MOTIF = [440, 523.25, 659.25, 440, 392, 659.25, 440, null];
+  const BASS_PATTERN = [
+    /* per beat 0..15 (sixteenth) — null = rest. Note in Hz. dur = beats. */
+    { i: 0,  f: 110,    d: 0.75 },
+    { i: 3,  f: 110,    d: 0.5  },
+    { i: 6,  f: 130.81, d: 0.5  }, // C3
+    { i: 10, f: 110,    d: 0.5  },
+    { i: 14, f: 98,     d: 0.5  }, // G2
+  ];
+
+  const scheduleBar = (barIdx, barStart) => {
+    /* Kick on every quarter beat (4). */
+    for (let b = 0; b < 4; b++) kick(barStart + b * MUSIC_BEAT);
+    /* Hihat dotted 8th — every 0.75 beat, alternating pan. */
+    for (let h = 0; h < 6; h++) {
+      const t = barStart + (h * 0.6667) * MUSIC_BEAT;
+      if (t < barStart + 4 * MUSIC_BEAT) hat(t, h % 2 === 0 ? -0.22 : 0.22);
+    }
+    /* Bass syncopated. */
+    BASS_PATTERN.forEach((p) => {
+      bass(barStart + p.i * (MUSIC_BEAT / 4), p.f, p.d * MUSIC_BEAT);
+    });
+    /* Pluck motif every 4 bars (so bars 0 and 4), one note per beat. */
+    if (barIdx % 4 === 0) {
+      PLUCK_MOTIF.forEach((f, i) => {
+        if (f == null) return;
+        const t = barStart + i * MUSIC_BEAT * 0.5;     // 8ths
+        pluck(t, f, 0.42, (i % 2 === 0 ? -0.18 : 0.18), 0.14);
+      });
+    }
+    /* Bell on bar 7 (last bar of the 8-bar loop). */
+    if (barIdx === MUSIC_LOOP_BARS - 1) {
+      bell(barStart + 2 * MUSIC_BEAT, 1318.51, 0.10);
+    }
+  };
+
+  const scheduleLoopStartingAt = (t0) => {
+    for (let b = 0; b < MUSIC_LOOP_BARS; b++) {
+      scheduleBar(b, t0 + b * MUSIC_BAR);
+    }
+  };
+
+  const lookahead = () => {
+    if (!running || !ctx) return;
+    const horizon = ctx.currentTime + 0.5;
+    if (nextLoopStart < horizon) {
+      scheduleLoopStartingAt(nextLoopStart);
+      nextLoopStart += MUSIC_LOOP_DUR;
+    }
+  };
+
+  return {
+    start() {
+      if (running) return true;
+      if (!ensure()) return false;
+      running = true;
+      nextLoopStart = ctx.currentTime + 0.05;
+      scheduleLoopStartingAt(nextLoopStart);
+      nextLoopStart += MUSIC_LOOP_DUR;
+      lookaheadTimer = setInterval(lookahead, 250);
+      /* Fade-in. */
+      const target = ducked ? volume * 0.4 : volume;
+      try {
+        masterGain.gain.cancelScheduledValues(ctx.currentTime);
+        masterGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(target, ctx.currentTime + 0.9);
+      } catch (e) {}
+      return true;
+    },
+    stop() {
+      if (!running) return;
+      running = false;
+      if (lookaheadTimer) { clearInterval(lookaheadTimer); lookaheadTimer = null; }
+      if (masterGain && ctx) {
+        try {
+          masterGain.gain.cancelScheduledValues(ctx.currentTime);
+          masterGain.gain.setValueAtTime(masterGain.gain.value, ctx.currentTime);
+          masterGain.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+        } catch (e) {}
+      }
+    },
+    setVolume(v) {
+      volume = Math.max(0, Math.min(1, v));
+      if (masterGain && ctx) {
+        const target = ducked ? volume * 0.4 : volume;
+        try {
+          masterGain.gain.cancelScheduledValues(ctx.currentTime);
+          masterGain.gain.linearRampToValueAtTime(target, ctx.currentTime + 0.2);
+        } catch (e) {}
+      }
+    },
+    duck() {
+      ducked = true;
+      if (masterGain && ctx && running) {
+        try {
+          masterGain.gain.cancelScheduledValues(ctx.currentTime);
+          masterGain.gain.linearRampToValueAtTime(volume * 0.4, ctx.currentTime + 0.25);
+        } catch (e) {}
+      }
+    },
+    unduck() {
+      ducked = false;
+      if (masterGain && ctx && running) {
+        try {
+          masterGain.gain.cancelScheduledValues(ctx.currentTime);
+          masterGain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.4);
+        } catch (e) {}
+      }
+    },
+    isRunning() { return running; },
+  };
+})();
+
+/* Orientation hook — listens to (orientation: landscape) media query. */
+const getOrientation = () => {
+  if (typeof window === 'undefined') return 'portrait';
+  return window.matchMedia('(orientation: landscape)').matches ? 'landscape' : 'portrait';
+};
+function useOrientation() {
+  const [o, setO] = useState(getOrientation);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(orientation: landscape)');
+    const handler = () => setO(mq.matches ? 'landscape' : 'portrait');
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else if (mq.addListener) mq.addListener(handler);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handler);
+      else if (mq.removeListener) mq.removeListener(handler);
+    };
+  }, []);
+  return o;
+}
+
+const DEFAULT_SETTINGS = {
+  soundOn: true,
+  hapticsOn: true,
+  themeMode: 'auto',
+  musicOn: false,
+  musicVolume: 0.35,
+};
 
 /* ============================================================================
    THEMING — Day / Night palette
@@ -1941,6 +2245,39 @@ export default function App() {
     else { setTracking(false); stopDemo(); }
   };
 
+  /* ============================================================================
+     AMBIENT MUSIC ORCHESTRATION
+     - Starts/stops based on settings.musicOn (toggled by user gesture).
+     - Ducks to 40% when a modal is open ("duck under voiceover").
+     - Pauses on visibilitychange (PWA loses focus) and on districts view.
+     - Volume tracks settings.musicVolume.
+  ============================================================================ */
+  const anyModalOpen = welcomeOpen || !!activeLandmark || !!activeAnekdote
+    || !!activePoi || !!levelUp || chapterDone
+    || showLegend || showAchievements || showJournal || showSettings || showLokale || showOverview;
+  const onAtlas = view === 'districts';
+  useEffect(() => {
+    const shouldPlay = settings.musicOn && !onAtlas;
+    if (shouldPlay) MusicEngine.start();
+    else MusicEngine.stop();
+  }, [settings.musicOn, onAtlas]);
+  useEffect(() => {
+    MusicEngine.setVolume(settings.musicVolume ?? 0.35);
+  }, [settings.musicVolume]);
+  useEffect(() => {
+    if (anyModalOpen) MusicEngine.duck();
+    else MusicEngine.unduck();
+  }, [anyModalOpen]);
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const onVis = () => {
+      if (document.hidden) MusicEngine.stop();
+      else if (settingsRef.current.musicOn && view !== 'districts') MusicEngine.start();
+    };
+    document.addEventListener('visibilitychange', onVis);
+    return () => document.removeEventListener('visibilitychange', onVis);
+  }, [view]);
+
   /* Render router */
   return (
     <>
@@ -1962,14 +2299,15 @@ export default function App() {
       {view === 'explore' && (
         <ExploreScreen
           palette={palette}
-          state={{ tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, revealBursts, heading, showOverview, anyModalOpen: welcomeOpen || !!activeLandmark || !!activeAnekdote || !!activePoi || !!levelUp || chapterDone || showLegend || showAchievements || showJournal || showSettings || showLokale || showOverview }}
+          state={{ tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, revealBursts, heading, showOverview, settings, anyModalOpen }}
           actions={{ handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, setShowOverview, processPosition, lastPosRef, setView,
             cycleTheme: () => setSettings((s) => {
               const next = s.themeMode === 'auto' ? (themeName === 'night' ? 'day' : 'night')
                 : s.themeMode === 'day' ? 'night'
                 : 'auto';
               return { ...s, themeMode: next };
-            })
+            }),
+            toggleMusic: () => setSettings((s) => ({ ...s, musicOn: !s.musicOn })),
           }}
         />
       )}
@@ -2317,8 +2655,10 @@ function DistrictsScreen({ palette, stats, onSelect }) {
 ============================================================================ */
 
 function ExploreScreen({ palette, state, actions }) {
-  const { tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, revealBursts = [], heading, showOverview, anyModalOpen } = state;
-  const { handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, setShowOverview, processPosition, lastPosRef, setView, cycleTheme } = actions;
+  const { tracking, simMode, demoRunning, position, accuracy, unlocked, stars, anekdoten, pois, achievements, trail, elapsed, distance, level, nextLevel, levelIdx, pct, streetsTouched, bgActive, wakeLockActive, osmStreets, osmFeatures, osmStatus, themeName, revealed, revealBursts = [], heading, showOverview, settings, anyModalOpen } = state;
+  const { handleStart, handleReset, setSimMode, runDemo, stopDemo, setShowLegend, setShowAchievements, setShowJournal, setShowSettings, setShowLokale, setActiveLandmark, setActiveAnekdote, setActivePoi, setShowOverview, processPosition, lastPosRef, setView, cycleTheme, toggleMusic } = actions;
+  const orientation = useOrientation();
+  const isLandscape = orientation === 'landscape';
 
   const svgRef = useRef(null);
   const LevelIcon = level.icon;
@@ -2364,7 +2704,9 @@ function ExploreScreen({ palette, state, actions }) {
      transitionProgress 0→1 wird per rAF beim ersten Positions-Fix interpoliert,
      damit Voll-Kartenansicht glatt in Nav-View überblendet (~800ms).
   ============================================================================ */
-  const NAV_OVERSCAN = 2.5;                                        // SVG-Element 250% des Containers
+  /* V1.2: bumped from 2.5 → 3.0 so heavily-rotated maps on iPhone landscape
+     can never expose the underlying page background at the container corners. */
+  const NAV_OVERSCAN = 3.0;                                        // SVG-Element 300% des Containers
   const NAV_VIEWBOX_SIZE_VISIBLE = 200;                            // sichtbare viewBox-Region (~50m Radius)
   const NAV_VIEWBOX_SIZE_RAW = NAV_VIEWBOX_SIZE_VISIBLE * NAV_OVERSCAN;  // 500
   const NAV_PLAYER_OFFSET_CONTAINER = 0.65;                        // Spieler bei 65% des Containers (Sicht voraus)
@@ -2504,9 +2846,12 @@ function ExploreScreen({ palette, state, actions }) {
     return false;
   };
 
+  /* Landscape sidebar width: 30% of viewport, max 280 px, min 220 px. */
+  const sidebarWidthCss = 'clamp(220px, 30vw, 280px)';
+
   return (
     <div
-      className="w-full flex flex-col min-h-screen-dvh"
+      className="w-full flex flex-col min-h-screen-dvh relative"
       style={{
         background: palette.pageBg,
         fontFamily: TYPO.body.fontFamily,
@@ -2515,8 +2860,8 @@ function ExploreScreen({ palette, state, actions }) {
       }}
     >
       <header
-        className="px-3 pt-4 pb-3 flex items-center justify-between border-b"
-        style={{
+        className={isLandscape ? "hidden" : "px-3 pt-4 pb-3 flex items-center justify-between border-b"}
+        style={isLandscape ? undefined : {
           borderColor: palette.headerBorder,
           paddingTop: 'calc(env(safe-area-inset-top) + 12px)',
           paddingLeft: 'calc(env(safe-area-inset-left) + 12px)',
@@ -2544,6 +2889,23 @@ function ExploreScreen({ palette, state, actions }) {
           <button onClick={cycleTheme} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg }} aria-label="Day / night">
             {themeName === 'night' ? <Moon size={18} /> : <Sun size={18} />}
           </button>
+          <button
+            onClick={() => { getAudioCtx(); toggleMusic(); }}
+            className="rounded-full flex items-center justify-center tap"
+            style={{
+              width: 44, height: 44,
+              background: settings?.musicOn
+                ? 'linear-gradient(135deg, #00E5FF, #0085A8)'
+                : palette.iconBtnBg,
+              color: settings?.musicOn ? '#050C24' : palette.text,
+              boxShadow: settings?.musicOn ? '0 0 14px rgba(0,229,255,0.55)' : 'none',
+              transition: 'background 300ms var(--ease-premium), box-shadow 300ms var(--ease-premium)',
+            }}
+            aria-label={settings?.musicOn ? 'Mute music — walk to the beat' : 'Play music — walk to the beat'}
+            title="Walk to the beat."
+          >
+            <Music size={18} />
+          </button>
           <button onClick={() => setShowJournal(true)} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg }} aria-label="Journal">
             <NotebookPen size={18} />
           </button>
@@ -2561,7 +2923,16 @@ function ExploreScreen({ palette, state, actions }) {
         </div>
       </header>
 
-      <div className="relative flex-1 min-h-[420px] overflow-hidden map-no-zoom" style={{ background: palette.mapBg, transition: 'background 800ms var(--ease-premium)', perspective: '900px' }}>
+      <div
+        className="relative flex-1 min-h-[420px] overflow-hidden map-no-zoom"
+        style={{
+          /* V1.2: container background acts as safety net beneath the
+             rotated SVG so rotation corners never expose page background. */
+          background: palette.mapBg,
+          transition: 'background 800ms var(--ease-premium)',
+          perspective: '900px',
+        }}
+      >
         <svg
           ref={svgRef}
           viewBox={viewBoxAttr}
@@ -3314,96 +3685,38 @@ function ExploreScreen({ palette, state, actions }) {
           </div>
         )}
 
-        {/* Mini-Map oben links — Klick öffnet Vollkarten-Overlay. Versteckt sich, wenn ein Modal offen ist.
-            Position/Revealed werden auf 500ms throttled gerendert (Mini-Map = React.memo). */}
-        <MiniMap palette={palette} revealed={miniRevealed} position={miniPosition} onOpen={() => setShowOverview(true)} hidden={anyModalOpen} />
-
-        {/* Status pill — TIER N · ROOKIE 🐣 + progress + next-tier hint. Tap → tier modal. */}
-        <button
-          onClick={() => setShowLegend(true)}
-          className="absolute px-3.5 py-2.5 rounded-xl backdrop-blur-md text-left tap"
-          style={{
-            top: 'max(12px, env(safe-area-inset-top))',
-            left: 'calc(max(12px, env(safe-area-inset-left)) + 172px)',
-            background: palette.cardBg,
-            border: `1px solid ${palette.cardBorder}`,
-            boxShadow: palette.cardShadow,
-            maxWidth: 'calc(100% - max(12px, env(safe-area-inset-left)) - max(12px, env(safe-area-inset-right)) - 184px)',
-            transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
-          }}
-          aria-label="Tier overview"
-        >
-          <div style={{
-            fontFamily: '"Space Grotesk", "Inter", sans-serif',
-            fontWeight: 500,
-            fontSize: '10px',
-            letterSpacing: '0.10em',
-            textTransform: 'uppercase',
-            opacity: 0.75,
-            color: palette.text,
-          }}>
-            Tier {levelIdx + 1} · <span style={{ color: level.color, fontWeight: 700 }}>{level.name}</span> <span style={{ letterSpacing: 0 }}>{level.emoji}</span>
-          </div>
-          <div className="mt-1.5 text-[12px]" style={{ ...TYPO.ui, color: palette.text }}>
-            {streetsTouched} of {STREETS.length} streets cleared · {pct.toFixed(0)}%
-          </div>
-          <div className="mt-2">
-            <div className="h-1.5 rounded-full overflow-hidden" style={{ background: palette.name === 'night' ? 'rgba(255,255,255,0.10)' : 'rgba(10,31,79,0.10)' }}>
-              <div className="h-full rounded-full transition-all duration-500" style={{ width: `${progressInBracket}%`, background: 'linear-gradient(90deg, #00E5FF, #6CF1FF)' }} />
-            </div>
-            {nextLevel ? (
-              <div className="flex items-center justify-between mt-1.5" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.6 }}>
-                <span>Next tier</span>
-                <span className="flex items-center gap-1">
-                  {nextLevel.emoji} {nextLevel.name} · {nextLevel.threshold}%
-                </span>
-              </div>
-            ) : (
-              <div className="mt-1.5 italic" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.6, fontStyle: 'italic' }}>Top tier reached</div>
-            )}
-          </div>
-        </button>
-
-        {/* Stars + stats card top-right */}
-        <div
-          className="absolute px-3 py-2 rounded-xl backdrop-blur-md"
-          style={{
-            top: 'max(12px, env(safe-area-inset-top))',
-            right: 'max(12px, env(safe-area-inset-right))',
-            background: palette.cardBg,
-            border: `1px solid ${palette.cardBorder}`,
-            boxShadow: palette.cardShadow,
-            transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
-          }}
-        >
-          <div className="flex items-center gap-1.5 justify-end">
-            {LANDMARKS.map((lm) => {
-              const isUnlocked = stars.has(lm.id);
-              return (
-                <button key={lm.id} onClick={() => setActiveLandmark(lm)} className="tap" aria-label={lm.name}>
-                  <Star size={18} fill={isUnlocked ? '#D4A93C' : 'transparent'} color={isUnlocked ? '#9B7820' : palette.textMuted} strokeWidth={isUnlocked ? 1.5 : 1.8} />
-                </button>
-              );
-            })}
-          </div>
-          <div className="mt-1.5 text-right" style={{ ...TYPO.caps, fontSize: '9px', opacity: 0.65 }}>
-            {stars.size}/{LANDMARKS.length} Landmarks
-          </div>
-          <div className="flex items-center gap-1 justify-end mt-1 text-[10px] opacity-65">
-            <BookOpen size={10} /> {anekdoten.size}/{ANEKDOTEN.length} Anecdotes
-          </div>
-          <button onClick={() => setShowLokale(true)} className="flex items-center gap-1 justify-end mt-1 text-[10px] opacity-75 tap ml-auto" aria-label="Open hotspots list">
-            <Martini size={10} /> {pois.size}/{POIS.length} Hot spots <ArrowUpRight size={9} className="opacity-60" />
-          </button>
-          <div className="border-t mt-1.5 pt-1.5 space-y-0.5" style={{ borderColor: palette.cardBorder }}>
-            <div className="flex items-center gap-1.5 justify-end text-[11px] opacity-70">
-              <Clock size={11} /> <span className="tabular-nums">{fmtTime(elapsed)}</span>
-            </div>
-            <div className="flex items-center gap-1.5 justify-end text-[11px] opacity-70">
-              <Route size={11} /> <span className="tabular-nums">{fmtDist(distance)}</span>
-            </div>
-          </div>
-        </div>
+        {/* ============================================================
+           HUD layout — orientation-aware.
+           Portrait: Row A (mini-map 110 + tier pill stretches) above
+                     Row B (compact stars strip, single line).
+           Landscape: sidebar on the right edge with mini-map (140),
+                      tier pill, vertical stars list. Action bar in
+                      bottom area is constrained to LEFT 70%.
+        ============================================================ */}
+        <HudOverlay
+          isLandscape={isLandscape}
+          palette={palette}
+          miniRevealed={miniRevealed}
+          miniPosition={miniPosition}
+          anyModalOpen={anyModalOpen}
+          setShowOverview={setShowOverview}
+          setShowLegend={setShowLegend}
+          setShowAchievements={setShowAchievements}
+          setActiveLandmark={setActiveLandmark}
+          setShowLokale={setShowLokale}
+          levelIdx={levelIdx}
+          level={level}
+          nextLevel={nextLevel}
+          streetsTouched={streetsTouched}
+          totalStreets={STREETS.length}
+          pct={pct}
+          progressInBracket={progressInBracket}
+          stars={stars}
+          anekdoten={anekdoten}
+          pois={pois}
+          elapsed={elapsed}
+          distance={distance}
+        />
 
         {tracking && nextStarHint && nextStarHint.d > STAR_RADIUS_M && nextStarHint.d < 250 && (
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full text-[11px] flex items-center gap-2" style={{ background: 'rgba(212,169,60,0.95)', color: '#0A1F4F', fontWeight: 600, boxShadow: '0 4px 12px rgba(10,31,79,0.18)' }}>
@@ -3436,15 +3749,33 @@ function ExploreScreen({ palette, state, actions }) {
         )}
 
         {tracking && (wakeLockActive || bgActive) && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full text-[10px] flex items-center gap-1.5" style={{ background: 'rgba(0,229,255,0.55)', color: '#050C24' }}>
+          <div
+            className="absolute left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full text-[10px] flex items-center gap-1.5"
+            style={{
+              bottom: 'calc(env(safe-area-inset-bottom) + 8px)',
+              background: 'rgba(0,229,255,0.55)',
+              color: '#050C24',
+            }}
+          >
             <Moon size={10} /> {bgActive ? 'Background mode' : 'Screen stays on'}
           </div>
         )}
       </div>
 
       <div
-        className="px-4 py-4 flex flex-col gap-3 border-t"
-        style={{
+        className={isLandscape
+          ? "px-3 py-2 flex flex-row gap-2 border-t items-center absolute z-30"
+          : "px-4 py-4 flex flex-col gap-3 border-t"}
+        style={isLandscape ? {
+          borderColor: palette.bottomBarBorder,
+          background: palette.bottomBarBg,
+          left: 'env(safe-area-inset-left)',
+          right: `calc(${sidebarWidthCss} + env(safe-area-inset-right))`,
+          bottom: 0,
+          paddingBottom: 'calc(env(safe-area-inset-bottom) + 8px)',
+          paddingTop: 8,
+          transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
+        } : {
           borderColor: palette.bottomBarBorder,
           background: palette.bottomBarBg,
           paddingBottom: 'calc(env(safe-area-inset-bottom) + 16px)',
@@ -3455,33 +3786,63 @@ function ExploreScreen({ palette, state, actions }) {
       >
         <button
           onClick={handleStart}
-          className="w-full rounded-xl flex items-center justify-center gap-2 tap"
+          className={isLandscape
+            ? "flex-1 rounded-xl flex items-center justify-center gap-2 tap"
+            : "w-full rounded-xl flex items-center justify-center gap-2 tap"}
           style={{
-            minHeight: '56px',
+            minHeight: isLandscape ? '44px' : '56px',
             background: tracking ? 'linear-gradient(135deg, #A2376B, #6B2348)' : '#00E5FF',
             color: tracking ? '#FFFFFF' : '#050C24',
             boxShadow: tracking
               ? '0 6px 24px rgba(162,55,107,0.35), inset 0 1px 0 rgba(255,255,255,0.18)'
               : '0 6px 24px rgba(0,229,255,0.35), inset 0 1px 0 rgba(255,255,255,0.4)',
-            fontFamily: TYPO.ui.fontFamily, fontWeight: 700, fontSize: '15px', letterSpacing: '0.02em',
+            fontFamily: TYPO.ui.fontFamily, fontWeight: 700, fontSize: isLandscape ? '13px' : '15px', letterSpacing: '0.02em',
           }}
         >
-          {tracking ? <><Pause size={17} /> Pause tracking</> : <><Play size={17} /> Walk with GPS</>}
+          {tracking
+            ? <><Pause size={isLandscape ? 14 : 17} /> {isLandscape ? 'Pause' : 'Pause tracking'}</>
+            : <><Play size={isLandscape ? 14 : 17} /> {isLandscape ? 'Walk' : 'Walk with GPS'}</>}
         </button>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setSimMode((v) => !v)} className="flex-1 rounded-lg text-xs flex items-center justify-center gap-2 tap" style={{ minHeight: '44px', background: simMode ? palette.simModeOnBg : palette.simModeOffBg, color: simMode ? '#050C24' : palette.text, fontWeight: 600 }}>
-            <Wand2 size={13} /> Demo mode {simMode ? 'on' : 'off'}
-          </button>
-          <button onClick={demoRunning ? stopDemo : runDemo} className="flex-1 rounded-lg text-xs flex items-center justify-center gap-2 tap" style={{ minHeight: '44px', background: demoRunning ? 'rgba(162,55,107,0.92)' : palette.simModeOffBg, color: demoRunning ? '#FFFFFF' : palette.text, fontWeight: 600 }}>
-            <Navigation size={13} /> {demoRunning ? 'Stop demo' : 'Demo tour'}
-          </button>
-        </div>
-        <p className="text-[10px] text-center opacity-55 px-4">
-          {accuracy && !simMode ? `GPS accuracy ±${Math.round(accuracy)} m · ` : ''}
-          {wakeLockActive && tracking ? 'Screen stays on · ' : ''}
-          Add to Home Screen for the full ride.
-        </p>
+        <button
+          onClick={() => setSimMode((v) => !v)}
+          className={isLandscape ? "rounded-lg text-xs flex items-center justify-center gap-1 tap px-3" : "flex-1 rounded-lg text-xs flex items-center justify-center gap-2 tap"}
+          style={{ minHeight: '44px', background: simMode ? palette.simModeOnBg : palette.simModeOffBg, color: simMode ? '#050C24' : palette.text, fontWeight: 600 }}
+          aria-label={`Demo mode ${simMode ? 'on' : 'off'}`}
+        >
+          <Wand2 size={13} /> {isLandscape ? (simMode ? 'Demo on' : 'Demo') : `Demo mode ${simMode ? 'on' : 'off'}`}
+        </button>
+        <button
+          onClick={demoRunning ? stopDemo : runDemo}
+          className={isLandscape ? "rounded-lg text-xs flex items-center justify-center gap-1 tap px-3" : "flex-1 rounded-lg text-xs flex items-center justify-center gap-2 tap"}
+          style={{ minHeight: '44px', background: demoRunning ? 'rgba(162,55,107,0.92)' : palette.simModeOffBg, color: demoRunning ? '#FFFFFF' : palette.text, fontWeight: 600 }}
+        >
+          <Navigation size={13} /> {isLandscape ? (demoRunning ? 'Stop' : 'Tour') : (demoRunning ? 'Stop demo' : 'Demo tour')}
+        </button>
+        {!isLandscape && (
+          <p className="text-[10px] text-center opacity-55 px-4">
+            {accuracy && !simMode ? `GPS accuracy ±${Math.round(accuracy)} m · ` : ''}
+            {wakeLockActive && tracking ? 'Screen stays on · ' : ''}
+            Add to Home Screen for the full ride.
+          </p>
+        )}
       </div>
+
+      {/* Landscape: back-arrow over map top-left + sidebar with header buttons. */}
+      {isLandscape && (
+        <LandscapeChrome
+          palette={palette}
+          themeName={themeName}
+          settings={settings}
+          achievements={achievements}
+          sidebarWidthCss={sidebarWidthCss}
+          onBack={() => setView('districts')}
+          onCycleTheme={cycleTheme}
+          onToggleMusic={() => { getAudioCtx(); toggleMusic(); }}
+          onShowJournal={() => setShowJournal(true)}
+          onShowAchievements={() => setShowAchievements(true)}
+          onShowSettings={() => setShowSettings(true)}
+        />
+      )}
     </div>
   );
 }
@@ -4031,6 +4392,32 @@ function SettingsModal({ palette, themeName, settings, setSettings, onReset, onC
             icon={settings.soundOn ? Volume2 : VolumeX}
           />
           <Toggle
+            on={settings.musicOn}
+            onChange={() => {
+              if (!settings.musicOn) getAudioCtx();
+              setSettings((s) => ({ ...s, musicOn: !s.musicOn }));
+            }}
+            label="Music"
+            desc="Walk to the beat — dark minimal techno loop"
+            icon={Music}
+          />
+          {settings.musicOn && (
+            <div className="px-3 py-2.5 rounded-lg flex items-center gap-3" style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.18)' }}>
+              <Headphones size={14} style={{ color: '#0085A8' }} />
+              <input
+                type="range"
+                min="0" max="1" step="0.01"
+                value={settings.musicVolume ?? 0.35}
+                onChange={(e) => setSettings((s) => ({ ...s, musicVolume: parseFloat(e.target.value) }))}
+                className="flex-1"
+                aria-label="Music volume"
+              />
+              <span className="tabular-nums text-[11px] opacity-70" style={{ ...TYPO.caps }}>
+                {Math.round((settings.musicVolume ?? 0.35) * 100)}%
+              </span>
+            </div>
+          )}
+          <Toggle
             on={settings.hapticsOn && vibrateSupported}
             onChange={() => setSettings((s) => ({ ...s, hapticsOn: !s.hapticsOn }))}
             label="Haptics"
@@ -4039,6 +4426,27 @@ function SettingsModal({ palette, themeName, settings, setSettings, onReset, onC
             disabled={!vibrateSupported}
           />
         </div>
+
+        {/* Spotify deep-link — play the actual Brejcha track on the side. */}
+        <h3 className="mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6 }}>Soundtrack reference</h3>
+        <a
+          href="https://open.spotify.com/search/Boris%20Brejcha%20Never%20Look%20Back"
+          target="_blank" rel="noopener noreferrer"
+          className="w-full flex items-center gap-3 p-3 rounded-lg text-left tap mb-5"
+          style={{ background: 'rgba(30,215,96,0.10)', border: '1px solid rgba(30,215,96,0.30)', color: '#0A1F4F', textDecoration: 'none' }}
+        >
+          <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: '#1ED760' }}>
+            <Music size={16} color="#0A1F4F" strokeWidth={2.2} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[13px]" style={{ ...TYPO.ui, fontWeight: 700 }}>
+              Boris Brejcha — Never Look Back
+            </div>
+            <div className="text-[10px] opacity-65 leading-tight">
+              The vibe reference. Open in Spotify <ArrowUpRight size={9} style={{ display: 'inline', verticalAlign: 'middle' }} />
+            </div>
+          </div>
+        </a>
 
         <h3 className="mb-2" style={{ ...TYPO.caps, fontSize: '10px', opacity: 0.6 }}>How it works</h3>
         <div className="p-3 rounded-lg mb-5" style={{ background: 'rgba(10,31,79,0.05)' }}>
@@ -4500,26 +4908,354 @@ function Stat({ icon: I, value, label }) {
 }
 
 /* ============================================================================
+   HUD OVERLAY — orientation-aware glass cards over the map.
+
+   PORTRAIT: two rows under the header.
+     Row A: mini-map 110×110 + tier pill stretching to the right edge.
+     Row B: compact stars strip (single line).
+   LANDSCAPE: vertical sidebar on the right (RIGHT 30%, max 280 px).
+     Mini-map 140×140, tier pill (full sidebar width), vertical stars
+     list. Header buttons are placed at the sidebar bottom by
+     LandscapeChrome.
+============================================================================ */
+
+function CompactTierPill({ palette, levelIdx, level, nextLevel, streetsTouched, totalStreets, pct, progressInBracket, onClick, width }) {
+  return (
+    <button
+      onClick={onClick}
+      className="rounded-[14px] backdrop-blur-md text-left tap flex flex-col justify-center"
+      style={{
+        background: palette.cardBg,
+        border: `1px solid ${palette.cardBorder}`,
+        boxShadow: palette.cardShadow,
+        padding: '10px 12px',
+        minHeight: 70,
+        width: width ?? '100%',
+        transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
+      }}
+      aria-label="Tier overview"
+    >
+      <div style={{
+        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontWeight: 500,
+        fontSize: '11px',
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        opacity: 0.78,
+        color: palette.text,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}>
+        Tier {levelIdx + 1} · <span style={{ color: level.color, fontWeight: 700 }}>{level.name}</span> <span style={{ letterSpacing: 0 }}>{level.emoji}</span>
+      </div>
+      <div style={{ ...TYPO.ui, color: palette.text, fontSize: '13px', marginTop: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        {streetsTouched} / {totalStreets} · {pct.toFixed(0)}%
+      </div>
+      <div style={{ marginTop: 6 }}>
+        <div className="rounded-full overflow-hidden" style={{ height: 3, background: palette.name === 'night' ? 'rgba(255,255,255,0.10)' : 'rgba(10,31,79,0.10)' }}>
+          <div className="h-full rounded-full transition-all duration-500" style={{ width: `${progressInBracket}%`, background: 'linear-gradient(90deg, #00E5FF, #6CF1FF)' }} />
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function StarsStripHorizontal({ palette, stars, anekdoten, pois, elapsed, distance, onShowAchievements, onShowLokale, setActiveLandmark }) {
+  return (
+    <button
+      onClick={onShowAchievements}
+      className="rounded-[14px] backdrop-blur-md tap flex items-center gap-3 px-3 py-2 w-full"
+      style={{
+        background: palette.cardBg,
+        border: `1px solid ${palette.cardBorder}`,
+        boxShadow: palette.cardShadow,
+        color: palette.text,
+        transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
+        fontFamily: TYPO.body.fontFamily,
+        fontSize: 11,
+      }}
+      aria-label="Achievements"
+    >
+      <span className="flex items-center gap-0.5">
+        {LANDMARKS.map((lm) => {
+          const isUnlocked = stars.has(lm.id);
+          return (
+            <Star key={lm.id} size={13} fill={isUnlocked ? '#D4A93C' : 'transparent'} color={isUnlocked ? '#9B7820' : palette.textMuted} strokeWidth={isUnlocked ? 1.5 : 1.8} />
+          );
+        })}
+      </span>
+      <span style={{ ...TYPO.ui, fontSize: 11, fontWeight: 600 }}>{stars.size}/{LANDMARKS.length}</span>
+      <span className="opacity-30">·</span>
+      <span className="flex items-center gap-1"><BookOpen size={11} /> {anekdoten.size}/{ANEKDOTEN.length}</span>
+      <span className="opacity-30">·</span>
+      <span className="flex items-center gap-1"><Martini size={11} /> {pois.size}/{POIS.length}</span>
+      <span className="opacity-30">·</span>
+      <span className="flex items-center gap-1 tabular-nums"><Clock size={11} /> {fmtTime(elapsed)}</span>
+      <span className="opacity-30">·</span>
+      <span className="flex items-center gap-1 tabular-nums"><Route size={11} /> {fmtDist(distance)}</span>
+    </button>
+  );
+}
+
+function StarsStripVertical({ palette, stars, anekdoten, pois, elapsed, distance, onShowAchievements, onShowLokale }) {
+  const rows = [
+    { icon: Star, label: 'Landmarks', val: `${stars.size}/${LANDMARKS.length}` },
+    { icon: BookOpen, label: 'Anecdotes', val: `${anekdoten.size}/${ANEKDOTEN.length}` },
+    { icon: Martini, label: 'Hot spots', val: `${pois.size}/${POIS.length}`, onClick: onShowLokale },
+    { icon: Clock, label: 'Time', val: fmtTime(elapsed) },
+    { icon: Route, label: 'Distance', val: fmtDist(distance) },
+  ];
+  return (
+    <div
+      className="rounded-[14px] backdrop-blur-md px-3 py-2.5 w-full flex flex-col gap-1.5"
+      style={{
+        background: palette.cardBg,
+        border: `1px solid ${palette.cardBorder}`,
+        boxShadow: palette.cardShadow,
+        color: palette.text,
+        transition: 'background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
+      }}
+    >
+      <button
+        onClick={onShowAchievements}
+        className="flex items-center justify-between text-[11px] tap"
+        aria-label="Achievements"
+      >
+        <span className="flex items-center gap-0.5">
+          {LANDMARKS.map((lm) => {
+            const isUnlocked = stars.has(lm.id);
+            return (
+              <Star key={lm.id} size={13} fill={isUnlocked ? '#D4A93C' : 'transparent'} color={isUnlocked ? '#9B7820' : palette.textMuted} strokeWidth={isUnlocked ? 1.5 : 1.8} />
+            );
+          })}
+        </span>
+        <span style={{ ...TYPO.ui, fontSize: 11, fontWeight: 700 }}>{stars.size}/{LANDMARKS.length}</span>
+      </button>
+      {rows.slice(1).map((r) => {
+        const Icon = r.icon;
+        const content = (
+          <>
+            <span className="flex items-center gap-1.5 opacity-75"><Icon size={11} /> {r.label}</span>
+            <span className="tabular-nums" style={{ ...TYPO.ui, fontSize: 11, fontWeight: 600 }}>{r.val}</span>
+          </>
+        );
+        return r.onClick ? (
+          <button key={r.label} onClick={r.onClick} className="flex items-center justify-between text-[11px] tap">
+            {content}
+          </button>
+        ) : (
+          <div key={r.label} className="flex items-center justify-between text-[11px]">{content}</div>
+        );
+      })}
+    </div>
+  );
+}
+
+function HudOverlay({
+  isLandscape, palette,
+  miniRevealed, miniPosition, anyModalOpen, setShowOverview,
+  setShowLegend, setShowAchievements, setActiveLandmark, setShowLokale,
+  levelIdx, level, nextLevel, streetsTouched, totalStreets, pct, progressInBracket,
+  stars, anekdoten, pois, elapsed, distance,
+}) {
+  if (isLandscape) {
+    /* Sidebar on the right, full height. */
+    return (
+      <div
+        className="absolute z-30 flex flex-col gap-2.5"
+        style={{
+          top: 'calc(env(safe-area-inset-top) + 12px)',
+          right: 'max(12px, env(safe-area-inset-right))',
+          width: 'clamp(220px, 30vw, 280px)',
+          /* Leave room for the bottom action overlay + sidebar's own chrome. */
+          bottom: 'calc(env(safe-area-inset-bottom) + 64px)',
+          opacity: anyModalOpen ? 0.15 : 1,
+          pointerEvents: anyModalOpen ? 'none' : 'auto',
+          transition: 'opacity 300ms var(--ease-premium)',
+        }}
+      >
+        <MiniMap palette={palette} revealed={miniRevealed} position={miniPosition} onOpen={() => setShowOverview(true)} hidden={false} sizePx={140} absolute={false} />
+        <CompactTierPill
+          palette={palette}
+          levelIdx={levelIdx} level={level} nextLevel={nextLevel}
+          streetsTouched={streetsTouched} totalStreets={totalStreets}
+          pct={pct} progressInBracket={progressInBracket}
+          onClick={() => setShowLegend(true)}
+        />
+        <StarsStripVertical
+          palette={palette}
+          stars={stars} anekdoten={anekdoten} pois={pois}
+          elapsed={elapsed} distance={distance}
+          onShowAchievements={() => setShowAchievements(true)}
+          onShowLokale={() => setShowLokale(true)}
+        />
+      </div>
+    );
+  }
+  /* Portrait — Row A (mini + tier) + Row B (stars strip). */
+  const safeL = 'max(12px, env(safe-area-inset-left))';
+  const safeR = 'max(12px, env(safe-area-inset-right))';
+  return (
+    <>
+      <div
+        className="absolute z-30 flex gap-2.5"
+        style={{
+          top: 'max(12px, env(safe-area-inset-top))',
+          left: safeL,
+          right: safeR,
+          opacity: anyModalOpen ? 0.15 : 1,
+          pointerEvents: anyModalOpen ? 'none' : 'auto',
+          transition: 'opacity 300ms var(--ease-premium)',
+        }}
+      >
+        <div style={{ width: 110, height: 110, flex: '0 0 auto', position: 'relative' }}>
+          <MiniMap palette={palette} revealed={miniRevealed} position={miniPosition} onOpen={() => setShowOverview(true)} hidden={false} sizePx={110} absolute={false} />
+        </div>
+        <div style={{ flex: '1 1 auto', minWidth: 0, display: 'flex' }}>
+          <CompactTierPill
+            palette={palette}
+            levelIdx={levelIdx} level={level} nextLevel={nextLevel}
+            streetsTouched={streetsTouched} totalStreets={totalStreets}
+            pct={pct} progressInBracket={progressInBracket}
+            onClick={() => setShowLegend(true)}
+          />
+        </div>
+      </div>
+      <div
+        className="absolute z-30"
+        style={{
+          top: 'calc(max(12px, env(safe-area-inset-top)) + 118px)',
+          left: safeL,
+          right: safeR,
+          opacity: anyModalOpen ? 0.15 : 1,
+          pointerEvents: anyModalOpen ? 'none' : 'auto',
+          transition: 'opacity 300ms var(--ease-premium)',
+        }}
+      >
+        <StarsStripHorizontal
+          palette={palette}
+          stars={stars} anekdoten={anekdoten} pois={pois}
+          elapsed={elapsed} distance={distance}
+          onShowAchievements={() => setShowAchievements(true)}
+          onShowLokale={() => setShowLokale(true)}
+          setActiveLandmark={setActiveLandmark}
+        />
+      </div>
+    </>
+  );
+}
+
+/* ============================================================================
+   LANDSCAPE CHROME — back arrow over map top-left + horizontal cluster of
+   header-equivalent buttons at the bottom of the right sidebar.
+============================================================================ */
+function LandscapeChrome({ palette, themeName, settings, achievements, sidebarWidthCss, onBack, onCycleTheme, onToggleMusic, onShowJournal, onShowAchievements, onShowSettings }) {
+  return (
+    <>
+      <button
+        onClick={onBack}
+        className="absolute z-40 rounded-full flex items-center justify-center tap backdrop-blur-md"
+        style={{
+          top: 'max(12px, env(safe-area-inset-top))',
+          left: 'max(12px, env(safe-area-inset-left))',
+          width: 44, height: 44,
+          background: palette.cardBg,
+          border: `1px solid ${palette.cardBorder}`,
+          color: palette.text,
+          boxShadow: palette.cardShadow,
+        }}
+        aria-label="Back"
+      >
+        <ArrowLeft size={18} />
+      </button>
+      <div
+        className="absolute z-30 flex items-center justify-center gap-1.5 rounded-[14px] backdrop-blur-md px-2 py-2"
+        style={{
+          right: 'max(12px, env(safe-area-inset-right))',
+          bottom: 'calc(env(safe-area-inset-bottom) + 14px)',
+          width: sidebarWidthCss,
+          background: palette.cardBg,
+          border: `1px solid ${palette.cardBorder}`,
+          boxShadow: palette.cardShadow,
+        }}
+      >
+        <button onClick={onCycleTheme} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg, color: palette.text }} aria-label="Day / night">
+          {themeName === 'night' ? <Moon size={18} /> : <Sun size={18} />}
+        </button>
+        <button
+          onClick={onToggleMusic}
+          className="rounded-full flex items-center justify-center tap"
+          style={{
+            width: 44, height: 44,
+            background: settings?.musicOn ? 'linear-gradient(135deg, #00E5FF, #0085A8)' : palette.iconBtnBg,
+            color: settings?.musicOn ? '#050C24' : palette.text,
+            boxShadow: settings?.musicOn ? '0 0 14px rgba(0,229,255,0.55)' : 'none',
+          }}
+          aria-label={settings?.musicOn ? 'Mute music' : 'Play music — walk to the beat'}
+          title="Walk to the beat."
+        >
+          <Music size={18} />
+        </button>
+        <button onClick={onShowJournal} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg, color: palette.text }} aria-label="Journal">
+          <NotebookPen size={18} />
+        </button>
+        <button onClick={onShowAchievements} className="relative rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg, color: palette.text }} aria-label="Achievements">
+          <Trophy size={18} />
+          {achievements.size > 0 && (
+            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[10px] font-bold" style={{ background: '#D4A93C', color: '#0A1F4F' }}>
+              {achievements.size}
+            </span>
+          )}
+        </button>
+        <button onClick={onShowSettings} className="rounded-full flex items-center justify-center tap" style={{ width: 44, height: 44, background: palette.iconBtnBg, color: palette.text }} aria-label="Settings">
+          <SettingsIcon size={18} />
+        </button>
+      </div>
+    </>
+  );
+}
+
+/* ============================================================================
    MINI-MAP — echter Stadtplan-Ausschnitt oben links. Zeigt Wasser, Parks,
    Gebäude-Cluster, Hauptstrassen-Netz, Brücken; freigelegte Bereiche heller
    gegenüber leicht eingenebelten unbekannten. Throttled-Position via React.memo.
 ============================================================================ */
-const MiniMap = React.memo(function MiniMap({ palette, revealed, position, onOpen, hidden }) {
+const MiniMap = React.memo(function MiniMap({ palette, revealed, position, onOpen, hidden, sizePx, absolute = true }) {
   const playerProj = position ? project(position[0], position[1]) : null;
-  // Vorberechnete Pfade (deterministisch, ändern sich nicht)
   const limmatPath = RIVER_PATH.map((p) => project(p[0], p[1]));
   const lakePts = LAKE_PATH.map((p) => project(p[0], p[1]));
+  const size = sizePx ?? 110;
+  const isNight = palette.name === 'night';
+  /* Visual upgrade: cream base, cyan player, gold border, trail polyline.
+     Override palette miniBg/miniBorder for richer reading at this scale. */
+  const baseBg     = isNight ? '#101830' : '#F5F3EE';
+  const borderCol  = isNight ? 'rgba(212,169,60,0.60)' : 'rgba(212,169,60,0.40)';
+  const streetCol  = isNight ? '#7DD3DC' : '#F8F4ED';
+  const streetW    = isNight ? 1.2 : 1.5;
+  const waterCol   = isNight ? 'rgba(30,58,95,0.85)' : 'rgba(168,213,232,0.65)';
+  const parkCol    = isNight ? 'rgba(42,59,45,0.6)' : 'rgba(184,201,168,0.35)';
+  const trailPts = revealed.slice(-20);
+  /* Positioning: when `absolute=true`, behave like the old top-left card.
+     Otherwise just fill the parent (lets HudOverlay control placement). */
+  const posStyle = absolute ? {
+    position: 'absolute',
+    top: 'max(12px, env(safe-area-inset-top))',
+    left: 'max(12px, env(safe-area-inset-left))',
+    width: size, height: size,
+  } : {
+    position: 'relative',
+    width: size, height: size,
+  };
   return (
     <button
       onClick={onOpen}
-      className="absolute z-30 rounded-[12px] overflow-hidden tap backdrop-blur-md"
+      className="z-30 rounded-[12px] overflow-hidden tap backdrop-blur-md"
       style={{
-        top: 'max(12px, env(safe-area-inset-top))',
-        left: 'max(12px, env(safe-area-inset-left))',
-        width: 160, height: 160,
-        background: palette.miniBg,
-        border: `1px solid ${palette.miniBorder}`,
-        boxShadow: palette.cardShadow,
+        ...posStyle,
+        background: baseBg,
+        border: `1px solid ${borderCol}`,
+        boxShadow: `${palette.cardShadow}, inset 0 0 12px ${isNight ? 'rgba(0,0,0,0.45)' : 'rgba(10,31,79,0.10)'}`,
         opacity: hidden ? 0 : 1,
         pointerEvents: hidden ? 'none' : 'auto',
         transition: 'opacity 300ms var(--ease-premium), background 600ms var(--ease-premium), border-color 600ms var(--ease-premium)',
@@ -4534,74 +5270,68 @@ const MiniMap = React.memo(function MiniMap({ palette, revealed, position, onOpe
               <circle key={i} cx={p.x} cy={p.y} r="60" fill="black" />
             ))}
           </mask>
+          <radialGradient id="miniPlayerGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.65" />
+            <stop offset="60%" stopColor="#00E5FF" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#00E5FF" stopOpacity="0" />
+          </radialGradient>
         </defs>
-        <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.miniBg} />
+        <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={baseBg} />
 
-        {/* Zürichsee-Anschnitt — Polygon mit dunklerem Umriss für klare Kontur */}
+        {/* Zürichsee */}
         <polygon
           points={lakePts.map((p) => `${p.x},${p.y}`).join(' ')}
-          fill={palette.miniWater}
+          fill={waterCol}
           stroke={palette.lakeBottom}
-          strokeWidth="4"
+          strokeWidth="3"
           strokeLinejoin="round"
           opacity="0.95" />
 
-        {/* Limmat — dunkler Outline-Stroke unten, hellere Wasserfüllung darüber */}
+        {/* Limmat — water trace */}
         <polyline
           points={limmatPath.map((p) => `${p.x},${p.y}`).join(' ')}
-          fill="none" stroke={palette.lakeBottom}
-          strokeWidth="32" strokeLinecap="round" strokeLinejoin="round" opacity="0.95" />
-        <polyline
-          points={limmatPath.map((p) => `${p.x},${p.y}`).join(' ')}
-          fill="none" stroke={palette.miniWater}
+          fill="none" stroke={waterCol}
           strokeWidth="22" strokeLinecap="round" strokeLinejoin="round" />
-        {/* Subtile zentrale Strömungslinie */}
-        <polyline
-          points={limmatPath.map((p) => `${p.x},${p.y}`).join(' ')}
-          fill="none" stroke={palette.riverHighlight}
-          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />
 
-        {/* Parks (Lindenhof etc.) als grüne Patches */}
+        {/* Parks */}
         {PLAZAS.filter((pl) => pl.type === 'park').map((pl) => {
           const pts = pl.poly.map((p) => { const pp = project(p[0], p[1]); return `${pp.x},${pp.y}`; }).join(' ');
-          return <polygon key={pl.id} points={pts} fill={palette.miniPark} opacity="0.85" />;
+          return <polygon key={pl.id} points={pts} fill={parkCol} />;
         })}
 
-        {/* Gebäude-Cluster (Block-Polygone, simplifiziert) */}
-        {BLOCKS.map((blk) => {
-          const pts = blk.poly.map((p) => { const pp = project(p[0], p[1]); return `${pp.x},${pp.y}`; }).join(' ');
-          return <polygon key={blk.id} points={pts} fill={palette.miniBuilding} />;
-        })}
-
-        {/* Hauptstrassen — dünn, hellgrau. Nur die "trunk"-Achsen für Lesbarkeit */}
-        {STREETS.filter((s) => ['bahnhofstr', 'limmatquai', 'bahnhofquai', 'niederdorfstr', 'rennweg'].includes(s.id)).map((s) => {
+        {/* Streets — simplified main-map style. No cobblestones at this scale. */}
+        {STREETS.filter((s) => s.side !== 'bridge').map((s) => {
           const pts = s.points.map(([la, ln]) => { const pp = project(la, ln); return `${pp.x},${pp.y}`; }).join(' ');
-          return <polyline key={s.id} points={pts} fill="none" stroke={palette.miniStreetMain} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />;
+          /* Express scaled stroke as fraction of VIEWPORT so it looks right whatever sizePx. */
+          const w = streetW * (VIEWPORT.width / size);
+          return <polyline key={s.id} points={pts} fill="none" stroke={streetCol} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" opacity="0.9" />;
         })}
-        {/* Restliche Strassen — sehr dezent */}
-        {STREETS.filter((s) => !['bahnhofstr', 'limmatquai', 'bahnhofquai', 'niederdorfstr', 'rennweg'].includes(s.id) && s.side !== 'bridge').map((s) => {
-          const pts = s.points.map(([la, ln]) => { const pp = project(la, ln); return `${pp.x},${pp.y}`; }).join(' ');
-          return <polyline key={s.id} points={pts} fill="none" stroke={palette.miniStreet} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />;
-        })}
-
-        {/* Brücken — kleine helle Striche über der Limmat */}
         {STREETS.filter((s) => s.side === 'bridge').map((s) => {
           const a = project(s.points[0][0], s.points[0][1]);
           const b = project(s.points[s.points.length - 1][0], s.points[s.points.length - 1][1]);
-          return <line key={s.id} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={palette.miniBridge} strokeWidth="7" strokeLinecap="round" />;
+          const w = streetW * (VIEWPORT.width / size);
+          return <line key={s.id} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={streetCol} strokeWidth={w} strokeLinecap="round" />;
         })}
 
-        {/* Fog-Veil — unerkundete Bereiche leicht einnebeln, freigelegte bleiben hell */}
+        {/* Trail polyline — last ~20 revealed segments in cyan */}
+        {trailPts.length > 1 && (
+          <polyline
+            points={trailPts.map((p) => `${p.x},${p.y}`).join(' ')}
+            fill="none" stroke="rgba(0,229,255,0.45)"
+            strokeWidth={1 * (VIEWPORT.width / size)}
+            strokeLinecap="round" strokeLinejoin="round" />
+        )}
+
+        {/* Fog veil */}
         <rect width={VIEWPORT.width} height={VIEWPORT.height} fill={palette.miniFog} mask="url(#miniFogMask)" />
 
-        {/* Spieler-Dot — pulsierend */}
+        {/* Player — 5 px solid cyan + 14 px soft glow. Stroke widths are
+            SVG units; for a 110-px MiniMap the VIEWPORT is 1000 wide
+            => scale = 1000/110 ≈ 9.1. 5 px ≈ 45 SVG units. */}
         {playerProj && (
           <g>
-            <circle cx={playerProj.x} cy={playerProj.y} r="30" fill={palette.userPulseColor} opacity="0.45">
-              <animate attributeName="r" values="22;42;22" dur="1.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.55;0;0.55" dur="1.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx={playerProj.x} cy={playerProj.y} r="18" fill={palette.userMarkerInner} stroke={palette.userMarkerFill} strokeWidth="5" />
+            <circle cx={playerProj.x} cy={playerProj.y} r={14 * (VIEWPORT.width / size)} fill="url(#miniPlayerGlow)" />
+            <circle cx={playerProj.x} cy={playerProj.y} r={5 * (VIEWPORT.width / size)} fill="#00E5FF" />
           </g>
         )}
       </svg>
@@ -4617,13 +5347,21 @@ function OverviewModal({ palette, revealed, position, onClose }) {
   const playerProj = position ? project(position[0], position[1]) : null;
   return (
     <div
-      className="fixed inset-0 z-[55] flex items-center justify-center p-4 animate-fadeIn"
-      style={{ background: 'rgba(0,0,0,0.7)' }}
+      className="fixed inset-0 z-[55] flex items-center justify-center animate-fadeIn"
+      style={{
+        background: 'rgba(0,0,0,0.7)',
+        /* V1.2: safe-area-aware padding so the close X always sits inside
+           the notch/home-indicator-safe rectangle on iPhone landscape. */
+        paddingTop: 'calc(env(safe-area-inset-top) + 16px)',
+        paddingRight: 'calc(env(safe-area-inset-right) + 16px)',
+        paddingBottom: 'calc(env(safe-area-inset-bottom) + 16px)',
+        paddingLeft: 'calc(env(safe-area-inset-left) + 16px)',
+      }}
       onClick={onClose}
     >
       <div
         className="relative w-full max-w-4xl rounded-2xl overflow-hidden"
-        style={{ aspectRatio: `${VIEWPORT.width} / ${VIEWPORT.height}`, background: palette.mapBg, border: `1px solid ${palette.cardBorder}`, boxShadow: palette.cardShadow }}
+        style={{ maxHeight: '100%', aspectRatio: `${VIEWPORT.width} / ${VIEWPORT.height}`, background: palette.mapBg, border: `1px solid ${palette.cardBorder}`, boxShadow: palette.cardShadow }}
         onClick={(e) => e.stopPropagation()}
       >
         <svg viewBox={`0 0 ${VIEWPORT.width} ${VIEWPORT.height}`} className="w-full h-full block" preserveAspectRatio="xMidYMid meet">
